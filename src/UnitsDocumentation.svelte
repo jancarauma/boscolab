@@ -17,30 +17,28 @@
 
 
 <p>
-    The following unit definintions are supported by Boscolab (from <a
-        href="https://mathjs.org/docs/datatypes/units.html#reference">Math.js</a
-    >
-    documentation). Units may be used in their long or short forms (meter or m) and
-    they may be used in their singular or plural forms (second or seconds).
+    As seguintes definições de unidades são suportadas pelo Boscolab (da documentação do <a
+        href="https://mathjs.org/docs/datatypes/units.html#reference">Math.js</a>).
+    As unidades podem ser usadas em suas formas completas ou abreviadas (meter ou m) e podem ser usadas tanto no singular quanto no plural (second ou seconds).
 </p>
 
 <table>
     <thead>
         <tr>
             <th>Base</th>
-            <th>Unit</th>
+            <th>Unidade</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Length</td>
+            <td>Comprimento</td>
             <td
                 >meter (m), inch (in), foot (ft), yard (yd), mile (mi), link
                 (li), rod (rd), chain (ch), angstrom, mil</td
             >
         </tr>
         <tr>
-            <td>Surface area</td>
+            <td>Área</td>
             <td>m2, sqin, sqft, sqyd, sqmi, sqrd, sqch, sqmil, acre, hectare</td
             >
         </tr>
@@ -52,7 +50,7 @@
             >
         </tr>
         <tr>
-            <td>Liquid volume</td>
+            <td>Volume (Líquido)</td>
             <td
                 >minim, fluiddram (fldr), fluidounce (floz), gill (gi), cup
                 (cp), pint (pt), quart (qt), gallon (gal), beerbarrel (bbl),
@@ -60,14 +58,14 @@
             >
         </tr>
         <tr>
-            <td>Angles</td>
+            <td>Ângulo</td>
             <td
                 >rad (radian), deg (degree), grad (gradian), cycle, arcsec
                 (arcsecond), arcmin (arcminute)</td
             >
         </tr>
         <tr>
-            <td>Time</td>
+            <td>Tempo</td>
             <td
                 >second (s, secs, seconds), minute (min, mins, minutes), hour
                 (h, hr, hrs, hours), day (days), week (weeks), month (months),
@@ -76,85 +74,85 @@
             >
         </tr>
         <tr>
-            <td>Frequency</td>
+            <td>Frequência</td>
             <td>hertz (Hz)</td>
         </tr>
         <tr>
-            <td>Mass</td>
+            <td>Massa</td>
             <td
                 >gram(g), tonne, ton, grain (gr), dram (dr), ounce (oz),
                 poundmass (lbm, lb, lbs), hundredweight (cwt), stick, stone</td
             >
         </tr>
         <tr>
-            <td>Electric current</td>
+            <td>Corrente Elétrica</td>
             <td>ampere (A)</td>
         </tr>
         <tr>
-            <td>Temperature</td>
+            <td>Temperatura</td>
             <td
                 >kelvin (K), celsius (degC), fahrenheit (degF), rankine (degR)</td
             >
         </tr>
         <tr>
-            <td>Amount of substance</td>
+            <td>Quantidade de Matéria</td>
             <td>mole (mol)</td>
         </tr>
         <tr>
-            <td>Luminous intensity</td>
+            <td>Intensidade Luminosa</td>
             <td>candela (cd)</td>
         </tr>
         <tr>
-            <td>Force</td>
+            <td>Força</td>
             <td>
                 newton (N), dyne (dyn), poundforce (lbf), kip, kilogramforce (kgf),
                 gramforce (gf)
             </td>
         </tr>
         <tr>
-            <td>Energy</td>
+            <td>Energia</td>
             <td>joule (J), erg, Wh, BTU (Btu), electronvolt (eV)</td>
         </tr>
         <tr>
-            <td>Power</td>
+            <td>Potência</td>
             <td>
                 watt (W), hp, tonrefrigeration (TR, RT, TOR, toncooling), boilerhp (BHP),
                 MBH, MMBH
             </td>
         </tr>
         <tr>
-            <td>Pressure</td>
+            <td>Pressão</td>
             <td>
                 Pa, psi, atm, torr, bar, mmHg, mmH2O, cmH2O, 
                 inHg, inH2O, ftH2O, kpsi (ksi), Mpsi
             </td>
         </tr>
         <tr>
-            <td>Electricity and magnetism</td>
+            <td>Eletromagnetismo</td>
             <td>ampere (A), coulomb (C), watt (W), volt (V), ohm, farad (F),
                 weber (Wb), tesla (T), henry (H), siemens (S), electronvolt (eV)
             </td>
         </tr>
         <tr>
-            <td> Viscosity (Dynamic and Kinematic)</td>
+            <td>Viscosidade</td>
             <td>
                 poise (P), reyn, ureyn, stokes (St)
             </td>
         </tr>
         <tr>
-            <td>Binary</td>
+            <td>Informação</td>
             <td>bits (b), bytes (B)</td>
         </tr>
     </tbody>
 </table>
 
-<h4>Supported Unit Prefixes</h4>
+<h4>Prefixos de Unidade Suportados</h4>
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Abbreviation</th>
-            <th>Value</th>
+            <th>Nome</th>
+            <th>Abreviação</th>
+            <th>Valor</th>
         </tr>
     </thead>
     <tbody>
@@ -214,9 +212,9 @@
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Abbreviation</th>
-            <th>Value</th>
+            <th>Nome</th>
+            <th>Abreviação</th>
+            <th>Valor</th>
         </tr>
     </thead>
     <tbody>
@@ -273,15 +271,15 @@
     </tbody>
 </table>
 
-<h4>Supported Binary Unit Prefixes</h4>
-<p>For use with bits (b) or bytes (B)</p>
+<h4>Prefixos Binários de Unidade Suportados</h4>
+<p>Para uso com bits (b) ou bytes (B)</p>
 
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Abbreviation</th>
-            <th>Value</th>
+            <th>Nome</th>
+            <th>Abreviação</th>
+            <th>Valor</th>
         </tr>
     </thead>
     <tbody>
@@ -331,9 +329,9 @@
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Abbreviation</th>
-            <th>Value</th>
+            <th>Nome</th>
+            <th>Abreviação</th>
+            <th>Valor</th>
         </tr>
     </thead>
     <tbody>

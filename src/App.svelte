@@ -291,7 +291,7 @@
   let modalInfo:ModalInfo = {
     state: "uploadSheet", 
     modalOpen: false, 
-    heading: "Save as Shareable Link",
+    heading: "Obter Link Compartilhável",
   };
 
   let mathCellConfigDialog: MathCellConfigDialog | null = null;
@@ -491,7 +491,7 @@
     modalInfo = {
       modalOpen: true,
       state: "termsAndConditions",
-      heading: "Terms and Conditions"
+      heading: "Termos e Condições"
     };
   }
 
@@ -1756,7 +1756,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "insertSheet",
-      heading: "Insert a Sheet",
+      heading: "Inserir uma Planilha",
       url: "",
       insertionLocation: e.detail.index
     };
@@ -1785,7 +1785,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "downloadDocument",
-      heading: "Save Document",
+      heading: "Salvar Arquivo",
     };
   }
 
@@ -2241,7 +2241,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "updateAvailable",
-      heading: "Update Available"
+      heading: "Nova Atualização Disponível"
     };
   }
 
@@ -2249,7 +2249,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       state: "uploadSheet",
       modalOpen: true,
-      heading: "Save as Shareable Link"
+      heading: "Obter Link Compartilhável"
     };
   }
 
@@ -2257,7 +2257,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "sheetSettings",
-      heading: "Sheet Settings",
+      heading: "Opções da Planilha",
       mathCell: null,
       mathCellElement: null
     };
@@ -2267,7 +2267,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "supportedUnits",
-      heading: "Supported Units"
+      heading: "Unidades"
     };
   }
 
@@ -2275,7 +2275,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "keyboardShortcuts",
-      heading: "Keyboard Shortcuts"
+      heading: "Atalhos"
     };
   }
 
@@ -2283,7 +2283,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "customMatrix",
-      heading: "Insert Matrix",
+      heading: "Inserir Matriz",
       targetMathField: event.detail.targetMathField
     };
   }
@@ -2461,7 +2461,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   :global(.bx--modal-close__icon) {
-    color: white;
+    fill: white;
   }
 
   :global(span.key.svelte-1bx9xya) {
@@ -2713,19 +2713,19 @@ Please include a link to this sheet in the email to assist in debugging the prob
     {/if}
     <HeaderGlobalAction 
       class="standalone"
-      title="Go Back"
+      title="Voltar"
       on:click={() => window.history.back()}
       icon={ArrowLeft}
     />
     <HeaderGlobalAction 
       class="standalone"
-      title="Go Forward"
+      title="Avançar"
       on:click={() => window.history.forward()}
       icon={ArrowRight}
     />
     <HeaderGlobalAction
       class="standalone hide-when-narrow"
-      title="Print"
+      title="Imprimir"
       on:click={() => window.print()}
       icon={Printer}
     />
@@ -2745,32 +2745,32 @@ Please include a link to this sheet in the email to assist in debugging the prob
         />
         <HeaderGlobalAction
           id="open-sheet"
-          title="Open Sheet From File"
+          title="Abrir Planilha"
           on:click={handleFileOpen}
           icon={Document}
         />
         <HeaderGlobalAction
           id="save-sheet"
-          title="Save Sheet to File in Various Formats"
+          title="Salvar Planilha"
           on:click={loadSaveSheetModal}
           icon={Download}
         />
         <HeaderGlobalAction
           id="upload-sheet"
-          title="Get Shareable Link"
+          title="Compartilhar Planilha"
           on:click={handleGetShareableLink} 
           icon={CloudUpload}
         />
-        <HeaderActionLink
+        <!--<HeaderActionLink
           href={`/${tutorialHash}`}
           title="Tutorial"
           rel="nofollow"
           icon={Help}
           on:click={(e) => handleLinkPushState(e, `/${tutorialHash}`) }
-        />
+        />-->
         <div class="dot-container">
           <HeaderGlobalAction 
-            title={"Sheet Settings" + (usingDefaultConfig ? "" : " (Modified)")}
+            title={"Opções da Planilha" + (usingDefaultConfig ? "" : " (Modificado)")}
             on:click={handleSheetSettings} 
             icon={SettingsAdjust}
           />
@@ -2779,19 +2779,19 @@ Please include a link to this sheet in the email to assist in debugging the prob
           {/if}
         </div>
         <HeaderGlobalAction
-          title="Supported Units"
+          title="Unidades"
           on:click={handleUnitsModal}
           icon={Ruler}
         />
         <HeaderGlobalAction 
           class="hide-when-narrow" 
-          title="Keyboard Shortcuts" 
+          title="Atalhos" 
           on:click={handleKeyboardShortcutsModal}
           icon={Keyboard}
         />
       {:else}
         <HeaderGlobalAction
-          title="Open this sheet in a new tab"
+          title="Abrir Esta Planilha em Nova Aba"
           on:click={() => window.open(window.location.href, "_blank")}
           icon={Launch}
         />
@@ -2807,7 +2807,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       on:close={() => window.dispatchEvent(new Event('resize'))}
     >
       <SideNavItems>
-        <SideNavMenu text="Example Sheets">
+        <!--<SideNavMenu text="Example Sheets">
           {#each exampleSheets as {path, title} (path)}
             <SideNavMenuItem 
               href={path}
@@ -2817,8 +2817,8 @@ Please include a link to this sheet in the email to assist in debugging the prob
               <div title={title} class="side-nav-title">{title}</div>
             </SideNavMenuItem>
           {/each}
-        </SideNavMenu>
-        <SideNavMenu text="Prebuilt Tables">
+        </SideNavMenu>-->
+        <!--<SideNavMenu text="Prebuilt Tables">
           {#each prebuiltTables as {url, title} (url)}
             <SideNavMenuItem 
               href={`/${getSheetHash(new URL(url))}`}
@@ -2828,15 +2828,15 @@ Please include a link to this sheet in the email to assist in debugging the prob
               <div title={title} class="side-nav-title">{title}</div>
             </SideNavMenuItem>
           {/each}
-        </SideNavMenu>
+        </SideNavMenu>-->
         {#if $history.length > 0}
-          <SideNavMenu text="Sheet History">
+          <SideNavMenu text="Revisões da Planilha">
             {#each $history as {url, hash, creation} (hash+creation)}
               {#if hash === "file"}
                 <SideNavMenuItem isSelected={false}>
                   <div title={url}>
                     <div class="side-nav-title">
-                      {`Saved as File: ${url}`}
+                      {`Salva como: ${url}`}
                     </div>
                     <em class="side-nav-date">{(new Date(creation)).toLocaleString()}</em>
                   </div>
@@ -2854,13 +2854,13 @@ Please include a link to this sheet in the email to assist in debugging the prob
           </SideNavMenu>
         {/if}
         {#if $insertedSheets.length > 0}
-          <SideNavMenu text="Inserted Sheets">
+          <SideNavMenu text="Planilhas Adicionadas">
             {#each $insertedSheets as {title, url, insertion}}
               {#if url === "file"}
                 <SideNavMenuItem>
                   <div title={title}>
                     <div class="side-nav-title">
-                      {`File Inserted: ${title}`}
+                      {`Arquivo adicionado: ${title}`}
                     </div>
                     <em class="side-nav-date">{(new Date(insertion)).toLocaleString()}</em>
                   </div>
@@ -2883,7 +2883,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
           </SideNavMenu>
         {/if}
         {#if recentSheets.size > 0}
-          <SideNavMenu text="Recent Sheets">
+          <SideNavMenu text="Arquivos Recentes">
             {#each [...recentSheets] as [key, value] (key)}
               {#if "url" in value}
                 <SideNavMenuItem
@@ -2917,29 +2917,29 @@ Please include a link to this sheet in the email to assist in debugging the prob
         {/if}
         <SideNavLink 
           on:click={() => showTerms()}
-          text="Terms and Conditions"
+          text="Termos e Condições"
         />
         <SideNavLink
           on:click={() => modalInfo = {
               modalOpen: true,
               state: "bugReport",
-              heading: "Bug Report"
+              heading: "Notificar Bug"
           }}
-          text="Bug Report"
+          text="Notificar Bug"
         />
-        <SideNavLink 
+        <!--<SideNavLink 
           on:click={() => modalInfo = {
             modalOpen: true,
             state: "newVersion",
             heading: "New Features"
           }}
           text="New Features"
-        />
-        <SideNavLink 
+        />-->
+        <!--<SideNavLink 
           on:click={() => showRequestPersistentStorage()}
           text="Enable Persistent Local Storage"
-        />
-        <SideNavLink
+        />-->
+        <!--<SideNavLink
           on:click={() => modalInfo = {
               modalOpen: true,
               state: "tryEpxyz",
@@ -2966,7 +2966,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
           href="https://www.reddit.com/r/boscolab/"
           text="Reddit Community"
           target="_blank"
-        />
+        />-->
       </SideNavItems>
     </SideNav>
   {/if}
@@ -3024,28 +3024,28 @@ Please include a link to this sheet in the email to assist in debugging the prob
     <div class="status-footer" on:mousedown={e=>e.preventDefault()}>
       <InformationFilled color="#0f62fe"/>
       <div>
-        Use of this software is subject to these  
+        O uso deste software está sujeito aos  
         <button class="link" on:click={showTerms}>
-          Terms and Conditions
-        </button>  (updated {versionToDateString(termsVersion)})
+          Termos e Condições
+        </button>  (Revisado em {versionToDateString(termsVersion)})
       </div>
-      <button on:click={acceptTerms}>Accept</button>
+      <button on:click={acceptTerms}>Aceitar</button>
     </div>
   {:else}
     {#if noParsingErrors}
       {#if inDebounce && !pyodideNotAvailable && pyodideLoaded}
         <div class="status-footer">
-          <InlineLoading status="inactive" description="Updating..."/>
+          <InlineLoading status="inactive" description="atualizando..."/>
         </div>
       {:else}
         {#await pyodidePromise}
           {#if !pyodideLoaded && !pyodideNotAvailable && !error}
             <div class="status-footer promise">
-              <InlineLoading description="Loading Pyodide..."/>
+              <InlineLoading description="carregando engine..."/>
             </div>
           {:else if pyodideLoaded && !pyodideNotAvailable}  
             <div class="status-footer promise" on:mousedown={e=>e.preventDefault()}>
-              <InlineLoading description="Updating..."/>
+              <InlineLoading description="atualizando..."/>
               {#if pyodideTimeout}
                 <button on:click={restartPyodide}>Restart Pyodide</button>
               {/if}
@@ -3059,20 +3059,20 @@ Please include a link to this sheet in the email to assist in debugging the prob
       {/if}
       {#if error && !inDebounce}
         <div class="status-footer">
-          <InlineLoading status="error" description={`Error: ${error}`} />
+          <InlineLoading status="error" description={`Erro: ${error}`} />
         </div>
       {/if}
       {#if pyodideNotAvailable}
         <div class="status-footer">
-          <InlineLoading status="error" description={`Error: Pyodide failed to load.`} />
+          <InlineLoading status="error" description={`Erro: Engine falhou ao iniciar.`} />
         </div>
       {/if}
     {:else}
       <div class="status-footer" on:mousedown={e=>e.preventDefault()}>
         <ErrorFilled color="#da1e28"/>
         <div>
-          Sheet cannot be evaluated due to a syntax error.
-          See this 
+          Planilha contém erro de sintaxe.
+          Veja este
           <a
             href={`/${tutorialHash}`}
             rel="nofollow"
@@ -3080,9 +3080,9 @@ Please include a link to this sheet in the email to assist in debugging the prob
           >
             tutorial
           </a>
-          to learn how to use this app.
+          sobre como criar uma planilha.
         </div>
-        <button on:click={showSyntaxError}>Show Error</button>
+        <button on:click={showSyntaxError}>Ver Erro</button>
       </div>
     {/if}
   {/if}
@@ -3091,8 +3091,8 @@ Please include a link to this sheet in the email to assist in debugging the prob
     {#if modalInfo.state === "sheetSettings"}
       <Modal
         modalHeading={modalInfo.heading}
-        primaryButtonText="Confirm"
-        secondaryButtonText="Restore Defaults"
+        primaryButtonText="Confirmar"
+        secondaryButtonText="Restaurar"
         on:click:button--primary={() => modalInfo.modalOpen = false}
         on:click:button--secondary={() => {mathCellConfigDialog?.resetDefaults();
                                            baseUnitsConfigDialog?.resetDefaults();
@@ -3109,18 +3109,18 @@ Please include a link to this sheet in the email to assist in debugging the prob
           />
         {:else}
           <Tabs>
-            <Tab label="Number Format" />
-            <Tab label="Default Units" />
-            <Tab label="Set User Default" />
+            <Tab label="Números" />
+            <Tab label="Unidades Padrão" />
+            <Tab label="Padrão do Usuário" />
             <svelte:fragment slot="content">
               <TabContent>
                 <Checkbox 
-                  labelText="Automatically Simplify Symbolic Expressions (unchecking may speed up sheet updates)"
+                  labelText="Simplificar Automaticamente Expressões Simbólicas."
                   bind:checked={$config.simplifySymbolicExpressions}
                   on:check={() => $mathCellChanged = true}
                 />
                 <Checkbox 
-                  labelText="Automatically Convert Decimal Values to Fractions (increases precision for decimal numbers, unchecking may speed up sheet updates)"
+                  labelText="Converter Automaticamente Valores Decimais para Frações."
                   bind:checked={$config.convertFloatsToFractions}
                   on:check={() => $mathCellChanged = true}
                 />
@@ -3158,8 +3158,8 @@ Please include a link to this sheet in the email to assist in debugging the prob
         passiveModal={!(modalInfo.state === "uploadSheet" || modalInfo.state === "insertSheet")}
         bind:open={modalInfo.modalOpen}
         modalHeading={modalInfo.heading}
-        primaryButtonText="Confirm"
-        secondaryButtonText="Cancel"
+        primaryButtonText="Confirmar"
+        secondaryButtonText="Cancelar"
         on:click:button--secondary={() => (modalInfo.modalOpen = false)}
         on:open
         on:close
@@ -3170,37 +3170,37 @@ Please include a link to this sheet in the email to assist in debugging the prob
                                       "keyboardShortcuts"].includes(modalInfo.state)}
       >
         {#if modalInfo.state === "uploadSheet"}
-          <p>Saving this document will create a private shareable link that can be used to access this 
-            document in the future. Anyone you share this link with will be able to access the document.
-          </p>
+          <p>Salvar este documento na nuvem irá criar um link compartilhável privado que poderá ser usado para acessar este documento no futuro. Qualquer pessoa com quem você compartilhar este link poderá acessar o documento.</p>
         {:else if modalInfo.state === "uploadPending"}
-          <InlineLoading description="Getting shareable link..."/>
+          <InlineLoading description="Obtendo Link Compartilhável..."/>
         {:else if modalInfo.state === "success"}
-          <p>Save this link in order to be able to access or share this sheet.</p>
+          <p>Anote ou salve este link em seu dispositivo para poder acessar ou compartilhar esta planilha.</p>
           <br>
           <div class="shareable-link">
-            <label for="shareable-link" class="shareable-link-label">Shareable Link:</label>
+            <label for="shareable-link" class="shareable-link-label">Link Compartilhável:</label>
             <input type="text" id="shareable-link" value={modalInfo.url} size=50 readonly>
             <CopyButton text={modalInfo.url} />
           </div>
         {:else if modalInfo.state === "retrieving"}
-          <InlineLoading description={`Retrieving sheet: ${window.location}`}/>
+          <InlineLoading description={`Recuperando arquivo: ${window.location}`}/>
         {:else if modalInfo.state === "generatingDocument"}
-          <InlineLoading description={`Generating document file...`}/>
+          <InlineLoading description={`Gerando arquivo...`}/>
         {:else if modalInfo.state === "opening"}
-          <InlineLoading description={`Opening sheet from file`}/>
+          <InlineLoading description={`Abrindo arquivo`}/>
         {:else if modalInfo.state === "importingSpreadsheet"}
-          <InlineLoading description={`Importing spreadsheet from file`}/>
+          <InlineLoading description={`Importando arquivo`}/>
         {:else if modalInfo.state === "saving"}
-          <InlineLoading description={`Saving sheet to file`}/>
+          <InlineLoading description={`Salvando arquivo`}/>
         {:else if modalInfo.state === "restoring"}
-          <InlineLoading description={`Restoring autosave checkpoint: ${window.location}`}/>
+          <InlineLoading description={`Restaurando checkpoint: ${window.location}`}/>
         {:else if modalInfo.state === "bugReport"}
-          <p>If you have discovered a bug in Boscolab, 
-            please send a bug report to 
-            <a href={`mailto:suporte@boscolab.com.br?subject=Bug Report&body=Sheet with issues: ${encodeURIComponent(window.location.href)}`}>suporte@boscolab.com.br</a>.
-            Please include a description of the problem. Additionally, it's best if you can include a link to the sheet that is experiencing the problem.
+          <p>
+            Caso você tenha identificado um erro no Boscolab, pedimos que envie um relatório detalhado para 
+            <a href={`mailto:suporte@boscolab.com.br?subject=Relatório de Erro&body=Planilha com problemas: ${encodeURIComponent(window.location.href)}`} aria-label="Enviar e-mail para suporte com detalhes do erro">suporte@boscolab.com.br</a>. 
           </p>
+          <p>
+              Por favor, inclua uma descrição clara do problema e, se possível, adicione o link da planilha em que o erro foi encontrado. Essas informações ajudarão nossa equipe a diagnosticar e resolver a questão de forma mais eficiente.
+          </p>      
         {:else if modalInfo.state === "tryEpxyz"}
           <p>
             Some environments indiscriminately block all <em>.xyz</em> domains. For example,

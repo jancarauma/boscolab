@@ -328,7 +328,7 @@
   <div class="row">
     <div>
       <label for={`fluid-selector-${index}`}>
-        Fluid:
+        Fluido:
       </label>
       <select
         id={`fluid-selector-${index}`}
@@ -350,7 +350,7 @@
     {#if FluidCell.FLUIDS.get(fluidConfig.fluid)?.incompressibleMixture}
       <div>
         <label for={`concentration-input-${index}`}>
-          Concentration:
+          Concentração:
         </label>
         <input
           bind:value={fluidConfig.incompMixConc}
@@ -372,7 +372,7 @@
         on:change={handleFluidConfigUpdate}
       />
       <label for={`use-sheet-fluid-${index}`}>
-        Use sheet fluid
+        Usar planilha de fluido
       </label>
     </div>
 
@@ -387,7 +387,7 @@
       <div class="row">
         <div>
           <label for={`fluid-component-selector-${index}-${i}`}>
-            Mixture Component {i+1}:
+            Componente da mistura {i+1}:
           </label>
           <select
             id={`fluid-component-selector-${index}-${i}`}
@@ -404,7 +404,7 @@
         
         <div>
           <label for={`fluid-component-mole-fraction-${index}-${i}`}>
-            Mole Fraction {i+1}:
+            Fração Molar {i+1}:
           </label>
           <div class="row">
             <input
@@ -419,7 +419,7 @@
             {#if fluidConfig.customMixture.length > 2}
               <IconButton
                 on:click={() => deleteRow(i)}
-                title="Delete Mixture Component"
+                title="Excluir Componente da Mistura"
                 id={`delete-row-${index}-${i}`}
               >
                 <RowDelete />
@@ -429,7 +429,7 @@
               <IconButton
                 on:click={addRow}
                 id={`add-row-${index}`}
-                title="Add Mixture Component"
+                title="Adicionar Componente da Mistura"
               >
                 <Add />
               </IconButton>
@@ -442,7 +442,7 @@
 
   <div>
     <label for={`output-selector-${index}`}>
-      Output:
+      Saída:
     </label>
     <select
       id={`output-selector-${index}`}
@@ -464,7 +464,7 @@
 
   <div>
     <label for={`input1-selector-${index}`}>
-      Input 1:
+      Entrada 1:
     </label>
     <select
       disabled={FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial}
@@ -486,7 +486,7 @@
   
   <div>
     <label for={`input2-selector-${index}`}>
-      Input 2:
+      Entrada 2:
     </label>
     <select
       disabled={FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial}
@@ -509,7 +509,7 @@
   <div>
     {#if fluidConfig.fluid === "HumidAir"}
       <label for={`input3-selector-${index}`}>
-        Input 3:
+        Entrada 3:
       </label>
       <select
         id={`input3-selector-${index}`}
@@ -531,7 +531,7 @@
 
   <div>
     <label for={`fluid-symbol-${index}`}>
-      {FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "Constant Name:" : "Function Name:"}
+      {FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "Nome da Constante:" : "Nome da Função:"}
     </label>
     <div id={`fluid-symbol-${index}`} class="row">
       <MathField
@@ -550,7 +550,7 @@
       {:else}
         <IconButton
           on:click={() => fluidCell.mathField.element?.getMathField()?.executeCommand('copyToClipboard')}
-          title={`Copy ${FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "Constant" : "Function"} Name to Clipboard`}
+          title={`Copiar Nome da ${FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "Constante" : "Função"} para Área de Transferência`}
           id={`copy-fluid-symbol-name-${index}`}
         >
           <Copy />
@@ -562,15 +562,15 @@
           on:change={handleUpdate}
         />
         <label for={`use-fluid-name-in-symbol-${index}`}>
-          {`Use fluid name in ${FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "constant" : "function"} name`}
+          {`Usar nome do fluido como nome da ${FluidCell.FLUID_PROPS_PARAMETERS.get(fluidCell.output)?.trivial ? "constante" : "função"}`}
         </label>
       {/if}
       <div class="info">
         <TooltipIcon direction="left">
           <span class="tooltip" slot="tooltipText">
-            The fluid models in Boscolab are powered by the CoolProp library. For 
-            more information on these models, see the 
-            <a href="http://coolprop.org/" target="_blank">CoolProp documentation</a>.
+            Os modelos de fluido no Boscolab são alimentados pela biblioteca CoolProp. Para 
+            mais informações sobre esses modelos, veja a 
+            <a href="http://coolprop.org/" target="_blank">documentação do CoolProp</a>.
           </span>
           <Information />
         </TooltipIcon>

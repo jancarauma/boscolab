@@ -68,17 +68,13 @@
 <div class="container">
 <p>
   {#if configsMatch}
-    <Checkmark color="green"/> The current sheet config matches the user default config.
+    <Checkmark color="green"/> A configuração atual da planilha corresponde à configuração padrão do usuário.
   {:else if !currentConfigIsDefaultConfig}
-    <Information color="blue"/> The current sheet config differs from the user default config, the buttons 
-    below can be used to either save this sheet's config as the user default config or apply the user default 
-    config to this sheet.
+    <Information color="blue"/> A configuração atual da planilha difere da configuração padrão do usuário, os botões abaixo podem ser usados para salvar a configuração desta planilha como a configuração padrão do usuário ou aplicar a configuração padrão do usuário a esta planilha.
   {:else}
-    <Information color="blue"/> The current sheet is using the Boscolab default config which 
-    is different than the user default config. The user default config can be applied to this sheet using 
-    the second button below.
+    <Information color="blue"/> A planilha atual está usando a configuração padrão do Boscolab, que é diferente da configuração padrão do usuário. A configuração padrão do usuário pode ser aplicada a esta planilha usando o segundo botão abaixo.
   {/if}
-</p>
+</p>  
 
 <div class="button-container">
   <Button 
@@ -86,7 +82,7 @@
     on:click={setDefaultConfig}
     disabled={configsMatch}
   >
-    Use This Sheet's Config as the User Default Config
+    Usar a Configuração Desta Planilha como Configuração Padrão do Usuário
   </Button>
 
   <Button
@@ -94,7 +90,7 @@
     on:click={useDefaultConfig}
     disabled={configsMatch}
   >
-    Apply the User Default Config to This Sheet
+    Aplicar a Configuração Padrão do Usuário a Esta Planilha
   </Button>
 </div>
 

@@ -39,7 +39,7 @@
 
       treeElements.push({
         id: currentIndex++,
-        text: "Prebuilt Tables",
+        text: "Tabelas Diversas",
         children: children
       });
     }
@@ -57,7 +57,7 @@
 
       treeElements.push({
         id: currentIndex++,
-        text: "Recent Sheets",
+        text: "Arquivos Recentes",
         children: children
       });
     }
@@ -84,18 +84,18 @@
 </style>
 
 <Tabs bind:selected={selectedTab}>
-  <Tab label="Select by URL" />
-  <Tab label="Select by File" />
+  <Tab label="A partir da URL" />
+  <Tab label="A partir de um arquivo" />
   <svelte:fragment slot="content">
     <TabContent>
       <div>
-        <label for="url">URL of Sheet to Insert:</label>
+        <label for="url">Endereço URL da Planilha:</label>
         <input bind:value={formUrl} type="url" name="url">
       </div>
 
       <div>
         <TreeView
-          labelText="Quick Links"
+          labelText="Links Úteis"
           children={treeElements}
           on:select={handleSelect}
         />
@@ -103,7 +103,7 @@
     </TabContent>
     <TabContent>
       <FileUploaderDropContainer
-        labelText="Drag and drop .blab files here or click to select"
+        labelText="Arraste e solte arquivos .blab aqui ou clique para selecionar"
         accept={[".blab"]}
         on:change={handleFileChange}
       />

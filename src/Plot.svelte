@@ -43,13 +43,13 @@
   const debounceUpdatePlot = debounce(updatePlot, 300);
 
   const savePngButton = {
-    name: 'Save Plot as PNG Image',
+    name: 'Salvar gráfico como imagem PNG',
     icon: pngIcon,
     click: (gd) => Plotly.downloadImage(gd, {format: 'png'})
   };
 
   const saveSvgButton = {
-    name: 'Save Plot as SVG Image',
+    name: 'Salvar gráfico como imagem SVG',
     icon: svgIcon,
     click: (gd) => Plotly.downloadImage(gd, {format: 'svg'})
   };

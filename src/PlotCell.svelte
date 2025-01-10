@@ -25,7 +25,7 @@
   let containerDiv: HTMLDivElement;
   let plotData = {data: [{}], layout: {}};
   let clipboardPlotData = {headers: [], units: [], columns: []};
-  let copyButtonText = "Copy Data";
+  let copyButtonText = "Copiar Dados";
 
   export async function getMarkdown() {
     if (plotElement) {
@@ -144,7 +144,7 @@
                 data.displayInputUnits = userInputUnitsLatex;
               } else {
                 data.unitsMismatch = true;
-                data.unitsMismatchReason = "All x-axis units must be compatible";
+                data.unitsMismatchReason = "Todas as unidades do eixo x devem ser compatíveis";
               }
             } else {
               data.displayInput = data.input;
@@ -249,7 +249,7 @@
             inputNames.add(result.data[0].inputNameLatex ?? result.data[0].inputName);
           } else {
             result.data[0].unitsMismatch = true;
-            result.data[0].unitsMismatchReason = "Cannot have more than 4 different y-axis units"
+            result.data[0].unitsMismatchReason = "Não pode haver mais de 4 unidades diferentes no eixo y";
           }
 
           clipboardPlotData.headers.push(result.data[0].inputName);
@@ -260,7 +260,7 @@
           clipboardPlotData.columns.push(result.data[0].displayOutput);
         } else {
           result.data[0].unitsMismatch = true;
-          result.data[0].unitsMismatchReason = "All x-axis units must be compatible"
+          result.data[0].unitsMismatchReason = "Todas as unidades do eixo x devem ser compatíveis";
         }
       }
     }
@@ -409,17 +409,17 @@
     const clipboardPlotData = getClipboardPlotData(); 
 
     if (clipboardPlotData === "") {
-      copyButtonText = "No data to copy";
+      copyButtonText = "Nenhum dado para copiar";
     } else {
       try {
         await navigator.clipboard.writeText(clipboardPlotData);
-        copyButtonText = "Copied!";
+        copyButtonText = "Copiado!";
       } catch (e) {
-        copyButtonText = "Copy failed, check browser settings";
+        copyButtonText = "Falha ao copiar, verifique as configurações do navegador";
       }
     }
 
-    setTimeout(() => copyButtonText="Copy Data", 2000);
+    setTimeout(() => copyButtonText="Copiar Dados", 2000);
   }
 
   function handleEnter(row: number) {
@@ -571,7 +571,7 @@
       on:change={handleAspectRatioChange}
       title="Use square aspect ratio"
     >
-      1:1 Ratio
+      Razão 1:1
     </TextCheckbox>
 
     <TextButton on:click={copyData}>
@@ -618,39 +618,39 @@
               </TooltipIcon>
             {:else if !$results[index][i].data[0].numericInput}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">X-axis limits of plot do not evaluate to a number</span>
+                <span slot="tooltipText">Os limites do eixo X do gráfico não resultam em um número</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if !$results[index][i].data[0].limitsUnitsMatch}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">Units of the x-axis upper and lower limits do not match</span>
+                <span slot="tooltipText">As unidades dos limites superior e inferior do eixo X não coincidem</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if !$results[index][i].data[0].numericOutput}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">Results of expression does not evaluate to finite and real numeric values</span>
+                <span slot="tooltipText">Os resultados da expressão não avaliam para valores numéricos reais e finitos</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if !unitsValid($results[index][i].data[0].displayInputUnits)}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">X-axis upper and/or lower limit dimension error{$results[index][i].data[0].asciiInputUnits.startsWith("Dimension Error:") ? $results[index][i].data[0].asciiInputUnits.slice(15) : ""}</span>
+                <span slot="tooltipText">Erro de dimensão nos limites superior e/ou inferior do eixo X{$results[index][i].data[0].asciiInputUnits.startsWith("Dimension Error:") ? $results[index][i].data[0].asciiInputUnits.slice(15) : ""}</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if !unitsValid($results[index][i].data[0].displayOutputUnits)}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">Y-axis dimension error{$results[index][i].data[0].asciiOutputUnits.startsWith("Dimension Error:") ? $results[index][i].data[0].asciiOutputUnits.slice(15) : ""}</span>
+                <span slot="tooltipText">Erro de dimensão do eixo Y{$results[index][i].data[0].asciiOutputUnits.startsWith("Dimension Error:") ? $results[index][i].data[0].asciiOutputUnits.slice(15) : ""}</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if $results[index][i].data[0].unitsMismatch}
               <TooltipIcon direction="right" align="end">
                   <span slot="tooltipText">
-                    { $results[index][i].data[0].unitsMismatchReason ? $results[index][i].data[0].unitsMismatchReason : "Units Mismatch" }
+                    { $results[index][i].data[0].unitsMismatchReason ? $results[index][i].data[0].unitsMismatchReason : "Incompatibilidade de Unidades" }
                   </span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else if $results[index][i].data[0].inputReversed}
               <TooltipIcon direction="right" align="end">
-                  <span slot="tooltipText">Upper and lower limits of plot range are reversed</span>
+                  <span slot="tooltipText">Limites superior e inferior do intervalo do gráfico estão invertidos</span>
                 <Error class="error"/>
               </TooltipIcon>
             {/if}
@@ -664,7 +664,7 @@
           >
             <IconButton
               on:click={() => deleteRow(i)}
-              title="Delete Row"
+              title="Excluir Linha"
               id={`delete-row-${index}-${i}`}
             >
               <RowDelete />
@@ -680,7 +680,7 @@
         <IconButton
           on:click={addMathField}
           id={`add-row-${index}`}
-          title="Add Equation"
+          title="Adicionar Equação"
         >
           <Add />
         </IconButton>

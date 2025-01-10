@@ -41,19 +41,20 @@ export const COMPARISON_MAP = new Map([
 export const UNITS_WITH_OFFSET = new Set(['degC', 'degF', 'celsius', 'fahrenheit']);
 
 export const TYPE_PARSING_ERRORS = {
-  math: "This field must contain an assignment (e.g., x=y*z) or a query (e.g., x=). To delete an unwanted math cell, click the trash can on the right.",
-  plot: "This field must contain a function query with an input parameter range using the format y(-10 ≤ x ≤ 10)=, a query with a pair of scalars or vectors separated by a comma using the format (a,b)=, or a query with a parametric expression using the format (sin(s), cos(s)) for (0 ≤ s ≤ 2*pi)=",
-  parameter: "A variable name is required in this field.",
-  units: "This field may only contain units in square brackets or may be left blank to indicate no units.",
-  expression: "This field may only contain a valid expression or number without an equals sign or it may be blank.",
-  expression_no_blank: "This field may only contain a valid expression or number without an equals sign.",
-  number: "This field may only contain a number since units are specified for this column.",
-  condition: "This field may only contain a condition statement such as x>1. The expression corresponding to the first satisfied condition will be used.",
-  piecewise: "Syntax Error",
-  equality: "An equation is required in this field.",
-  id_list: "A variable name, or a list of variable names separated by commas, is required in this field (x,y for example). If a numerical solve is required, the variables must be given initial guess values with a tilde (x~1, y~2, for example).",
-  data_table_expression: "A variable name or an assignment is required in this field."
+  math: "Este campo deve conter uma atribuição (exemplo: x=3+4) ou uma consulta (exemplo: x=). Para excluir uma célula matemática indesejada, clique na lixeira à direita.",
+  plot: "Este campo deve conter uma consulta de função com um intervalo de parâmetro de entrada no formato y(-10 ≤ x ≤ 10)=, uma consulta com um par de escalares ou vetores separados por vírgula no formato (a,b)=, ou uma consulta com uma expressão paramétrica no formato (sin(s), cos(s)) for (0 ≤ s ≤ 2*pi)=.",
+  parameter: "É necessário um nome de variável neste campo.",
+  units: "Este campo pode conter apenas unidades entre colchetes ou pode ser deixado em branco para indicar que não há unidades.",
+  expression: "Este campo pode conter apenas uma expressão válida ou número, sem sinal de igual, ou pode estar em branco.",
+  expression_no_blank: "Este campo pode conter apenas uma expressão válida ou número, sem sinal de igual.",
+  number: "Este campo pode conter apenas um número, pois unidades são especificadas para esta coluna.",
+  condition: "Este campo pode conter apenas uma declaração de condição, como x>1. A expressão correspondente à primeira condição satisfeita será usada.",
+  piecewise: "Erro de sintaxe.",
+  equality: "Uma equação é necessária neste campo.",
+  id_list: "É necessário um nome de variável ou uma lista de nomes de variáveis separadas por vírgulas (exemplo: x,y). Se for necessária uma resolução numérica, as variáveis devem ser fornecidas com valores iniciais utilizando til (~), como x~1, y~2, por exemplo.",
+  data_table_expression: "É necessário um nome de variável ou uma atribuição neste campo."
 };
+
 
 
 // SymPy and Python have many reserved names

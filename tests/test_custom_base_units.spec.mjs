@@ -280,10 +280,10 @@ test('Test user default config', async () => {
   await page.getByRole('tab', { name: 'Default Units' }).click();
   await page.getByRole('button', { name: 'inch-lbm-sec'}).click();
   await page.getByRole('tab', { name: 'Set User Default'}).click();
-  await expect(page.locator('text=The current sheet config differs from the user default config')).toBeAttached();
-  await page.getByRole('button', { name: "Use This Sheet's Config as the User Default Config"}).click();
-  await expect(page.locator('text=The current sheet config matches the user default config')).toBeAttached();
-  await page.getByRole('button', { name: 'Confirm' }).click();
+  await expect(page.locator('text=A configuração atual da planilha é diferente da configuração padrão do usuário.')).toBeAttached();
+  await page.getByRole('button', { name: "Usar a configuração desta planilha como a configuração padrão do usuário."}).click();
+  await expect(page.locator('text=Usar a configuração desta planilha como a configuração padrão do usuário.')).toBeAttached();
+  await page.getByRole('button', { name: 'Confirmar' }).click();
 
   await page.waitForSelector('text=Updating...', {state: 'detached'});
 

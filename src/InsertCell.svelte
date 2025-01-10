@@ -170,7 +170,7 @@
 <div class="container" class:mobile={$onMobile}>
   <div class="controls">
     {#if !$onMobile}
-      <p>Press the number to the desired cell type or press Escape to cancel:</p>
+      <p>Pressione o número para o tipo de célula desejado ou pressione Esc para cancelar:</p>
     {/if}
     
     <div class="button-grid">
@@ -185,7 +185,7 @@
           {#if !$onMobile}
             <div>1</div>
           {/if}
-          <div>Math Cell</div>
+          <div>Equação</div>
           <div><AddAlt size={20}/></div>
         </div>
       </button>
@@ -199,9 +199,9 @@
         <div class="button-text">
           {#if !$onMobile}
             <div>2</div>
-            <div>Documetation Cell</div>
+            <div>Texto</div>
           {:else}
-            <div>Comment Cell</div>
+            <div>Comentário</div>
           {/if}
           <div><AddComment size={20}/></div>
         </div>
@@ -217,7 +217,7 @@
           {#if !$onMobile}
             <div>3</div>
           {/if}
-          <div>Plot Cell</div>
+          <div>Gráfico</div>
           <div><ChartLineSmooth size={20}/></div>
         </div>
       </button>
@@ -232,7 +232,7 @@
           {#if !$onMobile}
             <div>4</div>
           {/if}
-          <div>Selector Table Cell</div>
+          <div>Lista</div>
           <div><Grid size={20}/></div>
         </div>
       </button>
@@ -247,7 +247,7 @@
           {#if !$onMobile}
             <div>5</div>
           {/if}
-          <div>Data Table Cell</div>
+          <div>Dados</div>
           <div><DataTable size={20}/></div>
         </div>
       </button>
@@ -261,9 +261,9 @@
         <div class="button-text">
           {#if !$onMobile}
             <div>6</div>
-            <div>Piecewise Expression Cell</div>
+            <div>Condicional</div>
           {:else}
-            <div>Piecewise Function Cell</div>
+            <div>Condicional (Função)</div>
           {/if}
           <div><ChartLine size={20}/></div>
         </div>
@@ -279,7 +279,7 @@
           {#if !$onMobile}
             <div>7</div>
           {/if}
-          <div>System Solve Cell</div>
+          <div>Sistema</div>
           <div><IbmWatsonStudio size={20}/></div>
         </div>
       </button>
@@ -294,7 +294,7 @@
           {#if !$onMobile}
             <div>8</div>
           {/if}
-          <div>Fluid Props Cell</div>
+          <div>Fluido</div>
           <div><RainDrop size={20}/></div>
         </div>
       </button>
@@ -309,7 +309,7 @@
           {#if !$onMobile}
             <div>9</div>
           {/if}
-          <div>Insert Sheet</div>
+          <div>Planilha</div>
           <div><InsertPage size={20}/></div>
         </div>
       </button>
@@ -322,9 +322,9 @@
       >
         <div class="button-text">
           {#if !$onMobile}
-            <div>Escape</div>
+            <div>Esc</div>
           {/if}
-          <div>Cancel</div>
+          <div>Cancelar</div>
           <div><Error size={20}/></div>
         </div>
       </button>

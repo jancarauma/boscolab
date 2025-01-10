@@ -194,7 +194,7 @@
       <IconButton        
         id="{`up-${index}`}"
         on:click={()=>moveUp(index)}
-        title="Move Cell Up"
+        title="Mover Célula para Cima"
       >
         <ChevronUp />
       </IconButton>
@@ -206,7 +206,7 @@
       on:touchstart|nonpassive={startDrag}
     >
       <IconButton
-        title="Drag to Move Cell"
+        title="Arraste para Mover a Célula"
       >
         <Draggable />
       </IconButton>
@@ -215,7 +215,7 @@
       <IconButton        
         id="{`down-${index}`}"
         on:click={()=>moveDown(index)}
-        title="Move Cell Down"
+        title="Mover Célula para Baixo"
       >
         <ChevronDown />
       </IconButton>
@@ -321,7 +321,7 @@
     <IconButton
       id="{`delete-${index}`}"
       on:click={()=>deleteCell(index)}
-      title="Delete Cell"
+      title="Excluir célula"
     >
       <TrashCan />
     </IconButton>

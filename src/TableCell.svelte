@@ -423,7 +423,7 @@
       >
         <IconButton
           on:click={() => deleteColumn(j)}
-          title="Delete Column"
+          title="Excluir Coluna"
           id={`delete-col-${index}-${j}`}
         >
           <ColumnDelete />
@@ -440,7 +440,7 @@
       >
         <IconButton
           on:click={() => deleteRow(i)}
-          title="Delete Row"
+          title="Excluir Linha"
           id={`delete-row-${index}-${i}`}
         >
           <RowDelete />
@@ -455,7 +455,7 @@
       <IconButton 
         id={`add-col-${index}`}
         on:click={addColumn}
-        title="Add Column"
+        title="Adicionar Coluna"
       > 
         <Add />
       </IconButton>
@@ -466,7 +466,7 @@
       <IconButton
         on:click={addRow}
         id={`add-row-${index}`}
-        title="Add Row"
+        title="Excluir Linha"
       >
         <Add />
       </IconButton>
@@ -477,7 +477,7 @@
     {#if !hideUnselected}
       {#if tableCell.rowJsons.length === 0}
         <IconButton
-          title="Add Row Specific Documentation"
+          title="Excluir documentação específica da linha"
           id={`add-row-docs-${index}`}
           on:click={addRowDocumentation}
         >
@@ -485,7 +485,7 @@
         </IconButton>
       {:else}
         <IconButton
-          title="Delete All Row Specific Documentation"
+          title="Excluir toda a documentação específica da linha"
           id={`del-row-docs-${index}`}
           on:click={deleteRowDocumentation}
         >
@@ -495,7 +495,7 @@
     {/if}
 
     <TooltipIcon direction="left">
-      <span slot="tooltipText">Place variable names in this row</span>
+      <span slot="tooltipText">Coloque os nomes das variáveis nesta linha</span>
       <Information />
     </TooltipIcon>
   </div>
@@ -504,7 +504,7 @@
     {#if numRows > 1}
       {#if hideUnselected}
         <IconButton
-          title="Show all rows"
+          title="Exibir todas as linhas"
           id={`show-all-rows-${index}`}
           on:click={() => tableCell.hideUnselected = false}
         >
@@ -512,7 +512,7 @@
         </IconButton>
       {:else}
         <IconButton
-          title="Hide unselected rows"
+          title="Ocultar linhas não selecionadas"
           id={`hide-unselected-rows-${index}`}
           on:click={() => tableCell.hideUnselected = true}
         >
@@ -522,7 +522,7 @@
     {/if}
     
     <TooltipIcon direction="left">
-      <span slot="tooltipText">Place column specific units in this row (optional)</span>
+      <span slot="tooltipText">Coloque as unidades específicas da coluna nesta linha (opcional)</span>
       <Information />
     </TooltipIcon>
   </div>

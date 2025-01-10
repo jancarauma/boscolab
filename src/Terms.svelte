@@ -2,82 +2,82 @@
   export let versionDateString: string;
 </script>
 
-<p><em>Updated {versionDateString}</em></p>
+<p><em>Atualizado em {versionDateString}</em></p>
 <br />
 <p>
-  Welcome to Boscolab! By using this software, you are agreeing to
-  the following terms and conditions.
+  Bem-vindo ao Boscolab! Ao utilizar este software, você concorda com os
+  seguintes termos e condições.
 </p>
 
 <br />
 
-<h4>Introduction</h4>
+<h4>Introdução</h4>
 
 <p>
-  Boscolab strives to protect user privacy. This is free and open
-  source software that does not require you to create an account to use. All of
-  the calculations you perform on Boscolab are performed on your own
-  computer and nothing you enter into your sheets is sent to our servers unless
-  you create a shareable link or export your sheet as a Microsoft Word .docx file
-  or a PDF file. When you create a shareable link, we only store the minimum amount of information 
-  required to run the shareable link service (see details below). When you export 
-  your sheet as a .docx or a .pdf file, no information is retained on the Boscolab 
-  servers (see details below). Using your browser's print functionality to save your sheet
-  as a PDF file sends no data to the Boscolab servers.
+  O Boscolab tem como compromisso proteger a privacidade dos usuários. Este é um software 
+  livre e de código aberto que não exige a criação de uma conta para ser utilizado. 
+  Todas as operações realizadas no Boscolab são executadas em seu próprio computador e 
+  nada do que você insere em suas planilhas é enviado para nossos servidores, a menos que 
+  você opte por criar um link compartilhável ou exportar sua planilha como um arquivo .docx 
+  do Microsoft Word ou PDF. Quando você cria um link compartilhável, armazenamos apenas o 
+  mínimo de informações necessárias para que o serviço de links compartilháveis funcione (veja os detalhes abaixo). 
+  Ao exportar suas planilhas como arquivos .docx ou PDF, nenhuma informação é retida nos servidores do Boscolab. 
+  Usar a funcionalidade de impressão do navegador para salvar suas planilhas como arquivos PDF não envia nenhum dado 
+  para os servidores do Boscolab.
 </p>
 <br />
 <p>
-  You have the option to save your full sheets to your local drive as .blab files. If you only save
-  your sheets locally as .blab or Markdown files, none of your data is ever sent to our servers.
+  Você tem a opção de salvar suas planilhas completas no seu dispositivo local como arquivos .blab. 
+  Caso opte por salvar suas planilhas localmente como arquivos .blab ou Markdown, nenhum dado será enviado para 
+  nossos servidores.
 </p>
 <br />
-<h4>No Warranty and Limitation of Liability</h4>
+<h4>Sem Garantia e Limitação de Responsabilidade</h4>
 <p>
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
+  ESTE SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" E O AUTOR ISENTA-SE DE TODAS AS GARANTIAS 
+  RELACIONADAS A ESTE SOFTWARE, INCLUINDO TODAS AS GARANTIAS IMPLÍCITAS DE COMERCIALIZAÇÃO E ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO. 
+  EM NENHUMA CIRCUNSTÂNCIA O AUTOR SERÁ RESPONSÁVEL POR QUAISQUER DANOS ESPECIAIS, DIRETOS, INDIRETOS, CONSEQUENCIAIS 
+  OU QUAISQUER OUTROS DANOS DECORRENTES DA PERDA DE USO, DADOS OU LUCROS, SEJA EM UMA AÇÃO DE CONTRATO, NEGLIGÊNCIA OU 
+  OUTRA AÇÃO ILÍCITA, RESULTANTES DO USO OU DESEMPENHO DESTE SOFTWARE.
 </p>
 <br />
-<h4>Privacy</h4>
+<h4>Privacidade</h4>
 <p>
-  Boscolab does not use cookies and does not track its users. The
-  only time personal information is collected is when you use the "Get Shareable
-  Link" feature of this site. When creating a shareable link, your IP address is
-  stored in a database along with the contents of the sheet that is uploaded.
-  The reason we collect the IP address for uploaded sheets is to protect this
-  free shareable link service from abuse. When creating a shareable link, your
-  data is stored on Cloudflare's global network. Cloudflare automatically
-  attempts to locate data closest to the user to improve overall performance.
+  O Boscolab não utiliza cookies e não rastreia seus usuários. A única ocasião em que informações pessoais 
+  são coletadas é quando você utiliza a funcionalidade "Gerar Link Compartilhável". Ao criar um link compartilhável, 
+  o endereço IP do usuário é armazenado em um banco de dados juntamente com o conteúdo da planilha enviada. 
+  O motivo para coletar o endereço IP é proteger o serviço gratuito de links compartilháveis contra abusos. 
+  Os dados enviados para criar links compartilháveis são armazenados na rede global da Cloudflare, que busca 
+  localizar os dados mais próximos do usuário para melhorar o desempenho geral.
 </p>
 <br />
-<p>
-  For technical reasons, it is necessary to send data to the Boscolab 
-  servers to convert your sheets to .docx or .pdf files. No data is retained 
-  on the Boscolab servers when creating .docx or .pdf files. 
-</p>
+<!--<p>
+  Por razões técnicas, é necessário enviar dados aos servidores do Boscolab para converter suas planilhas 
+  em arquivos .docx ou PDF. No entanto, nenhum dado é retido nos servidores do Boscolab durante esse processo. 
+</p>-->
 <br />
 <p>
-  Saving your sheets locally as .blab or Markdown files avoids sending any of your data to our database. 
-  Additionally, sheets can be convert to a PDF file using the browser's print functionality
-  without sending any data to the Boscolab servers.
+  Ao salvar suas planilhas localmente como arquivos .blab ou Markdown, nenhuma informação é enviada para nossa 
+  base de dados. Além disso, as planilhas podem ser convertidas em PDF usando a funcionalidade de impressão do navegador 
+  sem que qualquer dado seja enviado aos servidores do Boscolab.
 </p>
 <br />
-<h4>No Data Retention Guarantee for Shareable Links</h4>
+<h4>Sem Garantia de Retenção de Dados para Links Compartilháveis</h4>
 <p>
-  Our goal is to store sheets using the shareable link feature for the life of
-  the shareable link service. However, we provide no guarantee to the
-  accessibility of shareable links in the future. We reserve the right to shut
-  down the shareable link service at any time, and for any reason, without
-  warning. We also reserve the right to delete any uploaded sheet at any time,
-  and for any reason, without warning.
+  Nosso objetivo é armazenar planilhas usando a funcionalidade de links compartilháveis enquanto o serviço estiver 
+  ativo. No entanto, não garantimos a acessibilidade futura desses links. Reservamo-nos o direito de encerrar o 
+  serviço de links compartilháveis a qualquer momento e por qualquer motivo, sem aviso prévio. Também nos reservamos 
+  o direito de excluir qualquer planilha enviada a qualquer momento e por qualquer motivo, sem aviso.
 </p>
 <br />
 <p>
-  To ensure future access to your sheets, be sure to save them locally as .blab files
-  (even if you have created a shareable link).
+  Para garantir o acesso futuro às suas planilhas, certifique-se de salvá-las localmente como arquivos .blab 
+  (mesmo que tenha criado um link compartilhável).
 </p>
 <br />
+<h4>Importante</h4>
+<p>
+  O Boscolab é baseado no software de código aberto 
+  <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank">EngineeringPaper.xyz</a>, 
+  Copyright 2020-2023 Michael Greminger.
+</p>

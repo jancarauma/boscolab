@@ -524,20 +524,20 @@
 
 <div class="top-buttons">
   <TextButton on:click={handleLoadSpreadsheet}>
-    Import Spreadsheet
+    Importar Planilha
   </TextButton>
   <TextButton on:click={handleExportCSV}>
-    Export CSV
+    Exportar CSV
   </TextButton>
   <TextButton on:click={copyData}>
     {copyButtonText}
   </TextButton>
   {#if numInputs >= 2}
     <TextButton on:click={() => handleAddInterpolationFunction('interpolation')}>
-      Add Interpolation
+      Adicionar Interpolação
     </TextButton>
     <TextButton on:click={() => handleAddInterpolationFunction('polyfit')}>
-      Add Polyfit
+      Adicionar Polyfit
     </TextButton>
   {/if}
 </div>
@@ -577,7 +577,7 @@
         {:else if j === 0}
           <div class="info-tooltip">
             <TooltipIcon direction="right">
-              <span slot="tooltipText">Place variable names or column queries in this row</span>
+              <span slot="tooltipText">Coloque os nomes das variáveis ou consultas de coluna nesta linha.</span>
               <Information />
             </TooltipIcon>
           </div>
@@ -620,7 +620,7 @@
           {:else if j === 0}
             <div class="info-tooltip">
               <TooltipIcon direction="right">
-                <span slot="tooltipText">Place column specific units in this row (optional)</span>
+                <span slot="tooltipText">Coloque as unidades específicas da coluna nesta linha (opcional).</span>
                 <Information />
               </TooltipIcon>
             </div>
@@ -786,7 +786,7 @@
       >
         <IconButton
           on:click={() => deleteColumn(j)}
-          title="Delete Column"
+          title="Excluir Coluna"
           id={`delete-col-${index}-${j}`}
         >
           <ColumnDelete />
@@ -803,7 +803,7 @@
       >
         <IconButton
           on:click={() => deleteRow(i)}
-          title="Delete Row"
+          title="Excluir Linha"
           id={`delete-row-${index}-${i}`}
         >
           <RowDelete />
@@ -817,7 +817,7 @@
     <IconButton 
       id={`add-col-${index}`}
       on:click={addColumn}
-      title="Add Column"
+      title="Adicionar Coluna"
     > 
       <Add />
     </IconButton>
@@ -827,7 +827,7 @@
     <IconButton
       on:click={addRow}
       id={`add-row-${index}`}
-      title="Add Row"
+      title="Excluir Linha"
     >
       <Add />
     </IconButton>
@@ -838,7 +838,7 @@
       <IconButton
         on:click={deleteEmptyRows}
         id={`delete-blank-rows-${index}`}
-        title="Delete Blank Rows"
+        title="Excluir Linhas Vazias"
       >
         <RowCollapse />
       </IconButton>

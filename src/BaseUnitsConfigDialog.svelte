@@ -31,7 +31,7 @@
 
 <div class="container">
   <div>
-    <div class="bx--label">Unit System Shortcuts</div>
+    <div class="bx--label">Atalhos do Sistema de Unidades</div>
     <ButtonSet>
       {#each baseUnitSystems.keys() as name}
         <Button 
@@ -49,7 +49,7 @@
     <div class="combo-input">
       <ComboBox
         titleText={dimension.label}
-        placeholder="Select default unit method"
+        placeholder="Selecione o método de unidade padrão"
         bind:selectedId={baseUnits[dimension.name]}
         items={dimension.choices.map(value => ({id: value, text: value}))}
         on:select={update}

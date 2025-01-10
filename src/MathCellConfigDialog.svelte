@@ -55,38 +55,38 @@
 
 <Checkbox
   bind:checked={currentMathCellConfig.symbolicOutput}
-  labelText="Display Symbolic Results"
+  labelText="Exibir Resultados Simbólicos"
   on:change={update}
 />
 
 <div class="container">
   <Checkbox
     bind:checked={currentMathCellConfig.showIntermediateResults}
-    labelText="Show Intermediate Results"
+    labelText="Exibir Resultados Intermediários"
     on:change={() => update(null, true)}
   />
 
   <RadioButtonGroup
     disabled={currentMathCellConfig.symbolicOutput}
-    legendText="Notation"
+    legendText="Notação"
     bind:selected={currentMathCellConfig.formatOptions.notation}
     on:change={update}
   >
-    <RadioButton labelText="Automatic" value="auto" />
-    <RadioButton labelText="Fixed" value="fixed" />
-    <RadioButton labelText="Scientific" value="exponential" />
-    <RadioButton labelText="Engineering" value="engineering" />
+    <RadioButton labelText="Automática" value="auto" />
+    <RadioButton labelText="Fixa" value="fixed" />
+    <RadioButton labelText="Científica" value="exponential" />
+    <RadioButton labelText="Engenharia" value="engineering" />
   </RadioButtonGroup>
 
   <div class="number-input">
     <NumberInput
       disabled={currentMathCellConfig.symbolicOutput}
       bind:value={currentMathCellConfig.formatOptions.precision}
-      label={currentMathCellConfig.formatOptions.notation === "fixed" ? "Significant Figures After Decimal Point" : "Significant Figures"}
+      label={currentMathCellConfig.formatOptions.notation === "fixed" ? "Casas Decimais Significativas" : "Casas Significativas"}
       size="sm"
       min={currentMathCellConfig.formatOptions.notation === "fixed" ? 0 : 1}
       max={mathConfigLimits.precisionUpper}
-      invalidText={`Value must be between ${currentMathCellConfig.formatOptions.notation === "fixed" ? 0 : 1} and ${mathConfigLimits.precisionUpper}`}
+      invalidText={`O valor deve estar entre ${currentMathCellConfig.formatOptions.notation === "fixed" ? 0 : 1} e ${mathConfigLimits.precisionUpper}`}
       on:input={update}
     />
   </div>
@@ -95,11 +95,11 @@
     <NumberInput
       disabled={currentMathCellConfig.symbolicOutput || !(currentMathCellConfig.formatOptions.notation === "auto")}
       bind:value={currentMathCellConfig.formatOptions.lowerExp}
-      label="Negative Exponent Threshold"
+      label="Limite de Expoente Negativo"
       size="sm"
       min={mathConfigLimits.lowerExpLower}
       max={mathConfigLimits.lowerExpUpper}
-      invalidText={`Value must be between ${mathConfigLimits.lowerExpLower} and ${mathConfigLimits.lowerExpUpper}`}
+      invalidText={`O valor deve estar entre ${mathConfigLimits.lowerExpLower} e ${mathConfigLimits.lowerExpUpper}`}
       on:input={update}
     />
   </div>
@@ -108,11 +108,11 @@
     <NumberInput
       disabled={currentMathCellConfig.symbolicOutput || !(currentMathCellConfig.formatOptions.notation === "auto")}
       bind:value={currentMathCellConfig.formatOptions.upperExp}
-      label="Positive Exponent Threshold"
+      label="Limite de Expoente Positivo"
       size="sm"
       min={mathConfigLimits.upperExpLower}
       max={mathConfigLimits.upperExpUpper}
-      invalidText={`Value must be between ${mathConfigLimits.upperExpLower} and ${mathConfigLimits.upperExpUpper}`}
+      invalidText={`O valor deve estar entre ${mathConfigLimits.upperExpLower} e ${mathConfigLimits.upperExpUpper}`}
       on:input={update}
     />
   </div>

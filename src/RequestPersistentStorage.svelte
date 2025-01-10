@@ -22,28 +22,22 @@
 </script>
 
 <p>
-  Boscolab uses your browser's local storage to store your default sheet config, 
-  your {numCheckpoints ?? ""} most recent autosave
-  checkpoints, and your list of recently visited sheets. Your web browser will not automatically persist this
-  local storage and may clear it at any time. Safari is particularly aggressive about freeing this storage
-  and will automatically clear local storage for a site that has not been visited in the previous seven days. 
+  O Boscolab usa o armazenamento local do seu navegador para armazenar a configuração padrão da planilha, seus {numCheckpoints ?? ""} pontos de verificação de autosave mais recentes e sua lista de planilhas recentemente visitadas. Seu navegador da web não persiste automaticamente este armazenamento local e pode apagá-lo a qualquer momento. O Safari, em particular, é agressivo em liberar esse armazenamento e apagará automaticamente o armazenamento local de um site que não tenha sido visitado nos últimos sete dias.
 </p>
 
 <br>
 
 <p>
-  Click the button below to request that your browser enables persistent local storage for the 
-  {hostName} domain. Your browser may popup a dialog that asks you to approve this request.
-  Chrome and Edge may require you to bookmark {hostName} in order to enable persistent storage.
+  Clique no botão abaixo para solicitar que seu navegador habilite o armazenamento local persistente para o domínio {hostName}. Seu navegador pode exibir um diálogo pedindo que você aprove essa solicitação. O Chrome e o Edge podem exigir que você adicione {hostName} aos favoritos para habilitar o armazenamento persistente.
 </p>
 
 <br>
 
 <p>
   {#if persisted}
-    <Checkmark color="green"/> Persistent local storage is currently enabled.
+    <Checkmark color="green"/> O armazenamento local persistente está atualmente habilitado.
   {:else}
-    <Error color="red"/> Persistent local storage is currently disabled.
+    <Error color="red"/> O armazenamento local persistente está atualmente desabilitado.
   {/if}
 </p>
 
@@ -55,6 +49,6 @@
     disabled={persisted}
     on:click={requestPersistentStorage}
   >
-    Request Persistent Storage
+    Solicitar Armazenamento Persistente
   </Button>
 </p>

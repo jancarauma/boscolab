@@ -35,9 +35,9 @@
 <Modal
   passiveModal={false}
   bind:open
-  modalHeading="Save Document"
-  primaryButtonText="Save"
-  secondaryButtonText="Cancel"
+  modalHeading="Salvar Arquivo"
+  primaryButtonText="Salvar"
+  secondaryButtonText="Cancelar"
   on:click:button--secondary={() => (open = false)}
   on:open
   on:close
@@ -48,31 +48,31 @@
   <div class="container">
     <RadioButtonGroup
       orientation="vertical"
-      legendText="Document Type"
+      legendText="Formato do documento"
       name="document-type"
       required={true}
       bind:selected={docType}
     >
-      <RadioButton labelText="Native Boscolab .blab Sheet File (no data leaves your computer)" value="epxyz"/>
-      <RadioButton labelText="Markdown File (no data leaves your computer)" value="md" />
-      <RadioButton labelText="Microsoft Word .docx File (processed on the Boscolab server, no data is retained on the server)" value="docx" />
-      <RadioButton labelText="PDF File (processed on the Boscolab server, no data is retained on the server)" value="pdf" />
-      <RadioButton labelText="LaTeX File (images and plots are not included, processed on the Boscolab server, no data is retained on the server)" value="tex" />
+      <RadioButton labelText="Arquivo de Planilha Nativa do Boscolab (.blab)" value="epxyz" />
+      <RadioButton labelText="Arquivo Markdown" value="md" />
+      <RadioButton labelText="Arquivo Microsoft Word (Em Breve)" value="docx" />
+      <RadioButton labelText="Arquivo PDF (Em Breve)" value="pdf" />
+      <RadioButton labelText="Arquivo LaTeX (Em Breve)" value="tex" />    
     </RadioButtonGroup>
     {#if window.showSaveFilePicker}
       <div>
         <div class="bx--label">Save As</div>
         <Checkbox 
-          labelText="Prompt to change file name"
+          labelText="Solicitação para alterar o nome do arquivo"
           bind:checked={saveAs}
           disabled={docType !== "epxyz"}
         />
       </div>
     {/if}
     <div>
-      <div class="bx--label">Shareable Link</div>
+      <div class="bx--label">Link Compartilhável</div>
       <Checkbox 
-        labelText="Create a shareable link and add it to the generated document (only applies to md, docx, pdf, and tex files, anyone with this private link will be able to view your original sheet)"
+        labelText="Criar um link compartilhável e adicioná-lo ao documento gerado (aplica-se apenas aos arquivos md, docx, pdf e tex; qualquer pessoa com este link privado poderá visualizar sua planilha original)"
         bind:checked={getShareableLink}
         disabled={docType === "epxyz"}
       />

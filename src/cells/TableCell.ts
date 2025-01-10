@@ -32,7 +32,7 @@ export default class TableCell extends BaseCell {
   constructor (arg?: DatabaseTableCell) {
     if (arg === undefined) {
       super("table");
-      this.rowLabels = [new TableRowLabelField("Option 1"), new TableRowLabelField("Option 2")];
+      this.rowLabels = [new TableRowLabelField("Opção 1"), new TableRowLabelField("Opção 2")];
       this.nextRowLabelId = 3;
       this.parameterFields = [new MathField('Var1', 'parameter'), new MathField('Var2', 'parameter')];
       this.nextParameterId = 3;
@@ -131,7 +131,7 @@ export default class TableCell extends BaseCell {
 
   addRow() {
     const newRowId = this.nextRowLabelId++;
-    this.rowLabels = [...this.rowLabels, new TableRowLabelField(`Option ${newRowId}`)];
+    this.rowLabels = [...this.rowLabels, new TableRowLabelField(`Opção ${newRowId}`)];
     
     if (this.rowJsons.length > 0) {
       this.rowJsons = [...this.rowJsons, ''];

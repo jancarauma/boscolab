@@ -211,7 +211,7 @@
           class="item"
           style="grid-column: 4; grid-row: {i+1};"
         >
-          otherwise
+          caso contrário
         </div>
       {/if}
 
@@ -224,7 +224,7 @@
               id={`piecewise-condition-${index}-${i}`}
               style="grid-column: 4; grid-row: {i+1};"
             >
-              <div class="if">if</div>
+              <div class="if">se</div>
               
               <MathField
                 editable={true}
@@ -252,7 +252,7 @@
               >
                 <IconButton
                   on:click={() => deleteRow(i)}
-                  title="Delete Row"
+                  title="Excluir Linha"
                   id={`delete-row-${index}-${i}`}
                 >
                   <RowDelete />
@@ -275,7 +275,7 @@
     <IconButton
       on:click={addRow}
       id={`add-row-${index}`}
-      title="Add Row"
+      title="Adicionar Linha"
     >
         <Add />
     </IconButton>

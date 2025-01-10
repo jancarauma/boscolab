@@ -252,7 +252,7 @@
         class="item system-label"
         style="grid-column: 1; grid-row: 1 / {numRows+1}"
       >
-        System = 
+        Sistema = 
       </div>
 
       {#if systemCell.expressionFields}
@@ -288,7 +288,7 @@
             >
               <IconButton
                 on:click={() => deleteRow(i)}
-                title="Delete Row"
+                title="Excluir Linha"
                 id={`delete-row-${index}-${i}`}
               >
                 <RowDelete />
@@ -306,7 +306,7 @@
         <IconButton
           on:click={addRow}
           id={`add-row-${index}`}
-          title="Add Equation"
+          title="Adicionar Equação"
         >
           <Add />
         </IconButton>
@@ -324,7 +324,7 @@
           class="item system-label"
           style="grid-column: 1; grid-row: 1 / {numVars+2}"
         >
-          Solution = 
+          Solução = 
         </div>
         {#each Object.getOwnPropertyNames($system_results[index].solutions) as var_name, i}
           {#each $system_results[index].solutions[var_name] as value, j}
@@ -355,7 +355,7 @@
                   class="item justify-right"
                   style="grid-column: 1 / 3; grid-row: {numVars+2}"
                 >
-                  Selected Solution:
+                  Solução Selecionada:
                 </div>
               {/if}
             {/if}
@@ -375,7 +375,7 @@
 <div
   class="solve-for"
 >
-  <div class="item">Solve for: </div>
+  <div class="item">Solucionar para: </div>
   <div
     class="item math-field"
     id={`system-parameterlist-${index}`}

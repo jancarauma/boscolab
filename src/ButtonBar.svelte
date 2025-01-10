@@ -92,7 +92,7 @@
       class="mobile"
       on:click={mobileInsert}
     >
-      Insert New Cell
+      Adicionar Célula
     </button>
   </div>
 {:else}
@@ -100,7 +100,7 @@
     <hr>
     
     <IconButton
-      title="Insert Math Cell Here"
+      title="Adicionar Equação"
       on:click={() => addCell('math', index)}
       id={last ? "add-math-cell" : `add-math-cell-${index}`}
       noTouch={!last}
@@ -109,7 +109,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Documentation Cell Here"
+      title="Adicionar Texto"
       on:click={() => addCell('documentation', index)}
       id={last ? "add-documentation-cell" : `add-documentation-cell-${index}`} 
       noTouch={!last}
@@ -118,7 +118,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Plot Cell Here"
+      title="Adicionar Gráfico"
       on:click={() => addCell('plot', index)}
       id={last ? "add-plot-cell" : `add-plot-cell-${index}`}
       noTouch={!last}
@@ -127,7 +127,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Selector Table Cell Here"
+      title="Adicionar Lista"
       on:click={() => addCell('table', index)}
       id={last ? "add-table-cell" : `add-table-cell-${index}`}
       noTouch={!last}
@@ -136,7 +136,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Data Table Cell Here"
+      title="Adicionar Dados"
       on:click={() => addCell('dataTable', index)}
       id={last ? "add-data-table-cell" : `add-data-table-cell-${index}`}
       noTouch={!last}
@@ -145,7 +145,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Piecewise Expression Here"
+      title="Adicionar Condicional"
       on:click={() => addCell('piecewise', index)}
       id={last ? "add-piecewise-cell" : `add-piecewise-cell-${index}`}
       noTouch={!last}
@@ -154,7 +154,7 @@
     </IconButton>
 
     <IconButton
-      title="Insert System Solve Cell Here"
+      title="Adicionar Sistema"
       on:click={() => addCell('system', index)}
       id={last ? "add-system-cell" : `add-system-cell-${index}`}
       noTouch={!last}
@@ -163,7 +163,7 @@
     </IconButton>
 
     <IconButton
-      title="Insert Fluid Properties Cell Here"
+      title="Adicionar Fluido"
       on:click={() => addCell('fluid', index)}
       id={last ? "add-fluid-cell" : `add-fluid-cell-${index}`}
       noTouch={!last}
@@ -172,7 +172,7 @@
     </IconButton>
 
     <IconButton 
-      title="Insert Sheet Here"
+      title="Adicionar Planilha"
       on:click={() => insertSheet(index)}
       id={last ? "insert-sheet" : null}
       noTouch={!last}
