@@ -9,6 +9,7 @@
     "/print_logo.png",
     "/_routes.json",
     "/logo_dark.svg",
+    "/logo_dark.png",
     "/global.css",
     "/_worker.js",
     "/webworker.js",
@@ -17,6 +18,7 @@
     "/iframe_test.html",
     "/robots.txt",
     "/favicon.svg",
+    "/favicon.png",
     "/logo_with_background.png",
     "/index.html",
     "/favicon.ico"

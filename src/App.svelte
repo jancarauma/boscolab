@@ -684,8 +684,8 @@
     let hash = "";
 
     // Log para verificar se o hash está correto
-    console.log("URL Pathname:", url.pathname);
-    console.log("URL Hash:", url.hash);
+    //console.log("URL Pathname:", url.pathname);
+    //console.log("URL Hash:", url.hash);
 
     // First check if url hash could be sheet hash, if not check if path could a checkpoint or sheet hash
     if (url.hash.length === 23) {
@@ -694,7 +694,7 @@
       hash = url.pathname.slice(1);
     }
 
-    console.log("Hash retornado:", hash); // Log para verificar o valor final do hash
+    //console.log("Hash retornado:", hash); // Log para verificar o valor final do hash
     return hash;
   }
 
@@ -1274,7 +1274,7 @@
         window.history.pushState(null, "", currentState);
       }
 
-      console.log(fileUrl);
+      //console.log(fileUrl);
 
       if (resultModal) {
         modalInfo = {
@@ -1295,8 +1295,7 @@
       
       return fileUrl;
     } catch (error) {
-      console.error("Erro ao compartilhar a planilha:", error);
-
+      //console.error("Erro ao compartilhar a planilha:", error);
       if (resultModal) {
         modalInfo = {
           state: "error",
@@ -1312,17 +1311,17 @@
 
   async function downloadSheet(url: string):
                               Promise<{ sheet: Sheet; requestHistory: History; } | null> {
-    modalInfo = {state: "retrieving", modalOpen: true, heading: "Carregando documento"};
+    modalInfo = {state: "retrieving", modalOpen: true, heading: "Carregando Planilha"};
 
     let sheet: Sheet, requestHistory: History;
     
     try{
       let response;
       response = await fetch(url);
-      console.log("downloadSheet: ", url);
+      //console.log("downloadSheet: ", url);
       if (response.ok) {
         const responseObject = await response.json();
-        console.log("responseObject: ", JSON.stringify(responseObject));        
+        //console.log("responseObject: ", JSON.stringify(responseObject));        
         sheet = JSON.parse(responseObject.document) as Sheet;        
         requestHistory = responseObject.history as History;
       } else {
@@ -1331,11 +1330,25 @@
     } catch(error) {
       modalInfo = {
           state: "error",
-          error: `<p>Não foi possível abrir o memorial ${window.location}. A URL pode estar incorreta ou o servidor pode estar temporariamente sobrecarregado ou fora do ar. Se o problema persistir, por favor, reporte o erro para
-          <a href="mailto:@engjango?subject=Erro ao Recuperar Memorial&body=Memorial que falhou ao carregar: ${encodeURIComponent(window.location.href)}">@engjango</a>.
-          Inclua um link para este documento no e-mail para auxiliar na depuração do problema. <br>${error} </p>`,
+          error: `
+              <p>
+                  Não foi possível carregar a planilha localizada em <strong>${window.location}</strong>. 
+                  Isso pode ter ocorrido devido a uma URL incorreta, problemas temporários no servidor, 
+                  ou uma falha de conexão. 
+              </p>
+              <p>
+                  Se o problema persistir, entre em contato com nossa equipe de suporte através do e-mail 
+                  <a href="mailto:suporte@boscolab.com.br?subject=Erro ao Recuperar Planilha&body=Planilha que falhou ao carregar: ${encodeURIComponent(window.location.href)}" aria-label="Enviar e-mail para suporte técnico sobre erro no carregamento da planilha">
+                      @engjango
+                  </a>. 
+                  Inclua o link para esta planilha no e-mail para ajudar na análise e resolução do problema.
+              </p>
+              <p>
+                  Detalhes técnicos do erro: <code>${error}</code>
+              </p>
+          `,
           modalOpen: true,
-          heading: "Carregando documento"
+          heading: "Erro ao Carregar Planilha"
       };
       return null;
     }
@@ -1345,7 +1358,7 @@
 
 
   async function loadSheetFromUrl(url: string) {
-    console.log("loadSheetFromUrl: ", url);
+    //console.log("loadSheetFromUrl: ", url);
     const sheetData = await downloadSheet(url);
 
     if (!sheetData) {
@@ -1359,12 +1372,26 @@
     if (renderError) {
       modalInfo = {
           state: "error",
-          error: `<p>Não foi possível abrir o memorial ${window.location}. A URL pode estar incorreta ou o servidor pode estar temporariamente sobrecarregado ou fora do ar. Se o problema persistir, por favor, reporte o erro para
-          <a href="mailto:@engjango?subject=Erro ao Recuperar Memorial&body=Memorial que falhou ao carregar: ${encodeURIComponent(window.location.href)}">@engjango</a>.
-          Inclua um link para este documento no e-mail para auxiliar na depuração do problema. <br>${error} </p>`,
+          error: `
+              <p>
+                  Não foi possível carregar a planilha localizada em <strong>${window.location}</strong>. 
+                  Isso pode ter ocorrido devido a uma URL incorreta, problemas temporários no servidor, 
+                  ou uma falha de conexão. 
+              </p>
+              <p>
+                  Se o problema persistir, entre em contato com nossa equipe de suporte através do e-mail 
+                  <a href="mailto:suporte@boscolab.com.br?subject=Erro ao Recuperar Planilha&body=Planilha que falhou ao carregar: ${encodeURIComponent(window.location.href)}" aria-label="Enviar e-mail para suporte técnico sobre erro no carregamento da planilha">
+                      @engjango
+                  </a>. 
+                  Inclua o link para esta planilha no e-mail para ajudar na análise e resolução do problema.
+              </p>
+              <p>
+                  Detalhes técnicos do erro: <code>${error}</code>
+              </p>
+          `,
           modalOpen: true,
-          heading: "Carregando documento"
-      };
+          heading: "Erro ao Carregar Planilha"
+      };  
       $cells = [];
       $unsavedChange = false;
       $autosaveNeeded = false;
@@ -2599,7 +2626,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       slot="platform"
       on:click={() => $activeCell = -1}
     >
-      <img class="logo" src="logo_dark.svg" alt="Boscolab">
+      <img class="logo" src="logo_dark.png" alt="Boscolab">
     </span>
     
     {#if serviceWorkerUpdateWaiting}
