@@ -721,7 +721,7 @@
     $autosaveNeeded = false;
   }
 
-  async function refreshSheet(firstTime = false) {
+  /*async function refreshSheet(firstTime = false) {
     if (!refreshingSheet) {
       refreshingSheet = true;
 
@@ -785,6 +785,89 @@
     } else {
       // another refresh is already in progress
       // don't start a new one and reset the url path to match refresh already in progress
+      window.history.replaceState(currentStateObject, "", currentState);
+    }
+  }*/
+
+  async function refreshSheet(firstTime = false) {
+    if (!refreshingSheet) {
+      refreshingSheet = true;
+
+      let hash = getSheetHash(window.location);
+
+      let searchParams: null | URLSearchParams = null;
+      if (firstTime) {
+        searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.get('autosize-iframe-id')) {
+          autosizeIframeId = searchParams.get('autosize-iframe-id');
+        }
+      }
+
+      const pathnameSegments = window.location.pathname.split('/');
+
+      if (pathnameSegments.length > 1 && pathnameSegments[1]) {
+        hash = pathnameSegments[1];
+      } else {
+        console.log("Hast not found on pathname.");
+      }
+
+      if (
+        !firstTime &&
+        window.location.hash !== "" &&
+        window.location.hash.length !== 23 &&
+        `/${hash}` === currentState &&
+        window.history.state === null
+      ) {
+        window.history.replaceState(currentStateObject, "", currentState);
+      } else if (!$unsavedChange || window.confirm("Continue loading sheet, any unsaved changes will be lost?")) {
+        currentState = `/${hash}`;
+        if (
+          firstTime &&
+          (window.location.pathname === "/open_file" || searchParams.get('activation') === "file")
+        ) {
+          modalInfo = { state: "opening", modalOpen: true, heading: "Opening File" };
+          await initializeBlankSheet();
+          window.history.replaceState(null, "", "/");
+          if ('launchQueue' in window) {
+            (window.launchQueue as any).setConsumer((launchParams) => {
+              if (!launchParams.files.length) {
+                return;
+              }
+              const fileHandle = launchParams.files[0];
+              openSheetFromFileHandle(fileHandle);
+            });
+          } else {
+            modalInfo.modalOpen = false;
+          }
+        } else if (hash.startsWith(checkpointPrefix)) {
+          currentStateObject = window.history.state;
+          await restoreCheckpoint(hash);
+        } else if (hash !== "") {
+          currentStateObject = null;
+          const fileUrl = `https://${"mctdbucketmemorial.s3.us-east-2.amazonaws.com"}/${hash}.json`;
+
+          try {
+            await loadSheetFromUrl(fileUrl); // Opening sheet from service
+          } catch (error) {
+            console.error("Erro ao carregar o arquivo:", error);
+          }
+        } else if (getFileHandleFromKey(window.history.state?.fileKey)) {
+          currentStateObject = window.history.state;
+          openSheetFromFileHandle(getFileHandleFromKey(window.history.state?.fileKey), false);
+        } else {
+          await initializeBlankSheet();
+        }
+      } else {
+        window.history.replaceState(currentStateObject, "", currentState);
+      }
+
+      if (firstTime && searchParams.get("modal") === "terms") {
+        window.history.replaceState(window.history.state, "", window.location.pathname);
+        showTerms();
+      }
+
+      refreshingSheet = false;
+    } else {
       window.history.replaceState(currentStateObject, "", currentState);
     }
   }
@@ -1048,7 +1131,7 @@
     refreshCounter++; // make all pending updates stale
   }
 
-  async function uploadSheet(resultModal = true): Promise<string> {
+  /*async function uploadSheet(resultModal = true): Promise<string> {
     modalInfo.state = "uploadPending";
     const data = getSheetJson();
     const hash = await getHash(data);
@@ -1115,6 +1198,95 @@
           error: error,
           modalOpen: true,
           heading: modalInfo.heading};
+      }
+
+      return "";
+    }
+  }*/
+
+  async function uploadSheet(resultModal = true): Promise<string> {
+    modalInfo.state = "uploadPending";
+    const data = getSheetJson();
+    const hash = await getHash(data);
+
+    const bucketName = "mctdbucketmemorial";
+    const region = "us-east-2";
+    const fileName = `${hash}.json`;
+    //const fileUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${fileName}`;
+    //const fileUrl = `https://memorialdecalculo.vercel.app/${fileName}`;
+    const fileNameWithoutExtension = fileName.replace('.json', ''); 
+    const fileUrl = `https://boscolab.vercel.app/${fileNameWithoutExtension}`;
+
+    try {
+      // upload body
+      //const body: SheetPostBody = {
+      //  title: $title, 
+      //  history: $history,
+      //  document: data.slice(1)
+      //};
+
+      //console.log('data: ', data);
+      //console.log('data.slice(1): ', data.slice(1));
+      //console.log('body: ', JSON.stringify(body));
+
+      const body: Blob = new Blob([JSON.stringify({
+        title: $title,
+        history: $history,
+        document: data.slice(1)
+      })], { type: "application/json" });
+
+      // Upload do arquivo para o bucket S3
+      const response = await fetch(`https://${bucketName}.s3.${region}.amazonaws.com/${fileName}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          //"x-amz-acl": "public-read" // public for share
+        },
+        //body: JSON.stringify(body)
+        body: body
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao enviar o arquivo para o S3: ${response.status} ${await response.text()}`);
+      }
+
+      // Update state and history
+      if (getSheetHash(window.location) !== hash) {
+        currentState = `/${hash}`;
+        currentStateObject = null;
+        window.history.pushState(null, "", currentState);
+      }
+
+      console.log(fileUrl);
+
+      if (resultModal) {
+        modalInfo = {
+          state: "success",
+          url: fileUrl,
+          modalOpen: true,
+          heading: modalInfo.heading
+        };
+      }
+
+      $unsavedChange = false;
+      $autosaveNeeded = false;
+
+      $history = $history; // Keep history
+
+      // Update recent sheets
+      await updateRecentSheets({ url: fileUrl, title: $title, sheetId: $sheetId });
+      
+      return fileUrl;
+    } catch (error) {
+      console.error("Erro ao compartilhar planilha:", error);
+
+      if (resultModal) {
+        modalInfo = {
+          state: "error",
+          error: error,
+          modalOpen: true,
+          heading: modalInfo.heading
+        };
       }
 
       return "";
