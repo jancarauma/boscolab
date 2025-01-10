@@ -257,7 +257,7 @@
 
   math-field.editable {
     min-width: 2rem;
-    border: solid 1px gray;
+    border: 1px dashed gray;
     padding-left: 2px;
     padding-right: 2px;
     padding-top: 1px;

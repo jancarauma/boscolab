@@ -30,7 +30,8 @@
     font-size: 16px;
     margin: 1px;
     border-radius: 4px;
-    background-color: white;
+    color: white;
+    background-color: black;
     padding: 0px;
     transition: 0.3s;
   }

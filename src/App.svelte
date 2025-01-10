@@ -2383,6 +2383,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     width: 100vw;
     overflow-x: auto;
     justify-content: flex-end;
+    background: linear-gradient(45deg, black, black, black, #ff9800);
   }
 
   @media print {
@@ -2455,7 +2456,28 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   :global(.bx--modal-content--overflow-indicator) {
+    bottom: 2.9 rem;
     background-image: linear-gradient(0deg, black, transparent);
+  }
+
+  :global(.bx--modal-close__icon) {
+    color: white;
+  }
+
+  :global(span.key.svelte-1bx9xya) {
+    background-color: darkgreen;
+  }
+  
+  :global(.bx--btn--tertiary) {
+    color: white;
+  }
+
+  :global(.bx--checkbox-label::before) {
+    border: 1px solid white;
+  }
+
+  :global(.hideToolbar.svelte-fpogmb .ql-toolbar.ql-snow + .ql-container) {
+    border-top-style: dashed;
   }
 
   @media print {
@@ -2530,8 +2552,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   #keyboard-tray {
     display: flex;
     justify-content: center;
-    background-color: #f1f1f1;
-    border-top: solid 1px lightgray;
+    background-color: black;
     transition: 0.3s;
     transition-delay: 0.1s;
     overflow: hidden;
@@ -2972,7 +2993,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       />
 
       <div class="print-logo">
-        Created with: <img src="print_logo.png" alt="Boscolab" height="26 px">
+        Created with: <img src="logo_with_background.png" alt="Boscolab" height="12 px">
       </div>
 
       <div class="bottom-spacer" class:inIframe></div>

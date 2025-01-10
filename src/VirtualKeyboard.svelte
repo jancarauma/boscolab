@@ -22,6 +22,7 @@
   }
 
   button.tab {
+    color: white;
     background-color: inherit;
     float: left;
     border: none;
@@ -53,7 +54,8 @@
   }
 
   button.tab.selected {
-    background-color: #ccc;
+    color: white;
+    background-color: darkorange;
   }
   
   div.tab-content {
