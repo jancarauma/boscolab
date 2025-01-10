@@ -679,20 +679,22 @@
   } 
 
 
+  // Função para obter o hash da URL
   function getSheetHash(url: Location | URL) {
     let hash = "";
 
+    // Log para verificar se o hash está correto
+    console.log("URL Pathname:", url.pathname);
+    console.log("URL Hash:", url.hash);
+
     // First check if url hash could be sheet hash, if not check if path could a checkpoint or sheet hash
-    // url hash needs to be checked since early version of app used url hash instead of path
     if (url.hash.length === 23) {
       hash = url.hash.slice(1);
     } else if (url.pathname.slice(1).startsWith(checkpointPrefix) || url.pathname.length === 23) {
       hash = url.pathname.slice(1);
     }
 
-    console.log("URL Pathname:", url.pathname);
-    console.log("URL Hash:", url.hash);
-
+    console.log("Hash retornado:", hash); // Log para verificar o valor final do hash
     return hash;
   }
 
@@ -793,7 +795,7 @@
   }*/
 
   async function refreshSheet(firstTime = false) {
-    console.log("Refreshing sheet.");
+    console.log("Valor de refreshingSheet antes de chamar refreshSheet:", refreshingSheet);
     if (!refreshingSheet) {
       refreshingSheet = true;
 
@@ -807,15 +809,19 @@
         }
       }
 
+      // Log para verificar o hash gerado
       const pathnameSegments = window.location.pathname.split('/');
 
+      // Verifica se há ao menos um segmento válido
       if (pathnameSegments.length > 1 && pathnameSegments[1]) {
-        hash = pathnameSegments[1];        
+        hash = pathnameSegments[1];
       } else {
-        console.log("Hash not found on pathname.");
+        // Caso não haja segmento após o domínio
+        console.log("Nenhum segmento encontrado no pathname.");
+        // Aqui você pode definir um valor padrão ou lançar um erro
       }
 
-      console.log("Hash found: ", hash);
+      console.log("Hash gerado:", hash);
 
       if (
         !firstTime &&
@@ -852,8 +858,13 @@
           currentStateObject = null;
           const fileUrl = `https://${"mctdbucketmemorial.s3.us-east-2.amazonaws.com"}/${hash}.json`;
 
+          // Adicionando logs para verificar a URL e o hash
+          console.log("Abrir link");
+          console.log("Hash gerado:", hash);
+          console.log("URL do arquivo a ser carregado:", fileUrl);
+
           try {
-            await loadSheetFromUrl(fileUrl); // Opening sheet from service
+            await loadSheetFromUrl(fileUrl); // Carregando a planilha a partir da URL gerada
           } catch (error) {
             console.error("Erro ao carregar o arquivo:", error);
           }
