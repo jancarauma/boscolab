@@ -109,13 +109,13 @@
 
 <div class="container">
   <div class="controls">
-    <p class="hide-when-kinda-narrow">Deleting Cell</p>
+    <p class="hide-when-kinda-narrow">Excluindo célula...</p>
     <button 
       on:click={undoDelete}
       on:keydown={handleKeyboard}
       bind:this={buttonElement}
     >
-      Undo Delete
+      Cancelar
     </button>
     <progress class="hide-when-really-narrow" value={currentTime/timeout-.1}></progress>
   </div>

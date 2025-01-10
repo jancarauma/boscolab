@@ -236,7 +236,7 @@ ${parameterNames.map(parameterConversionMap).filter(value => value !== "").map((
     try {
       generatedCode = codeTemplate(statement, result);
     } catch(e) {
-      generatedCode = `# Error generated code: ${e} If this error persists, report to suporte@boscolab.com.br with the sheet that generates the error.`
+      generatedCode = `# Código gerado com erro: ${e} Se este erro persistir, reporte para suporte@boscolab.com.br com a planilha que gera o erro.`;
     }
   } else {
     generatedCode = "";
@@ -255,13 +255,13 @@ ${parameterNames.map(parameterConversionMap).filter(value => value !== "").map((
 <div class="info">
   <Information color="blue"/>
   <div>
-    Always test the generated code against known values, report issues or errors to 
+    Sempre teste o código obtido com valores conhecidos e reporte problemas ou erros para 
     <a href="mailto:suporte@boscolab.com.br">suporte@boscolab.com.br</a>
   </div>
 </div>
 
 {#await pyodidePromise}
-  <InlineLoading description="Generating Python Code..."/>
+  <InlineLoading description="Gerando Código em Python..."/>
 {:then promiseReturn}
   {#if generatedCode}
     <CodeSnippet

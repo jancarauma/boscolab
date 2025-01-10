@@ -75,9 +75,14 @@
   (mesmo que tenha criado um link compartilhável).
 </p>
 <br />
-<h4>Importante</h4>
+<h4>Derivação</h4>
 <p>
-  O Boscolab é baseado no software de código aberto 
+  O Boscolab é baseado no software de código-fonte aberto 
   <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank">EngineeringPaper.xyz</a>, 
   Copyright 2020-2023 Michael Greminger.
+</p>
+<br />
+<h4>Revisão</h4>
+<p>  
+  Copyright 2025 J. G. da Silva.
 </p>

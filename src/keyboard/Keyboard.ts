@@ -101,7 +101,7 @@ const unitsKeyboards: Keyboards = {
   selectedTab: 0,
   keyboards: [
     {
-      tabText: "Length",
+      tabText: "Comprimento",
       content: {
         type: "Buttons",
         buttons: [[
@@ -127,7 +127,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Force",
+      tabText: "Força",
       content: {
         type: "Buttons",
         buttons: [[
@@ -150,7 +150,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Mass",
+      tabText: "Massa",
       content: {
         type: "Buttons",
         buttons: [[
@@ -165,7 +165,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Time",
+      tabText: "Tempo",
       content: {
         type: "Buttons",
         buttons: [[
@@ -180,7 +180,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Area",
+      tabText: "Área",
       content: {
         type: "Buttons",
         buttons: [[
@@ -204,7 +204,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Press",
+      tabText: "Pressão",
       content: {
         type: "Buttons",
         buttons: [[
@@ -229,7 +229,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Vol",
+      tabText: "Volume",
       content: {
         type: "Buttons",
         buttons: [[
@@ -254,7 +254,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Energy",
+      tabText: "Energia",
       content: {
         type: "Buttons",
         buttons: [[
@@ -281,7 +281,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Power",
+      tabText: "Potência",
       content: {
         type: "Buttons",
         buttons: [[
@@ -306,7 +306,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Temp",
+      tabText: "Tempo",
       content: {
         type: "Buttons",
         buttons: [[
@@ -319,7 +319,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Vel",
+      tabText: "Velocidade",
       content: {
         type: "Buttons",
         buttons: [[
@@ -342,7 +342,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Accel",
+      tabText: "Aceleração",
       content: {
         type: "Buttons",
         buttons: [[
@@ -355,7 +355,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Density",
+      tabText: "Densidade",
       content: {
         type: "Buttons",
         buttons: [[
@@ -369,7 +369,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Angle",
+      tabText: "Ângulo",
       content: {
         type: "Buttons",
         buttons: [[
@@ -384,7 +384,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Freq",
+      tabText: "Frequência",
       content: {
         type: "Buttons",
         buttons: [[
@@ -398,7 +398,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Elec",
+      tabText: "Eletromagnetismo",
       content: {
         type: "Buttons",
         buttons: [[
@@ -426,7 +426,7 @@ const unitsKeyboards: Keyboards = {
       }
     },
     {
-      tabText: "Visc",
+      tabText: "Viscosidade",
       content: {
         type: "Buttons",
         buttons: [[
@@ -457,7 +457,7 @@ export const keyboards: Keyboards = {
   type: "Keyboards",
   keyboards: [
     {
-      tabText: "Math",
+      tabText: "Núm",
       content: {
         type: "Buttons",
         buttons: [[
@@ -569,7 +569,7 @@ export const keyboards: Keyboards = {
       }
     },
     {
-      tabText: "Matrices",
+      tabText: "Matrizes",
       content: {
         type: "Buttons",
         buttons: [[
@@ -671,8 +671,8 @@ export const keyboards: Keyboards = {
           new Button({ buttonText: ')', content: ')', command: "typedText" }),
           new Button({ buttonText: '[', content: '[', command: "typedText" }),
           new Button({ buttonText: ']', content: ']', command: "typedText" }),
-          new Button({ buttonText: 'Space', content: " ", command: 'typedText', size: '2fr', rawText: true}),
-          new Button({ buttonText: 'Comment', command: 'toggleMode', size: '2fr', rawText: true}),
+          new Button({ buttonText: 'Espaço', content: " ", command: 'typedText', size: '2fr', rawText: true}),
+          new Button({ buttonText: 'Comentário', command: 'toggleMode', size: '2fr', rawText: true}),
           new Button({ buttonText: '=', content: '=', command: "typedText" }),
           new Button({ buttonText: 'x_a', content: '#@_{#?}' }),
         ]]
@@ -723,8 +723,8 @@ export const keyboards: Keyboards = {
           new Button({ buttonText: ')', command: "typedText" }),
           new Button({ buttonText: '[', command: "typedText" }),
           new Button({ buttonText: ']', command: "typedText" }),
-          new Button({ buttonText: 'Space', content: " ", command: 'typedText', size: '2fr', rawText: true}),
-          new Button({ buttonText: 'Comment', command: 'toggleMode', size: '2fr', rawText: true}),
+          new Button({ buttonText: 'Espaço', content: " ", command: 'typedText', size: '2fr', rawText: true}),
+          new Button({ buttonText: 'Comentário', command: 'toggleMode', size: '2fr', rawText: true}),
           new Button({ buttonText: '=', content: '=', command: "typedText" }),
           new Button({ buttonText: 'x_a', content: '#@_{#?}' }),
         ]]
@@ -786,7 +786,7 @@ export const keyboards: Keyboards = {
       }
     },
     {
-      tabText: "Units",
+      tabText: "Unidades",
       content: unitsKeyboards
     }
   ]

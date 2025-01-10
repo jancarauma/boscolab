@@ -508,14 +508,14 @@
       {/if}
     {:else}
       <TooltipIcon direction="right" align="end">
-        <span slot="tooltipText">Internal error, attempt to place plot result in a math cell. Report to suporte@boscolab.com.br</span>
+        <span slot="tooltipText">Erro interno, tentativa de colocar o resultado do gráfico em uma célula matemática. Notifique nossa equipe de suporte em suporte@boscolab.com.br</span>
         <Error class="error"/>
       </TooltipIcon>
     {/if}
   {:else if mathCell.mathField.statement && mathCell.mathField.statement.type === "blank"}
     <span class="info">
       <TooltipIcon direction="right">
-        <span slot="tooltipText">This field must contain an assignment (e.g., x=y*z) or a query (e.g., x=). To delete an unwanted math cell, click the trash can on the right.</span>
+          <span slot="tooltipText">Este campo deve conter uma atribuição (por exemplo, x=3+4) ou uma consulta (por exemplo, x=). Para excluir uma célula matemática indesejada, clique na lixeira à direita.</span>
         <Information />
       </TooltipIcon>
     </span>
@@ -526,7 +526,7 @@
       
       {#if numericResult && mathCell.mathField.statement?.isCodeFunctionQuery && !error}
         <IconButton
-          title="Generate Python code for this function"
+          title="Obter código em python para esta função"
           id={`code-gen-${index}`}
           on:click={handleGenerateCode}
         >
@@ -535,8 +535,8 @@
       {/if}
 
       <IconButton
-        title="Edit Cell Number Format"
-        statusDotTitle="Edit Cell Number Format (Modified)"
+        title="Altarar Formatação Numérica da Célula"
+        statusDotTitle="Alterar formatação numérica da célula (Modificado)"
         id={`number-format-${index}`}
         on:click={handleUpdateNumberFormat}
         statusDot={Boolean(mathCell.config)}

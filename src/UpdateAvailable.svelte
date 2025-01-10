@@ -1,7 +1,5 @@
 <p>
-  An update is available for Boscolab. The next time you close all 
-  of your windows and tabs and reopen Boscolab, you'll receive the update
-  (note that refreshing the page is not sufficient to trigger the update).
-  You will know that the update has been applied when this icon disappears. It 
-  is safe to continue working until you are ready to update.
+  Uma atualização está disponível para o Boscolab. Na próxima vez que você fechar todas as janelas e abas e reabrir o Boscolab, a atualização será aplicada (observe que apenas atualizar a página não é suficiente para acionar a atualização). 
+  Você saberá que a atualização foi aplicada quando este ícone desaparecer. 
+  É seguro continuar trabalhando até que você esteja pronto para realizar a atualização.
 </p>

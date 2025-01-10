@@ -1766,7 +1766,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "sheetSettings",
-      heading: "Math Cell Number Format Settings",
+      heading: "Opções de formatação numérica da célula",
       mathCell: e.detail.mathCell as MathCell,
       mathCellElement: e.detail.target as MathCellElement
     };
@@ -1776,7 +1776,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     modalInfo = {
       modalOpen: true,
       state: "generateCode",
-      heading: "Generate Code From Function",
+      heading: "Gerar Código da Função",
       codeGenerationIndex: e.detail.index
     };
   }
@@ -1793,7 +1793,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     if (e.detail.file.size > 0) {
       modalInfo.state = "opening";
       modalInfo.modalOpen = true;
-      modalInfo.heading = "Opening File";
+      modalInfo.heading = "Abrindo Arquivo";
 
       const reader = new FileReader();
       reader.onload = insertSheet;
@@ -1801,9 +1801,9 @@ Please include a link to this sheet in the email to assist in debugging the prob
     } else {
       modalInfo = {
         state: "error",
-        error: `Error Opening File. Make sure you have dropped a file and not a directory.`,
+        error: `Não foi possível abrir o arquivo.`,
         modalOpen: true,
-        heading: "Opening File"
+        heading: "Abrir Arquivo"
       };
     }
   }
@@ -2125,14 +2125,14 @@ Please include a link to this sheet in the email to assist in debugging the prob
       modalInfo = {
             state: "uploadPending",
             modalOpen: true,
-            heading: "Generating Document"
+            heading: "Gerando Arquivo"
       };
 
       const sheetUrl = await uploadSheet(false);
       if (sheetUrl) {
-        markdown += `A live version of this calculation is available at [Boscolab](${sheetUrl}).\n\n`;
+        markdown += `Uma versão ao vivo deste cálculo está disponível em [Boscolab](${sheetUrl}).\n\n`;
       } else {
-        markdown += `An error occurred generating a shareable link for this document.\n\n`;
+        markdown += `Ocorreu um erro ao gerar um link compartilhável para este documento.\n\n`;
       }
 
       modalInfo.modalOpen = false;
@@ -2156,7 +2156,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     const formData = new FormData();
     formData.append("request_file", upload_file);
 
-    modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Generating Document"};
+    modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
 
     try {
       const response = await fetch(`${apiUrl}/docgen/${docType}`, {
@@ -2495,6 +2495,11 @@ Please include a link to this sheet in the email to assist in debugging the prob
     padding-right: 0px;
   }
 
+  :global(.bx--snippet--light) {
+    background-color: white;
+    color: black;
+  }
+
   div.side-nav-title {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2600,7 +2605,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   img.logo {
-    height: 1em;
+    height: 1.37em;
     max-width: 40vw;
   }
 
@@ -2614,6 +2619,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     align-items: center;
     gap: 10px;
     justify-content: flex-end;
+    padding: 8px;
   }
 
   @media screen {
@@ -2705,7 +2711,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     
     {#if serviceWorkerUpdateWaiting}
       <HeaderGlobalAction 
-        title="Update Available" 
+        title="Nova Atualização Disponível" 
         on:click={handleUpdateAvailable}
       >
         <Renew size={20} id="update-icon"/>
@@ -2993,7 +2999,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       />
 
       <div class="print-logo">
-        Created with: <img src="logo_with_background.png" alt="Boscolab" height="12 px">
+        Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
       </div>
 
       <div class="bottom-spacer" class:inIframe></div>
