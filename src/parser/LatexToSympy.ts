@@ -628,11 +628,11 @@ export class LatexToSympy extends LatexParserVisitor<string | Statement | UnitBl
                     CodeFunctionQueryStatement= initialQuery;
 
     if (this.rangeCount > 1) {
-      this.addParsingErrorMessage('Only one range may be specified for plotting.');
+      this.addParsingErrorMessage('Apenas um intervalo pode ser especificado para plotagem');
     } else if (this.rangeCount === 1) {
       const rangeFunction = this.functions.filter(value => (value.isRange))[0] as UserFunctionRange;
       if (rangeFunction.name !== sympy) {
-        this.addParsingErrorMessage(`Range may only be specified at top level function.`)
+        this.addParsingErrorMessage(`O intervalo só pode ser especificado na função de nível superior`);
       } else {
         finalQuery = {
           ...initialQuery,

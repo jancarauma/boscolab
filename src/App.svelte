@@ -2383,7 +2383,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     width: 100vw;
     overflow-x: auto;
     justify-content: flex-end;
-    background: linear-gradient(45deg, black, black, black, #ff9800);
+    background: linear-gradient(45deg, black, #383838, #383838, #ff9800);
   }
 
   @media print {
@@ -2402,12 +2402,12 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   :global(nav.bx--side-nav__navigation) {
-    background-color: black;
+    background-color: #383838;
     border-right: solid 1px lightgray;
   }
 
   :global(nav.bx--side-nav__navigation) {
-    background-color: black;
+    background-color: #383838;
     border-right: solid 1px lightgray;
   }
 
@@ -2424,7 +2424,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   :global(.bx--modal.is-visible .bx--modal-container) {
-    background-color: black;
+    background-color: #383838;
   }
   
   :global(.bx--modal-content) {
@@ -2457,7 +2457,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   :global(.bx--modal-content--overflow-indicator) {
     bottom: 2.9 rem;
-    background-image: linear-gradient(0deg, black, transparent);
+    background-image: linear-gradient(0deg, #383838, transparent);
   }
 
   :global(.bx--modal-close__icon) {
@@ -2557,7 +2557,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   #keyboard-tray {
     display: flex;
     justify-content: center;
-    background-color: black;
+    background-color: #383838;
     transition: 0.3s;
     transition-delay: 0.1s;
     overflow: hidden;

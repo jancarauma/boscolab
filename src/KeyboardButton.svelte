@@ -31,7 +31,7 @@
     margin: 1px;
     border-radius: 4px;
     color: white;
-    background-color: black;
+    background-color: #656565;
     padding: 0px;
     transition: 0.3s;
   }
