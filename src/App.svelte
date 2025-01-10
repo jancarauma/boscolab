@@ -2949,9 +2949,9 @@ Please include a link to this sheet in the email to assist in debugging the prob
           on:click={() => modalInfo = {
               modalOpen: true,
               state: "tryEpxyz",
-              heading: "Now Available at EPxyz.com"
+              heading: "Now Available at boscolab.com"
           }}
-          text=".xyz blocked? Try EPxyz.com"
+          text=".xyz blocked? Try boscolab.com"
         />
         <SideNavLink
           href="https://blog.boscolab.com.br"
@@ -3214,13 +3214,13 @@ Please include a link to this sheet in the email to assist in debugging the prob
             Chromebooks. Since it's important to us that all of the Boscolab
             goodness is available to everyone, the full functionality of Boscolab 
             is now also available as a <em>.com</em> address at
-            <a href="EPxyz.com" target="_blank">EPxyz.com</a>. The functionality is the same
+            <a href="boscolab.com" target="_blank">boscolab.com</a>. The functionality is the same
             between the two domains and sheets saved on one can be opened on the other. 
             Shareable links are interchangeable as well. For example, 
             <a href="https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL" target="_blank">
               https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL</a> and 
-            <a href="https://epxyz.com/fFjTsnFoSQMLwcvteVoNtL" target="_blank">
-              https://epxyz.com/fFjTsnFoSQMLwcvteVoNtL</a> point to the same sheet.
+            <a href="https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL" target="_blank">
+              https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL</a> point to the same sheet.
           </p>
         {:else if modalInfo.state === "supportedUnits"}
           <UnitsDocumentation />
