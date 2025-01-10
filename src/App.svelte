@@ -1230,12 +1230,12 @@
     const region = "us-east-2";
     const fileName = `${hash}.json`;
     //const fileUrl = `https://${bucketName}.s3.${region}.amazonaws.com/${fileName}`;
-    //const fileUrl = `https://memorialdecalculo.vercel.app/${fileName}`;
+    //const fileUrl = `https://boscolab.vercel.app/${fileName}`;
     const fileNameWithoutExtension = fileName.replace('.json', ''); 
     const fileUrl = `https://boscolab.vercel.app/${fileNameWithoutExtension}`;
 
     try {
-      // upload body
+      // Configuração do corpo do upload
       //const body: SheetPostBody = {
       //  title: $title, 
       //  history: $history,
@@ -1257,7 +1257,7 @@
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          //"x-amz-acl": "public-read" // public for share
+          //"x-amz-acl": "public-read" // Tornar o arquivo público para compartilhamento
         },
         //body: JSON.stringify(body)
         body: body
@@ -1267,7 +1267,7 @@
         throw new Error(`Erro ao enviar o arquivo para o S3: ${response.status} ${await response.text()}`);
       }
 
-      // Update state and history
+      // Atualizar o estado e histórico
       if (getSheetHash(window.location) !== hash) {
         currentState = `/${hash}`;
         currentStateObject = null;
@@ -1288,14 +1288,14 @@
       $unsavedChange = false;
       $autosaveNeeded = false;
 
-      $history = $history; // Keep history
+      $history = $history; // Preserva o histórico
 
-      // Update recent sheets
+      // Atualizar as planilhas recentes
       await updateRecentSheets({ url: fileUrl, title: $title, sheetId: $sheetId });
       
       return fileUrl;
     } catch (error) {
-      console.error("Erro ao compartilhar planilha:", error);
+      console.error("Erro ao compartilhar a planilha:", error);
 
       if (resultModal) {
         modalInfo = {
@@ -1312,30 +1312,30 @@
 
   async function downloadSheet(url: string):
                               Promise<{ sheet: Sheet; requestHistory: History; } | null> {
-    modalInfo = {state: "retrieving", modalOpen: true, heading: "Retrieving Sheet"};
+    modalInfo = {state: "retrieving", modalOpen: true, heading: "Carregando documento"};
 
     let sheet: Sheet, requestHistory: History;
     
     try{
       let response;
       response = await fetch(url);
-
+      console.log("downloadSheet: ", url);
       if (response.ok) {
         const responseObject = await response.json();
-        sheet = JSON.parse(responseObject.data) as Sheet;
+        console.log("responseObject: ", JSON.stringify(responseObject));        
+        sheet = JSON.parse(responseObject.document) as Sheet;        
         requestHistory = responseObject.history as History;
       } else {
         throw new Error(`${response.status} ${await response.text()}`);
       }
     } catch(error) {
       modalInfo = {
-        state: "error",
-        error: `<p>Error retrieving sheet ${window.location}. The URL may be incorrect or
-the server may be temporarily overloaded or down. If problem persists, please report problem to
-<a href="mailto:suporte@boscolab.com.br?subject=Error Retrieving Sheet&body=Sheet that failed to load: ${encodeURIComponent(window.location.href)}">suporte@boscolab.com.br</a>.  
-Please include a link to this sheet in the email to assist in debugging the problem. <br>${error} </p>`,
-        modalOpen: true,
-        heading: "Retrieving Sheet"
+          state: "error",
+          error: `<p>Não foi possível abrir o memorial ${window.location}. A URL pode estar incorreta ou o servidor pode estar temporariamente sobrecarregado ou fora do ar. Se o problema persistir, por favor, reporte o erro para
+          <a href="mailto:@engjango?subject=Erro ao Recuperar Memorial&body=Memorial que falhou ao carregar: ${encodeURIComponent(window.location.href)}">@engjango</a>.
+          Inclua um link para este documento no e-mail para auxiliar na depuração do problema. <br>${error} </p>`,
+          modalOpen: true,
+          heading: "Carregando documento"
       };
       return null;
     }
@@ -1345,6 +1345,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
 
   async function loadSheetFromUrl(url: string) {
+    console.log("loadSheetFromUrl: ", url);
     const sheetData = await downloadSheet(url);
 
     if (!sheetData) {
@@ -1357,14 +1358,12 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
     if (renderError) {
       modalInfo = {
-        state: "error",
-        error: `<p>Error regenerating sheet ${window.location}.
-This is most likely due to a bug in Boscolab.
-If problem persists after attempting to refresh the page, please report problem to
-<a href="mailto:suporte@boscolab.com.br?subject=Error Regenerating Sheet&body=Sheet that failed to load: ${encodeURIComponent(window.location.href)}">suporte@boscolab.com.br</a>.  
-Please include a link to this sheet in the email to assist in debugging the problem. </p>`,
-        modalOpen: true,
-        heading: "Retrieving Sheet"
+          state: "error",
+          error: `<p>Não foi possível abrir o memorial ${window.location}. A URL pode estar incorreta ou o servidor pode estar temporariamente sobrecarregado ou fora do ar. Se o problema persistir, por favor, reporte o erro para
+          <a href="mailto:@engjango?subject=Erro ao Recuperar Memorial&body=Memorial que falhou ao carregar: ${encodeURIComponent(window.location.href)}">@engjango</a>.
+          Inclua um link para este documento no e-mail para auxiliar na depuração do problema. <br>${error} </p>`,
+          modalOpen: true,
+          heading: "Carregando documento"
       };
       $cells = [];
       $unsavedChange = false;
