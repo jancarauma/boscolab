@@ -690,6 +690,9 @@
       hash = url.pathname.slice(1);
     }
 
+    console.log("URL Pathname:", url.pathname);
+    console.log("URL Hash:", url.hash);
+
     return hash;
   }
 
@@ -790,6 +793,7 @@
   }*/
 
   async function refreshSheet(firstTime = false) {
+    console.log("Refreshing sheet.");
     if (!refreshingSheet) {
       refreshingSheet = true;
 
@@ -806,10 +810,12 @@
       const pathnameSegments = window.location.pathname.split('/');
 
       if (pathnameSegments.length > 1 && pathnameSegments[1]) {
-        hash = pathnameSegments[1];
+        hash = pathnameSegments[1];        
       } else {
-        console.log("Hast not found on pathname.");
+        console.log("Hash not found on pathname.");
       }
+
+      console.log("Hash found: ", hash);
 
       if (
         !firstTime &&
