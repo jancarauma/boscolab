@@ -44,7 +44,7 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
-  "theme_color": "#e61f00",
+  "theme_color": "#faa541",
   "description": "O Boscolab é um aplicativo web gratuito e de código aberto para criar cálculos de engenharia compartilháveis, que verifica/converte unidades, resolve sistemas de equações e gera gráficos e códigos.",
   "screenshots": [
     {
