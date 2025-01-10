@@ -59,7 +59,7 @@ export async function loadPyodide(browser, page) {
 
 
 export async function newSheet(page) {
-  // will create a new sheet to clear contents
+  // will create a Nova Planilha to clear contents
   await page.evaluate(() => window.forceLoadBlankSheet());
 }
 

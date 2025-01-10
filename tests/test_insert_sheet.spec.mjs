@@ -19,8 +19,8 @@ test('Test sheet insertion', async ({ browserName }) => {
   }
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   await page.setLatex(0, 'E=');
 
@@ -52,8 +52,8 @@ test('Test insert using keyboard shortcut using newly saved sheet', async ({ bro
   const modifierKey = (await page.evaluate('window.modifierKey') )=== "metaKey" ? "Meta" : "Control";
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   await page.type(':nth-match(math-field.editable, 1)', 'x=3');
 
@@ -66,7 +66,7 @@ test('Test insert using keyboard shortcut using newly saved sheet', async ({ bro
   await page.click('[aria-label="Close the modal"]');
   await page.keyboard.press('Escape');
 
-  // create new sheet
+  // create Nova Planilha
   await page.locator('#new-sheet').click();
   await page.setLatex(0, 'x=');
 

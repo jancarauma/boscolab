@@ -20,7 +20,7 @@
 <h4>New Custom Default Sheet Settings Feature</h4>
 <p>
    You can now set your own custom default sheet settings (default units, default number 
-   formating, etc.). These defaults will be used whenever you create a new sheet 
+   formating, etc.). These defaults will be used whenever you create a Nova Planilha 
    and these settings can also be applied to existing sheets. All of this functionality 
    is accessible through the "Set User Default" tab of the "Sheet Settings" 
    dialog (available using the sheet settings button <SettingsAdjust size={16}/> 
@@ -77,7 +77,7 @@
 <em>August 18, 2024</em>
 <h4>New Show Intermediate Results Feature</h4>
 <p>
-   A new sheet setting has been added (available using the settings button <SettingsAdjust size={16}/> 
+   A Nova Planilha setting has been added (available using the settings button <SettingsAdjust size={16}/> 
    at the sheet level or at the math cell level) that will automatically show intermediate results for 
    a calculation. This feature is best shown with an example: 
 </p>

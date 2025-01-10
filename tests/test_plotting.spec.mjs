@@ -17,8 +17,8 @@ test.beforeEach(async () => newSheet(page));
 test('Test plotting', async ({ browserName }) => {
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // make sure first empty cell shows informative message
   await page.waitForSelector('button:has-text("This field must contain an assignment (e.g., x=y*z) or a query (e.g., x=). To delete an unwanted math cell, click the trash can on the right.")');
@@ -110,8 +110,8 @@ test('Test plotting', async ({ browserName }) => {
 test('Test plot dims with 0 start of range', async ({ browserName }) => {
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // test plot without units
   await page.setLatex(0, String.raw`y=1\left[m\right]\cdot x`);
@@ -131,8 +131,8 @@ test('Test plot dims with 0 start of range', async ({ browserName }) => {
 test('Test plot two curves with compatible x-range units', async ({ browserName }) => {
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // test plot without units
   await page.setLatex(0, String.raw`y=x`);
@@ -153,8 +153,8 @@ test('Test plot two curves with compatible x-range units', async ({ browserName 
 test('Test plot number of points', async ({ browserName }) => {
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // test plot without units
   await page.setLatex(0, 'y=x');
@@ -371,7 +371,7 @@ test('Test copy plot data', async ({ browserName }) => {
   await page.locator('text=Copy Data').click();
   await page.locator('text=Copied!').waitFor({state: "attached", timeout: 1000});
 
-  await page.click('text=New Sheet', { clickCount: 3 });
+  await page.click('text=Nova Planilha', { clickCount: 3 });
   await page.locator('h1').press(modifierKey+'+v');
 
   let clipboardContents = await page.locator('h1').textContent();

@@ -181,8 +181,8 @@ test('Test table cell functionality', async ({ browserName }) => {
   await page.setViewportSize({ width: width, height: height });
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   await page.setLatex(0, 'a_1=');
   await page.click('#add-math-cell');
@@ -354,7 +354,7 @@ test('Test table cell functionality', async ({ browserName }) => {
 
   await page.screenshot({ path: `${screenshotDir}/${browserName}_table_screenshot.png`, fullPage: false });
 
-  // clear contents, we'll be creating a new sheet
+  // clear contents, we'll be creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // retrieve previously saved document from database and check screenshot

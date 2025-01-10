@@ -65,7 +65,7 @@ test('Test custom base units for math cells', async () => {
   const sheetUrl = new URL(await page.$eval('#shareable-link', el => el.value));
   await page.click('[aria-label="Close the modal"]');
 
-  // clear contents by creating a new sheet
+  // clear contents by creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // go back to page that was just saved
@@ -292,7 +292,7 @@ test('Test user default config', async () => {
   content = await page.textContent('#result-units-0');
   expect(content).toBe('in');
 
-  // load new sheet and make sure it is using the user default sheet config
+  // load Nova Planilha and make sure it is using the user default sheet config
   await newSheet(page);
 
   await page.setLatex(0, String.raw`2\left\lbrack m\right\rbrack=`);
@@ -350,7 +350,7 @@ test('Test user default config', async () => {
   content = await page.textContent('#result-units-0');
   expect(content).toBe('m');
 
-  // load new sheet and make sure it is using the default sheet config
+  // load Nova Planilha and make sure it is using the default sheet config
   await newSheet(page);
 
   await page.setLatex(0, String.raw`3\left\lbrack m\right\rbrack=`);

@@ -472,8 +472,8 @@ test('Test system solve database saving and retrieving', async ({ browserName })
   await page.setViewportSize({ width: width, height: height });
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // create system with two equations and two variables to solve for
   await page.forceDeleteCell(0);
@@ -519,7 +519,7 @@ test('Test system solve database saving and retrieving', async ({ browserName })
 
   await page.screenshot({ path: `${screenshotDir}/${browserName}_solve_screenshot.png`, fullPage: true });
 
-  // clear contents, we'll be creating a new sheet
+  // clear contents, we'll be creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // retrieve previously saved document from database and check screenshot

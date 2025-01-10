@@ -32,7 +32,7 @@
     margin-left: 7px;
     min-width: 8rem;
     width: fit-content;
-    border: 1px solid gray;
+    border: 1px dashed gray;
     border-radius: 2px;
   }
 

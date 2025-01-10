@@ -347,15 +347,15 @@ test('Test custom function name', async () => {
   expect(parseLatexFloat(content)).toBeCloseTo(1.0009178056435, precision);
 
   // save sheet to database
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
   await page.click('#upload-sheet');
   await page.click('text=Confirm');
   await page.waitForSelector('#shareable-link');
   const sheetUrl = new URL(await page.$eval('#shareable-link', el => el.value));
   await page.click('[aria-label="Close the modal"]');
 
-  // clear contents by creating a new sheet
+  // clear contents by creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // go back to page that was just saved
@@ -441,15 +441,15 @@ test('Test sheet level fluid selection', async () => {
   expect(parseLatexFloat(content)).toBeCloseTo(998.207150467928, precision);
 
   // save sheet to database
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
   await page.click('#upload-sheet');
   await page.click('text=Confirm');
   await page.waitForSelector('#shareable-link');
   const sheetUrl = new URL(await page.$eval('#shareable-link', el => el.value));
   await page.click('[aria-label="Close the modal"]');
 
-  // clear contents by creating a new sheet
+  // clear contents by creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // go back to page that was just saved

@@ -25,8 +25,8 @@ test('Test database', async ({ page, browserName }) => {
   await page.locator("text=Accept").click();
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   await page.type(':nth-match(math-field.editable, 1)', 'x=3');
   await page.click('#add-math-cell');
@@ -84,8 +84,8 @@ test('Test database', async ({ page, browserName }) => {
 
   // create and save a second document that has plots
   await page.click('#new-sheet');
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   // test plot without units
   await page.click('#add-documentation-cell');

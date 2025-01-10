@@ -212,7 +212,7 @@
   // used for testing so that correct modifier key is used in tests
   (window as any).modifierKey = $modifierKey;
 
-  // Used for testing to force new sheet even with unsaved changes.
+  // Used for testing to force Nova Planilha even with unsaved changes.
   // This is necessary since dismissing the unsaved changes dialog in playwright doesn't work after the first
   // time it is requested.
   (window as any).forceLoadBlankSheet = () => {$unsavedChange = false; loadBlankSheet();};
@@ -2401,8 +2401,61 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   :global(nav.bx--side-nav__navigation) {
-    background-color: #f1f1f1;
+    background-color: black;
     border-right: solid 1px lightgray;
+  }
+
+  :global(nav.bx--side-nav__navigation) {
+    background-color: black;
+    border-right: solid 1px lightgray;
+  }
+
+  :global(a.bx--side-nav__link>.bx--side-nav__link-text) {
+    color: white;
+  }
+  
+  :global(.bx--side-nav__submenu) {
+    color: white;
+  }
+
+  :global(.bx--btn--primary) {
+    background-color: darkorange;
+  }
+
+  :global(.bx--modal.is-visible .bx--modal-container) {
+    background-color: black;
+  }
+  
+  :global(.bx--modal-content) {
+    color: white;
+  }
+
+  :global(.bx--modal-header__heading) {
+    color: white;
+  }
+
+  :global(.bx--label) {
+    color: darkorange;
+  }
+
+  :global(.bx--radio-button:checked+.bx--radio-button__label .bx--radio-button__appearance::before) {
+    background-color: darkorange;
+  }
+
+  :global(.bx--radio-button__appearance) {
+    border: 1px solid white;
+  }
+  
+  :global(.bx--radio-button:checked+.bx--radio-button__label .bx--radio-button__appearance) {
+    border-color: white;
+  }
+  
+  :global(.bx--tabs__nav-item .bx--tabs__nav-link) {
+    color: white !important;
+  }
+
+  :global(.bx--modal-content--overflow-indicator) {
+    background-image: linear-gradient(0deg, black, transparent);
   }
 
   @media print {
@@ -2526,7 +2579,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 
   img.logo {
-    height: 2em;
+    height: 1em;
     max-width: 40vw;
   }
 
@@ -2664,7 +2717,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       {#if !inIframe}
         <HeaderActionLink
           id="new-sheet"
-          title="New Sheet"
+          title="Nova Planilha"
           href="/" 
           icon={DocumentBlank}
           on:click={ (e) => handleLinkPushState(e, '/') }

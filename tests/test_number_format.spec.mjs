@@ -194,8 +194,8 @@ test('Test scientific notation', async () => {
 
 
 test('Test cell level number format and format save and restore', async () => {
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'Title for testing purposes only, will be deleted from database automatically');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'Title for testing purposes only, will be deleted from database automatically');
 
   await page.setLatex(0, String.raw`\frac{2}{3}=`);
 
@@ -252,7 +252,7 @@ test('Test cell level number format and format save and restore', async () => {
   const sheetUrl = new URL(await page.$eval('#shareable-link', el => el.value));
   await page.click('[aria-label="Close the modal"]');
 
-  // clear contents by creating a new sheet
+  // clear contents by creating a Nova Planilha
   await page.locator('#new-sheet').click();
 
   // go back to page that was just saved

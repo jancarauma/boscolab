@@ -1,7 +1,7 @@
 <script>
   import { activeCell, nonMathCellChanged } from "./stores.ts";
 
-  export let title = "New Sheet";
+  export let title = "Nova Planilha";
 
   let spellcheck = false;
 </script>

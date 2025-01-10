@@ -287,7 +287,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    border: solid gray 1px;
+    border: 1px dashed gray;
     padding: 10px;
     border-radius: 2px;
   }

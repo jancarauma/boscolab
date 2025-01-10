@@ -18,8 +18,8 @@ test('Test autosave checkpoints', async ({ browserName }) => {
   });
 
   // Change title
-  await page.click('text=New Sheet', { clickCount: 3 });
-  await page.type('text=New Sheet', 'New Title');
+  await page.click('text=Nova Planilha', { clickCount: 3 });
+  await page.type('text=Nova Planilha', 'New Title');
 
   await page.setLatex(0, '1=');
 
@@ -33,16 +33,16 @@ test('Test autosave checkpoints', async ({ browserName }) => {
 
   await page.waitForTimeout(10500);
 
-  // will create a new sheet to clear contents
-  // will first dismiss creating new sheet and make sure everything stays the same
+  // will create a Nova Planilha to clear contents
+  // will first dismiss creating Nova Planilha and make sure everything stays the same
   page.once('dialog', dialog => {
     dialog.dismiss();
   });
   await page.locator('#new-sheet').click();
   await page.locator('text=Checkpoint 3').waitFor();
 
-  // will create a new sheet to clear contents
-  // now accept new sheet and make sure everything is gone
+  // will create a Nova Planilha to clear contents
+  // now accept Nova Planilha and make sure everything is gone
   page.once('dialog', dialog => {
     dialog.accept();
   });
@@ -52,7 +52,7 @@ test('Test autosave checkpoints', async ({ browserName }) => {
   await page.goBack();
   await page.locator('text=Checkpoint 3').waitFor();
 
-  await page.goBack(); // need to go back twice since cancelled new sheet adds additional page to history
+  await page.goBack(); // need to go back twice since cancelled Nova Planilha adds additional page to history
   await page.locator('text=Checkpoint 3').waitFor();
 
   await page.goBack(); // now we'll hit checkpoint 2
@@ -68,6 +68,6 @@ test('Test autosave checkpoints', async ({ browserName }) => {
   expect(parseLatexFloat(content)).toBeCloseTo(1, precision);
 
   await page.goBack();
-  await page.locator('text=New Sheet').waitFor();
+  await page.locator('text=Nova Planilha').waitFor();
   
 });

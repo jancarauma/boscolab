@@ -20,7 +20,7 @@ import type { Result, FiniteImagResult, PlotResult,
               MatrixResult, SystemResult, DataTableResult } from './resultTypes';
 import { type Config, type InsertedSheet, type Sheet, getDefaultConfig, normalizeConfig } from './sheet/Sheet';
 
-const defaultTitle = 'New Sheet';
+const defaultTitle = 'Nova Planilha';
 
 export const unsavedChange = writable(false);
 export const autosaveNeeded = writable(false);

@@ -62,7 +62,7 @@
   ],
   "shortcuts" : [
     {
-      "name": "New Sheet",
+      "name": "Nova Planilha",
       "url": "/",
       "description": "Open a new window with a blank sheet",
       "icons": [

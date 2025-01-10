@@ -124,12 +124,12 @@
   }
 
   :global(.ql-toolbar.ql-snow + .ql-container) {
-    border: 1px solid gray;
+    border: 1px dashed gray;
     border-radius: 0px 0px 2px 2px;
   }
 
   :global(.ql-toolbar.ql-snow) {
-    border: 1px solid gray !important;
+    border: 1px dashed gray !important;
     border-radius: 2px 2px 0px 0px;
   }
 
