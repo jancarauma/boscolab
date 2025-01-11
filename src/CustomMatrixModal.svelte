@@ -31,9 +31,9 @@
 <Modal
   passiveModal={false}
   bind:open
-  modalHeading="Insert Empty Matrix"
-  primaryButtonText="Insert"
-  secondaryButtonText="Cancel"
+  modalHeading="Adicionar Matriz"
+  primaryButtonText="Adicionar"
+  secondaryButtonText="Cancelar"
   on:click:button--secondary={() => (open = false)}
   on:open
   on:close
@@ -45,7 +45,7 @@
     <NumberInput
       min={1}
       bind:value={numRows}
-      label="Matrix Rows"
+      label="Número de Linhas"
     />
   </div>
 
@@ -54,7 +54,7 @@
       min={1}
       max={MAX_MATRIX_COLS}
       bind:value={numColumns}
-      label="Matrix Columns"
+      label="Número de Colunas"
     />
   </div>
 </Modal>
