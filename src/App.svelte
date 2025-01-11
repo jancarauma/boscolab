@@ -2330,7 +2330,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   button.link {
     border: none;
-    color: blue;
+    color: darkorange;
     cursor: pointer;
     padding: 0px;
     background: none;
@@ -3028,7 +3028,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   {#if (termsAccepted < termsVersion) && !inIframe}
     <div class="status-footer" on:mousedown={e=>e.preventDefault()}>
-      <InformationFilled color="#0f62fe"/>
+      <InformationFilled color="#f99501"/>
       <div>
         O uso deste software está sujeito aos  
         <button class="link" on:click={showTerms}>
