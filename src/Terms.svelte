@@ -75,14 +75,28 @@
   (mesmo que tenha criado um link compartilhável).
 </p>
 <br />
-<h4>Derivação</h4>
+<h4>Licença</h4>
 <p>
   O Boscolab é baseado no software de código-fonte aberto 
   <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank">EngineeringPaper.xyz</a>, 
-  Copyright 2020-2023 Michael Greminger.
+  desenvolvido por Michael Greminger, e licenciado sob os termos da MIT License 
+  (Copyright 2020-2023 Michael Greminger). As permissões e limitações estabelecidas pela licença original 
+  permanecem aplicáveis a este software derivado.
 </p>
 <br />
-<h4>Revisão</h4>
-<p>  
-  Copyright 2025 J. G. da Silva.
+<h4>Revisão e Modificações</h4>
+<p>
+  Este software foi modificado e ampliado por J. G. da Silva.  
+  Copyright 2025 J. G. da Silva.  
 </p>
+<br />
+<h4>Termos</h4>
+<p>
+  As modificações feitas por J. G. da Silva também estão licenciadas sob os termos da MIT License, garantindo os mesmos direitos 
+  e permissões do software original, conforme os seguintes termos:  
+</p>
+<ul>
+  <li>Permissão para usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do software.</li>
+  <li>Este aviso de copyright e a licença original devem ser incluídos em todas as cópias ou partes substanciais do software derivado.</li>
+  <li>O software é fornecido "como está", sem garantia de qualquer tipo, explícita ou implícita.</li>
+</ul>

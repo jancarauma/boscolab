@@ -2403,12 +2403,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   :global(nav.bx--side-nav__navigation) {
     background-color: #383838;
-    border-right: solid 1px lightgray;
-  }
-
-  :global(nav.bx--side-nav__navigation) {
-    background-color: #383838;
-    border-right: solid 1px lightgray;
+    border-right: solid 1px #f49303;
   }
 
   :global(a.bx--side-nav__link>.bx--side-nav__link-text) {
@@ -2500,6 +2495,10 @@ Please include a link to this sheet in the email to assist in debugging the prob
     color: black;
   }
 
+  :global(.bx--inline-loading__text) {
+    color: white;
+  }
+
   div.side-nav-title {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2584,9 +2583,10 @@ Please include a link to this sheet in the email to assist in debugging the prob
     border-radius: 10px 0px 0px 0px;
     bottom: var(--keyboard-tray-height);
     right: 0;
-    background: whitesmoke;
-    border-top: 1px lightgray solid;
-    border-left: 1px lightgray solid;
+    color: white;
+    background: #383838;
+    border-top: 1px #383838 solid;
+    border-left: 1px #383838 solid;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -3053,7 +3053,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
             <div class="status-footer promise" on:mousedown={e=>e.preventDefault()}>
               <InlineLoading description="atualizando..."/>
               {#if pyodideTimeout}
-                <button on:click={restartPyodide}>Restart Pyodide</button>
+                <button on:click={restartPyodide}>Reiniciar Engine</button>
               {/if}
             </div>
           {/if}
