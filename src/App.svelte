@@ -745,7 +745,7 @@
         // Only hash fragment of URL has changed, don't need to do anything, let browser jump to ID
         // Without this check, sheet will reload on hash fragment change 
         window.history.replaceState(currentStateObject, "", currentState); // clear hash so that future clicks on hash fragment trigger this same check
-      } else if (!$unsavedChange || window.confirm("Continue loading sheet, any unsaved changes will be lost?")) {
+      } else if (!$unsavedChange || window.confirm("Continuar carregando a planilha? Quaisquer alterações não salvas serão perdidas.")) {
         currentState = `/${hash}`;
         if (firstTime && ( window.location.pathname === "/open_file" || 
                            searchParams.get('activation') === "file") ) {
@@ -831,7 +831,7 @@
         window.history.state === null
       ) {
         window.history.replaceState(currentStateObject, "", currentState);
-      } else if (!$unsavedChange || window.confirm("Continue loading sheet, any unsaved changes will be lost?")) {
+      } else if (!$unsavedChange || window.confirm("Continuar carregando a planilha? Quaisquer alterações não salvas serão perdidas.")) {
         currentState = `/${hash}`;
         if (
           firstTime &&
