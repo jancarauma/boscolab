@@ -3,100 +3,66 @@
 </script>
 
 <p><em>Atualizado em {versionDateString}</em></p>
-<br />
-<p>
-  Bem-vindo ao Boscolab! Ao utilizar este software, você concorda com os
-  seguintes termos e condições.
-</p>
 
-<br />
+<p>
+  Bem-vindo ao Boscolab! Ao utilizar este software, você concorda com os seguintes termos e condições. Por favor, leia atentamente.
+</p>
 
 <h4>Introdução</h4>
 
 <p>
-  O Boscolab tem como compromisso proteger a privacidade dos usuários. Este é um software 
-  livre e de código aberto que não exige a criação de uma conta para ser utilizado. 
-  Todas as operações realizadas no Boscolab são executadas em seu próprio computador e 
-  nada do que você insere em suas planilhas é enviado para nossos servidores, a menos que 
-  você opte por criar um link compartilhável ou exportar sua planilha como um arquivo .docx 
-  do Microsoft Word ou PDF. Quando você cria um link compartilhável, armazenamos apenas o 
-  mínimo de informações necessárias para que o serviço de links compartilháveis funcione (veja os detalhes abaixo). 
-  Ao exportar suas planilhas como arquivos .docx ou PDF, nenhuma informação é retida nos servidores do Boscolab. 
-  Usar a funcionalidade de impressão do navegador para salvar suas planilhas como arquivos PDF não envia nenhum dado 
-  para os servidores do Boscolab.
+  O Boscolab é um software livre e de código aberto, desenvolvido para oferecer simplicidade e privacidade em suas operações. Ele não exige a criação de contas para uso, e todas as operações são realizadas exclusivamente no seu dispositivo local. Nenhum dado inserido em suas planilhas é enviado para servidores externos, exceto quando você decide criar um link compartilhável ou exportar arquivos no formato .docx, .tex ou .pdf.
 </p>
-<br />
+
 <p>
-  Você tem a opção de salvar suas planilhas completas no seu dispositivo local como arquivos .blab. 
-  Caso opte por salvar suas planilhas localmente como arquivos .blab ou Markdown, nenhum dado será enviado para 
-  nossos servidores.
+  Ao optar por criar um link compartilhável, armazenamos apenas o mínimo necessário para que o serviço funcione, incluindo o conteúdo da planilha e seu endereço IP, com o único propósito de proteger o sistema contra abusos. Nenhum dado é retido em nossos servidores após a exportação de arquivos ou o uso de funcionalidades como a impressão direta do navegador.
 </p>
-<br />
+
+<p>
+  Você também pode salvar suas planilhas localmente nos formatos .blab ou Markdown. Nestes casos, nenhum dado é transmitido aos servidores do Boscolab.
+</p>
+
+<h4>Proibição de Uso Comercial</h4>
+
+<p>
+  O Boscolab é disponibilizado exclusivamente para fins pessoais e educacionais. É estritamente proibido o uso deste software para fins comerciais, incluindo, mas não se limitando, à venda, sublicenciamento ou qualquer outra forma de exploração econômica direta ou indireta.
+</p>
+
 <h4>Sem Garantia e Limitação de Responsabilidade</h4>
+
 <p>
-  ESTE SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" E O AUTOR ISENTA-SE DE TODAS AS GARANTIAS 
-  RELACIONADAS A ESTE SOFTWARE, INCLUINDO TODAS AS GARANTIAS IMPLÍCITAS DE COMERCIALIZAÇÃO E ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO. 
-  EM NENHUMA CIRCUNSTÂNCIA O AUTOR SERÁ RESPONSÁVEL POR QUAISQUER DANOS ESPECIAIS, DIRETOS, INDIRETOS, CONSEQUENCIAIS 
-  OU QUAISQUER OUTROS DANOS DECORRENTES DA PERDA DE USO, DADOS OU LUCROS, SEJA EM UMA AÇÃO DE CONTRATO, NEGLIGÊNCIA OU 
-  OUTRA AÇÃO ILÍCITA, RESULTANTES DO USO OU DESEMPENHO DESTE SOFTWARE.
+  ESTE SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIAS DE QUALQUER NATUREZA, SEJAM ELAS EXPRESSAS OU IMPLÍCITAS, INCLUINDO GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO OU NÃO VIOLAÇÃO. O AUTOR NÃO SE RESPONSABILIZA POR QUAISQUER DANOS, INCLUINDO PERDA DE DADOS, LUCROS OU INTERRUPÇÃO DE NEGÓCIOS, DECORRENTES DO USO DESTE SOFTWARE.
 </p>
-<br />
+
 <h4>Privacidade</h4>
+
 <p>
-  O Boscolab não utiliza cookies e não rastreia seus usuários. A única ocasião em que informações pessoais 
-  são coletadas é quando você utiliza a funcionalidade "Gerar Link Compartilhável". Ao criar um link compartilhável, 
-  o endereço IP do usuário é armazenado em um banco de dados juntamente com o conteúdo da planilha enviada. 
-  O motivo para coletar o endereço IP é proteger o serviço gratuito de links compartilháveis contra abusos. 
-  Os dados enviados para criar links compartilháveis são armazenados na rede global da Cloudflare, que busca 
-  localizar os dados mais próximos do usuário para melhorar o desempenho geral.
+  O Boscolab respeita a privacidade de seus usuários. Não utilizamos cookies, nem rastreamos suas atividades. A única coleta de informações ocorre ao gerar links compartilháveis, onde o endereço IP e os dados necessários são temporariamente armazenados para garantir a funcionalidade do serviço. Esses dados são gerenciados com segurança na infraestrutura da Cloudflare para otimizar o desempenho.
 </p>
-<br />
-<!--<p>
-  Por razões técnicas, é necessário enviar dados aos servidores do Boscolab para converter suas planilhas 
-  em arquivos .docx ou PDF. No entanto, nenhum dado é retido nos servidores do Boscolab durante esse processo. 
-</p>-->
-<br />
+
+<h4>Garantia de Dados para Links Compartilháveis</h4>
+
 <p>
-  Ao salvar suas planilhas localmente como arquivos .blab ou Markdown, nenhuma informação é enviada para nossa 
-  base de dados. Além disso, as planilhas podem ser convertidas em PDF usando a funcionalidade de impressão do navegador 
-  sem que qualquer dado seja enviado aos servidores do Boscolab.
+  Embora nos esforcemos para manter a acessibilidade dos links compartilháveis enquanto o serviço estiver ativo, não garantimos sua permanência futura. Reservamo-nos o direito de descontinuar o serviço ou excluir conteúdos armazenados a qualquer momento, sem aviso prévio.
 </p>
-<br />
-<h4>Sem Garantia de Retenção de Dados para Links Compartilháveis</h4>
+
 <p>
-  Nosso objetivo é armazenar planilhas usando a funcionalidade de links compartilháveis enquanto o serviço estiver 
-  ativo. No entanto, não garantimos a acessibilidade futura desses links. Reservamo-nos o direito de encerrar o 
-  serviço de links compartilháveis a qualquer momento e por qualquer motivo, sem aviso prévio. Também nos reservamos 
-  o direito de excluir qualquer planilha enviada a qualquer momento e por qualquer motivo, sem aviso.
+  Para maior segurança, salve suas planilhas localmente como arquivos .blab ou Markdown.
 </p>
-<br />
-<p>
-  Para garantir o acesso futuro às suas planilhas, certifique-se de salvá-las localmente como arquivos .blab 
-  (mesmo que tenha criado um link compartilhável).
-</p>
-<br />
+
 <h4>Licença</h4>
+
 <p>
-  O Boscolab é baseado no software de código-fonte aberto 
+  Este software é baseado no projeto de código aberto 
   <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank">EngineeringPaper.xyz</a>, 
-  desenvolvido por Michael Greminger, e licenciado sob os termos da MIT License 
-  (Copyright 2020-2023 Michael Greminger). As permissões e limitações estabelecidas pela licença original 
-  permanecem aplicáveis a este software derivado.
+  de Michael Greminger, licenciado sob os termos da MIT License. As permissões e restrições desta licença continuam aplicáveis ao Boscolab.
 </p>
-<br />
-<h4>Revisão e Modificações</h4>
+
 <p>
-  Este software foi modificado e ampliado por J. G. da Silva.  
-  Copyright 2025 J. G. da Silva.  
-</p>
-<br />
-<h4>Termos</h4>
-<p>
-  As modificações feitas por J. G. da Silva também estão licenciadas sob os termos da MIT License, garantindo os mesmos direitos 
-  e permissões do software original, conforme os seguintes termos:  
+  As modificações realizadas por J. G. da Silva estão protegidas por copyright © 2025 J. G. da Silva e também são licenciadas sob a MIT License, com as seguintes ressalvas:
 </p>
 <ul>
-  <li>Permissão para usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do software.</li>
-  <li>Este aviso de copyright e a licença original devem ser incluídos em todas as cópias ou partes substanciais do software derivado.</li>
-  <li>O software é fornecido "como está", sem garantia de qualquer tipo, explícita ou implícita.</li>
+  <li>É permitido usar, copiar, modificar e distribuir este software, desde que não seja para fins comerciais.</li>
+  <li>Este aviso de copyright e os termos da licença original devem acompanhar todas as cópias ou partes substanciais do software.</li>
+  <li>O software é fornecido "como está", sem garantia de qualquer tipo.</li>
 </ul>
