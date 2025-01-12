@@ -22,6 +22,9 @@
   }>();
 
   onMount(() => {
+    // Registra o módulo de fórmula manualmente
+    Quill.register('formats/formula', Quill.import('formats/formula'));
+
     const bindings = {
       tab: {
         key: 9, // desabilitar a tecla Tab para que ela seja usada para foco
@@ -73,9 +76,10 @@
     const Formula = Quill.import('formats/formula');
     Formula.sanitize = (value) => {
       try {
-        return katex.renderToString(value); // Renderiza a fórmula com KaTeX
+        return katex.renderToString(value, { throwOnError: false });
       } catch (e) {
-        return ''; // Caso haja erro na fórmula
+        console.error('Erro ao renderizar fórmula KaTeX:', e);
+        return '';
       }
     };
 
