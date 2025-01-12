@@ -353,6 +353,7 @@
   });
 
   onMount( async () => {
+    // let katex globally available
     if (typeof window !== 'undefined') {
       window.katex = katex;
     }
@@ -2543,18 +2544,8 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   #sheet {
     width: min(1000px, 100%);
-    height: auto;
+    height: fit-content;
     z-index: 2;
-    box-shadow: 3px 3px 16px rgba(0,0,0,0.6);
-  }
-
-  @media print {
-    #sheet {
-      width: min(1000px, 100%);
-      height: fit-content;
-      z-index: 2;
-      box-shadow: none;
-    }
   }
 
   div.sheet-margin {
@@ -2563,6 +2554,18 @@ Please include a link to this sheet in the email to assist in debugging the prob
     top: 0px;
     z-index: 1;
     background: gray;
+  }
+
+  div.sheet-container {
+    height: max-content;
+    box-shadow: 3px 3px 16px rgba(0,0,0,0.6);
+  }
+
+  @media print {
+    div.sheet-container {
+      height: max-content;
+      box-shadow: none;  
+    }
   }
 
   #keyboard-tray {
@@ -2997,24 +3000,26 @@ Please include a link to this sheet in the email to assist in debugging the prob
     >
     </div>
 
-    <div id="sheet">
-      <DocumentTitle bind:title={$title}/>
+    <div class="sheet-container">
+      <div id="sheet">
+        <DocumentTitle bind:title={$title}/>
 
-      <CellList
-        on:insertSheet={loadInsertSheetModal}
-        on:updateNumberFormat={loadCellNumberFormatModal}
-        on:generateCode={loadGenerateCodeModal}
-        on:insertMathCellAfter={handleInsertMathCell}
-        on:insertInsertCellAfter={handleInsertInsertCell}
-        on:modal={handleCellModal}
-        bind:this={cellList}
-      />
+        <CellList
+          on:insertSheet={loadInsertSheetModal}
+          on:updateNumberFormat={loadCellNumberFormatModal}
+          on:generateCode={loadGenerateCodeModal}
+          on:insertMathCellAfter={handleInsertMathCell}
+          on:insertInsertCellAfter={handleInsertInsertCell}
+          on:modal={handleCellModal}
+          bind:this={cellList}
+        />
 
-      <div class="print-logo">
-        Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
+        <div class="print-logo">
+          Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
+        </div>
+
+        <div class="bottom-spacer" class:inIframe></div>
       </div>
-
-      <div class="bottom-spacer" class:inIframe></div>
     </div>
 
     <div
