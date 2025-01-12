@@ -353,6 +353,10 @@
   });
 
   onMount( async () => {
+    if (typeof window !== 'undefined') {
+      window.katex = katex;
+    }
+
     // update main content element so that top of page will scroll into view when clicked
     const anchorElement = document.querySelector('div[slot="skip-to-content"] > a.bx--skip-to-content');
     if (anchorElement) {
