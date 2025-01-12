@@ -1477,7 +1477,7 @@
       const currentFileHandle = getFileHandleFromKey(window.history.state?.fileKey);
 
       // @ts-ignore
-      let options: OpenFilePickerOptions = { types: fileTypes, id: "epxyz"};
+      let options: OpenFilePickerOptions = { types: fileTypes, id: "blab"};
 
       if (currentFileHandle) {
         // @ts-ignore
@@ -1531,12 +1531,12 @@
     if (file) {
       if (DataTableCell.spreadsheetExtensions.includes(file.name.split('.').slice(-1)[0])) {
         // dropped a spreadsheet, add a data table cell to the end of the document
-        modalInfo = 
-          {
-            state: "importingSpreadsheet", 
-            modalOpen: true, 
-            heading: 'Importing Spreadsheet'
-          };
+        modalInfo = {
+    state: "importingSpreadsheet",
+    modalOpen: true,
+    heading: "Importando Planilha"
+};
+
         await tick();
 
         await DataTableCell.init();
@@ -1545,11 +1545,11 @@
           await newDataTableCell.loadFile(file);
         } catch (e) {
           modalInfo = {
-            state: "error",
-            error: `Error importing spreadsheet file: ${e}`,
-            modalOpen: true,
-            heading: "Importing Spreadsheet"
-          };
+    state: "error",
+    error: `Erro ao importar o arquivo da planilha: ${e}`,
+    modalOpen: true,
+    heading: "Importando Planilha"
+};
 
           return;
         }
@@ -1592,11 +1592,12 @@
       openSheetFromFile(await fileHandle.getFile(), fileHandle, pushState)
     } catch(e) {
       modalInfo = {
-        state: "error",
-        error: `Error Opening File. The file may no longer exist or the browser may be limiting access to files from a previous session. You will need to reopen the file from its original location.`,
-        modalOpen: true,
-        heading: "Opening File"
-      };
+    state: "error",
+    error: `Erro ao Abrir o Arquivo. O arquivo pode não existir mais ou o navegador pode estar limitando o acesso a arquivos de sessões anteriores. 
+    Será necessário reabrir o arquivo a partir de sua localização original.`,
+    modalOpen: true,
+    heading: "Abrindo Arquivo"
+};
     }
   }
 
@@ -1609,10 +1610,10 @@
       reader.readAsText(file);
     } else {
       modalInfo = {
-        state: "error",
-        error: `Error Opening File. Make sure you have chosen a valid Boscolab file.`,
-        modalOpen: true,
-        heading: "Opening File"
+          state: "error",
+          error: `Erro ao Abrir o Arquivo. Verifique se você selecionou um arquivo válido do Boscolab.`,
+          modalOpen: true,
+          heading: "Abrindo Arquivo"
       };
     } 
   }
@@ -1632,16 +1633,15 @@
 
     } catch(error) {
       modalInfo = {
-        state: "error",
-        error: `<p>${error} <br><br>
-Error parsing input file. Make sure your attempting to open an Boscolab
-<br><br>
-If this problem persists after verifying the file is an Boscolab file,
-email suporte@boscolab.com.br
-If possible, please attach the file that is not opening.
- </p>`,
-        modalOpen: true,
-        heading: "Opening Sheet"
+          state: "error",
+          error: `<p>${error} <br><br>
+              Ocorreu um erro ao processar o arquivo de entrada. Certifique-se de que está tentando abrir um arquivo do Boscolab.
+          <br><br>
+          Caso o problema persista após verificar que o arquivo é um arquivo do Boscolab, 
+          envie um e-mail para <a href="mailto:suporte@boscolab.com.br">suporte@boscolab.com.br</a>. 
+          Se possível, por favor, anexe o arquivo que não está abrindo.</p>`,
+          modalOpen: true,
+          heading: "Abrindo Planilha"
       };
       return null;
     }
@@ -1663,15 +1663,15 @@ If possible, please attach the file that is not opening.
 
     if (renderError) {
       modalInfo = {
-        state: "error",
-        error: `<p>Error restoring file. <br><br>
-          Error parsing input file. Make sure your attempting to open an Boscolab file.
-<br><br>
-If this problem persists after verifying the file is an Boscolab file,
-email suporte@boscolab.com.br
-with the file that is not opening attached, if possible. </p>`,
-        modalOpen: true,
-        heading: "Restoring Sheet"
+          state: "error",
+          error: `<p>Erro ao restaurar o arquivo. <br><br>
+              Ocorreu um erro ao processar o arquivo de entrada. Certifique-se de que está tentando abrir um arquivo do Boscolab.
+          <br><br>
+          Caso o problema persista após verificar que o arquivo é de fato um arquivo do Boscolab, 
+          envie um e-mail para <a href="mailto:suporte@boscolab.com.br">suporte@boscolab.com.br</a>, 
+          anexando, se possível, o arquivo que não está abrindo.</p>`,
+          modalOpen: true,
+          heading: "Restaurando Planilha"
       };
 
       $cells = [];
@@ -1697,7 +1697,7 @@ with the file that is not opening attached, if possible. </p>`,
 
 
   async function restoreCheckpoint(hash: string) {
-    modalInfo = {state: "restoring", modalOpen: true, heading: "Retrieving Autosave Checkpoint"};
+    modalInfo = {state: "restoring", modalOpen: true, heading: "Restaurando Planilha"};
 
     let sheet: Sheet, requestHistory: History;
     
@@ -1707,26 +1707,21 @@ with the file that is not opening attached, if possible. </p>`,
         sheet = checkpoint.data as Sheet;
         requestHistory = checkpoint.history as History;
       } else {
-        throw `Autosave checkpoint '${hash}' does not exist on this browser`;
+        throw `Checkpoint de salvamento automático ('${hash}') não encontrado neste dispositivo.`;
       }
     } catch(error) {
       modalInfo = {
-        state: "error",
-        error: `<p>${error}. <br><br>
-If someone has shared this link with you, ask them to 
-create a shareable link so that you are able to open their sheet. Checkpoint links, such as this one, can only be opened on the computer, 
-and the browser, where they were originally generated.
-<br><br>
-There are several possible causes for this error.
-Autosave checkpoints are stored locally on the browser that you are working on. Autosave checkpoints are not permanent 
-and may be deleted by your browser to free up space. Boscolab will only retain the ${numCheckpoints} most recent checkpoints.
-Some browsers, Safari for example, automatically delete local browser storage
-for a website that has not been visited in the previous 7 days. To request that your browser retains the storage used by
-Boscolab, use the "Enable Persistent Local Storage" option on the left menu. 
- </p>`,
+    state: "error",
+    error: `<p>${error}. <br><br>
+    Caso alguém tenha compartilhado este link com você, solicite que a pessoa crie um link compartilhável para que você possa acessar a planilha. Links de checkpoint, como este, podem ser abertos apenas no computador e no navegador onde foram originalmente gerados.
+    <br><br>
+    Existem diversas causas possíveis para esse erro.
+    Os checkpoints de salvamento automático são armazenados localmente no navegador em uso. Esses checkpoints não são permanentes e podem ser excluídos pelo navegador para liberar espaço. O Boscolab reterá apenas os ${numCheckpoints} checkpoints mais recentes.
+    Alguns navegadores, como o Safari, excluem automaticamente o armazenamento local do navegador para sites que não foram visitados nos últimos 7 dias. Para solicitar que seu navegador mantenha o armazenamento utilizado pelo Boscolab, ative a opção "Habilitar Armazenamento Local Persistente" no menu à esquerda. 
+    </p>`,
         modalOpen: true,
-        heading: "Restoring Sheet"
-      };
+        heading: "Restaurando Planilha"
+    };
       return;
     }
 
@@ -1734,14 +1729,14 @@ Boscolab, use the "Enable Persistent Local Storage" option on the left menu.
 
     if (renderError) {
       modalInfo = {
-        state: "error",
-        error: `<p>Error restoring autosave checkpoint ${window.location}.
-This is most likely due to a bug in Boscolab.
-If problem persists after attempting to refresh the page, please report problem to
-<a href="mailto:suporte@boscolab.com.br?subject=Error Regenerating Sheet&body=Sheet that failed to load: ${encodeURIComponent(window.location.href)}">suporte@boscolab.com.br</a>.  
-Please include a link to this sheet in the email to assist in debugging the problem. </p>`,
-        modalOpen: true,
-        heading: "Restoring Sheet"
+    state: "error",
+    error: `<p>Erro ao restaurar o checkpoint de salvamento automático ${window.location}.
+      Este problema provavelmente é causado por um erro no Boscolab.
+      Caso o problema persista após tentar atualizar a página, por favor, reporte o incidente para
+      <a href="mailto:suporte@boscolab.com.br?subject=Erro ao Regenerar Planilha&body=Planilha que não foi carregada: ${encodeURIComponent(window.location.href)}">suporte@boscolab.com.br</a>.
+      Inclua um link para a planilha no e-mail, a fim de ajudar na investigação e resolução do problema. </p>`,
+          modalOpen: true,
+          heading: "Restaurando Planilha"
       };
 
       $cells = [];
@@ -1949,7 +1944,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
         const options: SaveFilePickerOptions = {
           types: fileTypes,
           // @ts-ignore
-          id: "epxyz",
+          id: "blab",
           suggestedName: `${$title}.blab`
         }
         
@@ -2955,7 +2950,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
         <!--<SideNavLink
           on:click={() => modalInfo = {
               modalOpen: true,
-              state: "tryEpxyz",
+              state: "tryBlab",
               heading: "Now Available at boscolab.com"
           }}
           text=".xyz blocked? Try boscolab.com"
@@ -2971,7 +2966,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
           target="_blank"
         />
         <SideNavLink
-          href="https://www.youtube.com/@epxyz"
+          href="https://www.youtube.com/@blab"
           text="YouTube Channel"
           target="_blank"
         />
@@ -3179,7 +3174,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
         on:submit={ modalInfo.state === "uploadSheet" ? () => uploadSheet() : () => insertSheet() }
         hasScrollingContent={["supportedUnits", "insertSheet", "termsAndConditions",
                             "newVersion", "keyboardShortcuts", "generateCode"].includes(modalInfo.state)}
-        preventCloseOnClickOutside={!["supportedUnits", "bugReport", "tryEpxyz", "newVersion", "updateAvailable", 
+        preventCloseOnClickOutside={!["supportedUnits", "bugReport", "tryBlab", "newVersion", "updateAvailable", 
                                       "keyboardShortcuts"].includes(modalInfo.state)}
       >
         {#if modalInfo.state === "uploadSheet"}
@@ -3214,7 +3209,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
           <p>
               Por favor, inclua uma descrição clara do problema e, se possível, adicione o link da planilha em que o erro foi encontrado. Essas informações ajudarão nossa equipe a diagnosticar e resolver a questão de forma mais eficiente.
           </p>      
-        {:else if modalInfo.state === "tryEpxyz"}
+        {:else if modalInfo.state === "tryBlab"}
           <p>
             Some environments indiscriminately block all <em>.xyz</em> domains. For example,
             some school districts block all <em>.xyz</em> domains for their school issued 

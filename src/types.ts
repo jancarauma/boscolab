@@ -9,7 +9,7 @@ import type { InterpolationFunction } from "./cells/DataTableCell";
 
 export type ModalInfo = {
   state: "uploadSheet" | "uploadPending" | "success" | "error" | "requestPersistentStorage" |
-         "retrieving" | "restoring" | "bugReport" | "tryEpxyz" | "supportedUnits" | 
+         "retrieving" | "restoring" | "bugReport" | "tryE" | "supportedUnits" | 
          "opening" | "saving" | "termsAndConditions" | "newVersion" | "insertSheet" |
          "keyboardShortcuts" | "updateAvailable" | "sheetSettings" | "generateCode" |
          "customMatrix" | "generatingDocument" | "downloadDocument" | "importingSpreadsheet";

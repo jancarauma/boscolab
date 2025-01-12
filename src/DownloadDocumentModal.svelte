@@ -9,13 +9,13 @@
     downloadSheet: {saveAs: boolean};
   }>();
 
-  let docType: "epxyz" | "docx" | "pdf" | "md" | "tex" = "epxyz";
+  let docType: "blab" | "docx" | "pdf" | "md" | "tex" = "blab";
   let getShareableLink = false;
   let saveAs = false;
 
   async function handleSave() {
     open = false;
-    if (docType === "epxyz") {
+    if (docType === "blab") {
       dispatch("downloadSheet", {saveAs: saveAs});
     } else {
       dispatch("downloadDocument", {docType: docType, getShareableLink: getShareableLink});
@@ -53,7 +53,7 @@
       required={true}
       bind:selected={docType}
     >
-      <RadioButton labelText="Arquivo de Planilha Nativa do Boscolab (.blab)" value="epxyz" />
+      <RadioButton labelText="Arquivo de Planilha Nativa do Boscolab (.blab)" value="blab" />
       <RadioButton labelText="Arquivo Markdown" value="md" />
       <RadioButton labelText="Arquivo Microsoft Word (Em Breve)" value="docx" />
       <RadioButton labelText="Arquivo PDF (Em Breve)" value="pdf" />
@@ -65,7 +65,7 @@
         <Checkbox 
           labelText="Solicitação para alterar o nome do arquivo"
           bind:checked={saveAs}
-          disabled={docType !== "epxyz"}
+          disabled={docType !== "blab"}
         />
       </div>
     {/if}
@@ -74,7 +74,7 @@
       <Checkbox 
         labelText="Criar um link compartilhável e adicioná-lo ao documento gerado (aplica-se apenas aos arquivos md, docx, pdf e tex; qualquer pessoa com este link privado poderá visualizar sua planilha original)"
         bind:checked={getShareableLink}
-        disabled={docType === "epxyz"}
+        disabled={docType === "blab"}
       />
     </div>
   </div>
