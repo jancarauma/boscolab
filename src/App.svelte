@@ -2556,18 +2556,6 @@ Please include a link to this sheet in the email to assist in debugging the prob
     background: gray;
   }
 
-  div.sheet-container {
-    height: max-content;
-    box-shadow: 3px 3px 16px rgba(0,0,0,0.6);
-  }
-
-  @media print {
-    div.sheet-container {
-      height: max-content;
-      box-shadow: none;  
-    }
-  }
-
   #keyboard-tray {
     display: flex;
     justify-content: center;
@@ -2999,27 +2987,25 @@ Please include a link to this sheet in the email to assist in debugging the prob
       on:click={() => $activeCell = -1}
     >
     </div>
+      
+    <div id="sheet">
+      <DocumentTitle bind:title={$title}/>
 
-    <div class="sheet-container">
-      <div id="sheet">
-        <DocumentTitle bind:title={$title}/>
+      <CellList
+        on:insertSheet={loadInsertSheetModal}
+        on:updateNumberFormat={loadCellNumberFormatModal}
+        on:generateCode={loadGenerateCodeModal}
+        on:insertMathCellAfter={handleInsertMathCell}
+        on:insertInsertCellAfter={handleInsertInsertCell}
+        on:modal={handleCellModal}
+        bind:this={cellList}
+      />
 
-        <CellList
-          on:insertSheet={loadInsertSheetModal}
-          on:updateNumberFormat={loadCellNumberFormatModal}
-          on:generateCode={loadGenerateCodeModal}
-          on:insertMathCellAfter={handleInsertMathCell}
-          on:insertInsertCellAfter={handleInsertInsertCell}
-          on:modal={handleCellModal}
-          bind:this={cellList}
-        />
-
-        <div class="print-logo">
-          Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
-        </div>
-
-        <div class="bottom-spacer" class:inIframe></div>
+      <div class="print-logo">
+        Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
       </div>
+
+      <div class="bottom-spacer" class:inIframe></div>
     </div>
 
     <div
@@ -3226,19 +3212,11 @@ Please include a link to this sheet in the email to assist in debugging the prob
           </p>      
         {:else if modalInfo.state === "tryBlab"}
           <p>
-            Some environments indiscriminately block all <em>.xyz</em> domains. For example,
-            some school districts block all <em>.xyz</em> domains for their school issued 
-            Chromebooks. Since it's important to us that all of the Boscolab
-            goodness is available to everyone, the full functionality of Boscolab 
-            is now also available as a <em>.com</em> address at
-            <a href="boscolab.com" target="_blank">boscolab.com</a>. The functionality is the same
-            between the two domains and sheets saved on one can be opened on the other. 
-            Shareable links are interchangeable as well. For example, 
-            <a href="https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL" target="_blank">
-              https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL</a> and 
-            <a href="https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL" target="_blank">
-              https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL</a> point to the same sheet.
-          </p>
+            Para garantir a acessibilidade do Boscolab para todos, sua funcionalidade completa também está disponível em 
+            <a href="https://boscolab.com" target="_blank">boscolab.com</a>. Ambos os domínios oferecem os mesmos recursos, e planilhas salvas em um podem ser acessadas no outro. Links compartilháveis são totalmente intercambiáveis. Por exemplo: 
+            <a href="https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL" target="_blank">https://boscolab.vercel.app/fFjTsnFoSQMLwcvteVoNtL</a> e 
+            <a href="https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL" target="_blank">https://boscolab.com/fFjTsnFoSQMLwcvteVoNtL</a> levam à mesma planilha.
+          </p>      
         {:else if modalInfo.state === "supportedUnits"}
           <UnitsDocumentation />
         {:else if modalInfo.state === "keyboardShortcuts"}
