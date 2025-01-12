@@ -48,10 +48,19 @@
       modules: {
         toolbar: [
           [{ header: [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline'],
+          [{ font: [] }],  // add font
+          [{ size: ['small', false, 'large', 'huge'] }],  // add size
+  
+          ['bold', 'italic', 'underline', 'strike'], // add strike
           [{list: 'ordered'}, {list: 'bullet'}],
-          ['link', 'image'],
-          ['clean']
+          [{ align: [] }], // add align
+
+          ['link', 'image', 'video'], // add video
+
+          ['code-block'],  // add code
+          ['formula'],  // add formula
+
+          ['clean'] // clean format
         ], 
         keyboard: {
           bindings: bindings
