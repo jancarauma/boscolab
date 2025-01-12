@@ -135,7 +135,7 @@
   @media screen {
     .hideToolbar :global(.ql-toolbar.ql-snow + .ql-container) {
       border-top-width: 1px;
-      border-top-style: solid;
+      border-top-style: dashed;
       border-top-color: gray;
       border-radius: 2px;
     }
