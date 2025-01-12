@@ -2543,7 +2543,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   #sheet {
     width: min(1000px, 100%);
-    height: max-content;
+    height: auto;
     z-index: 2;
     box-shadow: 3px 3px 16px rgba(0,0,0,0.6);
   }
@@ -2551,7 +2551,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   @media print {
     #sheet {
       width: min(1000px, 100%);
-      height: auto;
+      height: fit-content;
       z-index: 2;
       box-shadow: none;
     }
