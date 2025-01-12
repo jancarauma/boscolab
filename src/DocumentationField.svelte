@@ -1,10 +1,9 @@
 <script lang="ts">
-  import Quill from "quill";
-  import katex from "katex";  // Importação do KaTeX
+  import 'katex/dist/katex.min.css';  
+  import katex from 'katex';  
+  import Quill from 'quill';  
   import { onMount, createEventDispatcher } from "svelte";
   import { modifierKey } from "./stores";
-
-  import 'katex/dist/katex.min.css';  // Estilo do KaTeX
 
   export let hideToolbar = true;
   export let quill;

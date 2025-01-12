@@ -82,6 +82,7 @@
   import SettingsAdjust from "carbon-icons-svelte/lib/SettingsAdjust.svelte";
 
   import 'katex/dist/katex.min.css';
+  import katex from 'katex';
   import 'quill/dist/quill.snow.css';
   import 'carbon-components-svelte/css/white.css';
   import MathCellConfigDialog from "./MathCellConfigDialog.svelte";
