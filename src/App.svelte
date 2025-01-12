@@ -2524,7 +2524,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     overflow: auto;
     position: static;
     height: 100%;
-    padding: 8px 0px 8px 0px;
+    padding: 0px 0px 0px 0px;
   }
 
   @media print {
@@ -2557,6 +2557,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     position: sticky;
     top: 0px;
     z-index: 1;
+    background: gray;
   }
 
   #keyboard-tray {
