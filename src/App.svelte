@@ -82,7 +82,6 @@
   import SettingsAdjust from "carbon-icons-svelte/lib/SettingsAdjust.svelte";
 
   import 'quill/dist/quill.snow.css';
-  import "mathquill/build/mathquill.css";
   import 'carbon-components-svelte/css/white.css';
   import MathCellConfigDialog from "./MathCellConfigDialog.svelte";
   import type MathCellElement from "./MathCell.svelte";
