@@ -1,7 +1,10 @@
 <script lang="ts">
   import Quill from "quill";
+  import katex from "katex";  // Importação do KaTeX
   import { onMount, createEventDispatcher } from "svelte";
   import { modifierKey } from "./stores";
+
+  import 'katex/dist/katex.min.css';  // Estilo do KaTeX
 
   export let hideToolbar = true;
   export let quill;
@@ -13,7 +16,7 @@
   let editorDiv;
 
   const dispatch = createEventDispatcher<{
-    update: {json: any};
+    update: { json: any };
     shiftEnter: null;
     modifierEnter: null;
   }>();
@@ -21,68 +24,71 @@
   onMount(() => {
     const bindings = {
       tab: {
-        key: 9, // dissable tab key so that tab can be used for focus
-        handler: function() {
+        key: 9, // desabilitar a tecla Tab para que ela seja usada para foco
+        handler: function () {
           return true;
-        }
+        },
       },
       custom1: {
-        key: 13, // for shift-enter, don't do anthing here and re-dispatch event to window (otherwise quill eats the event)
+        key: 13, // para shift-enter, não faz nada e reenvia o evento
         shiftKey: true,
-        handler: function() {
+        handler: function () {
           dispatch('shiftEnter');
           return false;
-        }
+        },
       },
       custom2: {
-        key: 13, // for meta-enter, don't do anthing here and re-dispatch event to window (otherwise quill eats the event)
+        key: 13, // para meta-enter, não faz nada e reenvia o evento
         [$modifierKey]: true,
-        handler: function() {
-          dispatch('modifierEnter')
+        handler: function () {
+          dispatch('modifierEnter');
           return false;
-        }
+        },
       },
     };
 
+    // Configuração do Quill com o módulo de fórmula
     quill = new Quill(editorDiv, {
       modules: {
         toolbar: [
           [{ header: [1, 2, 3, false] }],
-          [{ font: [] }],  // add font
-          [{ size: ['small', false, 'large', 'huge'] }],  // add size
-  
-          ['bold', 'italic', 'underline', 'strike'], // add strike
-          [{list: 'ordered'}, {list: 'bullet'}],
-          [{ align: [] }], // add align
-
-          ['link', 'image', 'video'], // add video
-
-          ['code-block'],  // add code
-          ['formula'],  // add formula
-
-          ['clean'] // clean format
-        ], 
+          [{ font: [] }],
+          [{ size: ['small', false, 'large', 'huge'] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }],
+          ['link', 'image', 'video'],
+          ['code-block'],
+          ['formula'],
+          ['clean'],
+        ],
         keyboard: {
-          bindings: bindings
+          bindings: bindings,
         },
       },
-      theme: 'snow'  // or 'bubble'
+      theme: 'snow', // ou 'bubble'
     });
 
+    // Usando KaTeX para renderizar fórmulas
+    const Formula = Quill.import('formats/formula');
+    Formula.sanitize = (value) => {
+      try {
+        return katex.renderToString(value); // Renderiza a fórmula com KaTeX
+      } catch (e) {
+        return ''; // Caso haja erro na fórmula
+      }
+    };
 
     quill.on('text-change', (delta, oldDelta, source) => {
       dispatch('update', {
-          json: quill.getContents()
+        json: quill.getContents(),
       });
-    
     });
   });
-
 </script>
 
 <style>
-  /* Hack to make quill not overflow bottom of flexbox */
-  /* From: https://codepen.io/justinpincar/pen/gWdeRJ */
+  /* Estilos personalizados para o editor Quill */
   div.wrap {
     height: 100%;
     display: flex;
@@ -148,7 +154,7 @@
   }
 
   :global(div.wrap .ql-snow .ql-tooltip) {
-    /* make sure url tooltip is above other elements (specifically, the button bar) */
+    /* Garantir que o tooltip do URL esteja acima de outros elementos */
     z-index: 100;
   }
 
@@ -182,15 +188,11 @@
 
     :global(div.wrap .ql-container.ql-snow) {
       border: none;
-    }    
+    }
   }
 
 </style>
 
-
-<div
-  class="wrap" 
-  class:hideToolbar 
->
+<div class="wrap" class:hideToolbar>
   <div class="editor" bind:this={editorDiv} />
 </div>
