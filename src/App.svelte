@@ -2543,8 +2543,18 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   #sheet {
     width: min(1000px, 100%);
-    height: fit-content;
+    height: max-content;
     z-index: 2;
+    box-shadow: 3px 3px 16px rgba(0,0,0,0.6);
+  }
+
+  @media print {
+    #sheet {
+      width: min(1000px, 100%);
+      height: auto;
+      z-index: 2;
+      box-shadow: none;
+    }
   }
 
   div.sheet-margin {
