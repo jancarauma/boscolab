@@ -2954,7 +2954,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
               state: "tryBlab",
               heading: "Now Available at boscolab.com"
           }}
-          text=".xyz blocked? Try boscolab.com"
+          text="boscolab.com.br blocked? Try blab.com"
         />
         <SideNavLink
           href="https://blog.boscolab.com.br"
