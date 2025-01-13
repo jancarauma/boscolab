@@ -22,7 +22,7 @@
 
   onMount(() => {
     // Registra o módulo de fórmula manualmente
-    Quill.register('formats/formula', Quill.import('formats/formula'));
+    // Quill.register('formats/formula', Quill.import('formats/formula'));
 
     const bindings = {
       tab: {
@@ -53,16 +53,26 @@
     quill = new Quill(editorDiv, {
       modules: {
         toolbar: [
-          [{ header: [1, 2, 3, false] }],
-          [{ font: [] }],
-          [{ size: ['small', false, 'large', 'huge'] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ align: [] }],
-          ['link', 'image', 'video'],
-          ['code-block'],
-          ['formula'],
-          ['clean'],
+          [{ header: [1, 2, 3, 4, 5, false] }],          // Cabeçalhos ou parágrafo
+          [{ font: [] }],                                // Fontes
+          [{ size: ['small', false, 'large', 'huge'] }], // Tamanho
+
+          ['bold', 'italic', 'underline', 'strike'],     // Estilos
+          [{ 'color': [] }, { 'background': [] }],       // Cores
+
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }], // Listas          
+          [{ align: [] }],                               // Alinhar
+          [{ 'indent': '-1'}, { 'indent': '+1' }],       // Indentações
+
+
+          ['blockquote', 'code-block'],                  // Anotação
+          ['link', 'image', 'video'],                    // Inserir URL, imagem ou vídeo
+          ['code-block'],                                // Inserir código          
+
+          ['formula'],                                   // Inserir fórmula
+          [{ 'script': 'sub'}, { 'script': 'super' }],   // Inserir sub-escrito ou sobre-escrito          
+          
+          ['clean'],                                     // Limpar formatação
         ],
         keyboard: {
           bindings: bindings,

@@ -1831,9 +1831,10 @@
       } catch(error) {
         modalInfo = {
           state: "error",
-          error: `<p>Error inserting sheet "${sheetUrl ? sheetUrl : 'empty URL'}". The URL is not valid Boscolab sheet.`,
+          error: `<p>Erro ao inserir a planilha "${sheetUrl ? sheetUrl : 'URL vazia'}".<br>
+                  A URL fornecida não é uma planilha válida do Boscolab.</p>`,
           modalOpen: true,
-          heading: "Retrieving Sheet"
+          heading: "Recuperando Planilha"
         };
         return;
       }
@@ -1868,13 +1869,17 @@
     } catch(error) {
       modalInfo = {
         state: "error",
-        error: `<p>Error inserting sheet ${sheetUrl}.
-This is most likely due to a bug in Boscolab.
-If problem persists after attempting to refresh the page, please report problem to
-<a href="mailto:suporte@boscolab.com.br?subject=Error Regenerating Sheet&body=Sheet that failed to load: ${encodeURIComponent(sheetUrl)}">suporte@boscolab.com.br</a>.  
-Please include a link to this sheet in the email to assist in debugging the problem. <br>${error} </p>`,
+        error: `<p>Erro ao inserir a planilha ${sheetUrl}.<br>
+                Isso provavelmente ocorreu devido a um bug no Boscolab.<br>
+                Caso o problema persista após tentar atualizar a página, por favor, reporte o problema para 
+                <a href="mailto:suporte@boscolab.com.br?subject=Erro ao Regenerar Planilha&body=Planilha com falha ao carregar: ${encodeURIComponent(sheetUrl)}">
+                  suporte@boscolab.com.br
+                </a>.<br>
+                Inclua um link para esta planilha no e-mail para ajudar na depuração do problema.<br>
+                ${error}
+                </p>`,
         modalOpen: true,
-        heading: "Retrieving Sheet"
+        heading: "Recuperando Planilha"
       };
       $cells = [];
       $unsavedChange = false;
@@ -1925,7 +1930,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       // use current file handle if user has already saved this sheet
       const currentFileHandle = getFileHandleFromKey(window.history.state?.fileKey);
       if (!saveAs && currentFileHandle && window.history.state?.fileKey ===  currentFileHandle.name + $title + $sheetId) {
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Planilha"};
         try {
           const writable = await currentFileHandle.createWritable();
           await writable.write(fileData);
@@ -1953,23 +1958,23 @@ Please include a link to this sheet in the email to assist in debugging the prob
           saveFileHandle = await window.showSaveFilePicker(options);
         } catch(e) {
           // user cancelled the save operation
-          console.log('Save cancelled.');
+          console.log('Operação para salvar foi cancelada.');
           return;
         }
 
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Planilha"};
         try {
           const writable = await saveFileHandle.createWritable();
           await writable.write(fileData);
           await writable.close();
         } catch(e) {
-          //save failed
+          // save failed
           modalInfo = {
             state: "error",
-            error: `<p>Error saving sheet: ${saveFileHandle.name} </p><br>
-                    <p>${e}</p`,
+            error: `<p>Erro ao salvar a planilha: ${saveFileHandle.name}</p><br>
+                    <p>${e}</p>`,
             modalOpen: true,
-            heading: "Saving Sheet"
+            heading: "Salvando Planilha"
           };
           return;
         }
