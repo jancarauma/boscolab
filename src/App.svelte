@@ -42,7 +42,7 @@
 
   import QuickLRU from "quick-lru";
 
-  import { pandoc } from "../public/docgen/ipandoc.js";
+  import { pandoc } from "../public/ipandoc.js";
 
   import { get, set, update, delMany } from 'idb-keyval';
 
