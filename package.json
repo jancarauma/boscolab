@@ -16,6 +16,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-wasm": "^6.2.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/wicg-file-system-access": "^2020.9.5",
     "better-sqlite3": "^7.6.2",
