@@ -2205,6 +2205,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
     // Instanciando e inicializando o Pandoc
     const pandoc = new Pandoc();
+    const wasmPath = "/docgen/pandoc.wasm";
     try {
       await pandoc.init(); // Inicializa o Pandoc (WebAssembly)
     } catch (error) {
