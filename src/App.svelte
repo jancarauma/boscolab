@@ -39,6 +39,15 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
+  //import jsPDF from "jspdf";
+  import { Document as DocxDocument, Packer, Paragraph} from "docx";
+  //import MarkdownIt from "markdown-it";
+  import { saveAs } from "file-saver";
+  import MarkdownIt from "markdown-it";
+  import markdownItKatex from "markdown-it-katex";
+  import markdownPdf from "markdown-pdf";
+  import * as fs from "fs";
+  import { JSDOM } from "jsdom";
 
   import QuickLRU from "quick-lru";
 
@@ -1831,9 +1840,10 @@
       } catch(error) {
         modalInfo = {
           state: "error",
-          error: `<p>Error inserting sheet "${sheetUrl ? sheetUrl : 'empty URL'}". The URL is not valid Boscolab sheet.`,
+          error: `<p>Erro ao inserir a planilha "${sheetUrl ? sheetUrl : 'URL vazia'}".<br>
+                  A URL fornecida não é uma planilha válida do Boscolab.</p>`,
           modalOpen: true,
-          heading: "Retrieving Sheet"
+          heading: "Recuperando Planilha"
         };
         return;
       }
@@ -1868,13 +1878,17 @@
     } catch(error) {
       modalInfo = {
         state: "error",
-        error: `<p>Error inserting sheet ${sheetUrl}.
-This is most likely due to a bug in Boscolab.
-If problem persists after attempting to refresh the page, please report problem to
-<a href="mailto:suporte@boscolab.com.br?subject=Error Regenerating Sheet&body=Sheet that failed to load: ${encodeURIComponent(sheetUrl)}">suporte@boscolab.com.br</a>.  
-Please include a link to this sheet in the email to assist in debugging the problem. <br>${error} </p>`,
+        error: `<p>Erro ao inserir a planilha ${sheetUrl}.<br>
+                Isso provavelmente ocorreu devido a um bug no Boscolab.<br>
+                Caso o problema persista após tentar atualizar a página, por favor, reporte o problema para 
+                <a href="mailto:suporte@boscolab.com.br?subject=Erro ao Regenerar Planilha&body=Planilha com falha ao carregar: ${encodeURIComponent(sheetUrl)}">
+                  suporte@boscolab.com.br
+                </a>.<br>
+                Inclua um link para esta planilha no e-mail para ajudar na depuração do problema.<br>
+                ${error}
+                </p>`,
         modalOpen: true,
-        heading: "Retrieving Sheet"
+        heading: "Recuperando Planilha"
       };
       $cells = [];
       $unsavedChange = false;
@@ -1925,7 +1939,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       // use current file handle if user has already saved this sheet
       const currentFileHandle = getFileHandleFromKey(window.history.state?.fileKey);
       if (!saveAs && currentFileHandle && window.history.state?.fileKey ===  currentFileHandle.name + $title + $sheetId) {
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Planilha"};
         try {
           const writable = await currentFileHandle.createWritable();
           await writable.write(fileData);
@@ -1953,23 +1967,23 @@ Please include a link to this sheet in the email to assist in debugging the prob
           saveFileHandle = await window.showSaveFilePicker(options);
         } catch(e) {
           // user cancelled the save operation
-          console.log('Save cancelled.');
+          console.log('Operação para salvar foi cancelada.');
           return;
         }
 
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Planilha"};
         try {
           const writable = await saveFileHandle.createWritable();
           await writable.write(fileData);
           await writable.close();
         } catch(e) {
-          //save failed
+          // save failed
           modalInfo = {
             state: "error",
-            error: `<p>Error saving sheet: ${saveFileHandle.name} </p><br>
-                    <p>${e}</p`,
+            error: `<p>Erro ao salvar a planilha: ${saveFileHandle.name}</p><br>
+                    <p>${e}</p>`,
             modalOpen: true,
-            heading: "Saving Sheet"
+            heading: "Salvando Planilha"
           };
           return;
         }
@@ -2145,7 +2159,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     return markdown;
   }
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
@@ -2190,6 +2204,155 @@ Please include a link to this sheet in the email to assist in debugging the prob
         modalOpen: true,
         heading: modalInfo.heading};
     }
+  }*/
+
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+
+    // Save Markdown directly
+    if (docType === "md") {
+      saveFileBlobExp(upload_blob, `${$title}.${docType}`);
+      return;
+    }
+
+    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+    try {
+      if (docType === "pdf") {
+        // Convert Markdown to PDF
+        const md = new MarkdownIt();
+        const htmlContent = md.render(markDown);
+        const pdf = new jsPDF();
+        pdf.html(htmlContent, {
+          callback: function (doc) {
+            const pdfBlob = doc.output("blob");
+            saveFileBlobExp(pdfBlob, `${$title}.pdf`);
+          },
+        });
+      } else if (docType === "docx") {
+        // Convert Markdown to DOCX
+        const md = new MarkdownIt();
+        const plainText = md.render(markDown).replace(/<[^>]+>/g, ""); // Strip HTML tags
+        const doc = new DocxDocument({
+          sections: [
+            {
+              children: plainText
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line) => new Paragraph(line)),
+            },
+          ],
+        });
+        const buffer = await Packer.toBlob(doc);
+        saveFileBlobExp(buffer, `${$title}.docx`);
+      } else if (docType === "tex") {
+          // Convert Markdown to LaTeX
+          const latexContent = `\\documentclass{article}
+          \\usepackage[utf8]{inputenc}
+
+          \\begin{document}
+          ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
+          \\end{document}`;
+          const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
+          saveFileBlobExp(latexBlob, `${$title}.tex`);
+        }
+
+      modalInfo.modalOpen = false;
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading,
+      };
+    }
+  }
+
+  // Helper function to save Blob as a file
+  function saveFileBlobExp(blob, filename) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }*/
+
+  // Configurar Markdown-It com suporte para KaTeX
+  const md = new MarkdownIt().use(markdownItKatex);
+
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+
+    if (docType === "md") {
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return;
+    }
+
+    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+    try {
+      if (docType === "pdf") {
+        // Gerar PDF diretamente do Markdown
+        markdownPdf().from.string(markDown).to("output.pdf", function () {
+          const pdfBlob = fs.readFileSync("output.pdf");
+          saveFileBlobExp(new Blob([pdfBlob]), `${$title}.pdf`);
+        });
+      } else if (docType === "docx") {
+        // Renderizar Markdown para HTML e converter para DOCX
+        const htmlContent = md.render(markDown);
+        const dom = new JSDOM(htmlContent);
+        const plainText = dom.window.document.body.textContent || "";
+
+        // Usar docx.js para criar o arquivo DOCX
+        const doc = new DocxDocument({
+          sections: [
+            {
+              children: plainText
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line) => new Paragraph(line)),
+            },
+          ],
+        });
+        const buffer = await Packer.toBlob(doc);
+        saveFileBlobExp(buffer, `${$title}.docx`);
+      } else if (docType === "tex") {
+        // Gerar arquivo LaTeX
+        const latexContent = `\\documentclass{article}
+  \\usepackage[utf8]{inputenc}
+  \\usepackage{amsmath}
+  \\usepackage{amsfonts}
+  \\usepackage{amssymb}
+
+  \\begin{document}
+  ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
+  \\end{document}`;
+        const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
+        saveFileBlobExp(latexBlob, `${$title}.tex`);
+      }
+
+      modalInfo.modalOpen = false;
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading,
+      };
+    }
+  }
+
+  // Helper function to save Blob as a file
+  function saveFileBlobExp(blob, filename) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
   }
 
   async function retrieveRecentSheets() {

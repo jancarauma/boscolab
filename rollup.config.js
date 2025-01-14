@@ -15,6 +15,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { optimizeImports } from 'carbon-preprocess-svelte';
 import { generateSW } from 'rollup-plugin-workbox';
 import ssri from 'ssri';
+import json from '@rollup/plugin-json'; // Para lidar com arquivos JSON
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -55,52 +56,43 @@ export default [
 		}
 	},
 	{
-	input: 'src/main.js',
-	output: {
-		sourcemap: !production,
-		format: 'es',
-		name: 'app',
-		dir: 'public/build'
-	},
-	plugins: [
-		del({ targets: 'public/build/*', runOnce: true}),
-		copy({
-			targets: [
-				{src: 'node_modules/mathlive/dist/fonts/*', dest: 'public/build/mathlive/fonts'},
-				{src: 'node_modules/mathlive/dist/sounds/*', dest: 'public/build/mathlive/sounds'},
-				{src: 'node_modules/mathjax/es5/tex-svg.js', dest: 'public/build/mathjax'}
-			]
-		}),
+		input: 'src/main.js',
+		output: {
+			sourcemap: !production,
+			format: 'es',
+			name: 'app',
+			dir: 'public/build'
+		},
+		plugins: [
+			del({ targets: 'public/build/*', runOnce: true}),
+			copy({
+				targets: [
+					{src: 'node_modules/mathlive/dist/fonts/*', dest: 'public/build/mathlive/fonts'},
+					{src: 'node_modules/mathlive/dist/sounds/*', dest: 'public/build/mathlive/sounds'},
+					{src: 'node_modules/mathjax/es5/tex-svg.js', dest: 'public/build/mathjax'}
+				]
+			}),
+			optimizeImports(),
+			svelte({
+				preprocess: preprocess(),
+			}),
+			bundleFonts({fontTargetDir: "public/fonts", cssBundleDir: "public/build"}),
+			css({ output: 'bundle.css' }),
+			// Adicionando a resolução dos módulos e JSON
+			resolve({
+				browser: true,
+				dedupe: ['svelte'],
+				preferBuiltins: false, // Garantindo que os módulos locais são preferidos
+			}),
+			commonjs(),
+			json(),
+			typescript({ sourceMap: !production }),
 
-		optimizeImports(),
+			// Minificação em produção
+			production && terser(),
 
-		svelte({
-			preprocess: preprocess(),
-		}),
-
-		bundleFonts({fontTargetDir: "public/fonts", cssBundleDir: "public/build"}),
-
-		// we'll extract any component CSS out into
-		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
-
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
-		typescript( { sourceMap: !production} ),
-
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && terser(),
-		
-		generateSW({
+			// Gerando o service worker
+			generateSW({
 				swDest: 'public/serviceworker.js',
 				globDirectory: 'public/',
 				globIgnores: [
@@ -136,35 +128,34 @@ export default [
 				navigateFallback: "index.html",
 				navigateFallbackAllowlist: [/^\/[a-zA-Z0-9]{22}$/, /^\/temp-checkpoint-.*$/, /^\/open_file$/],
 				ignoreURLParametersMatching: [/^activation$/, /^modal$/],
-				maximumFileSizeToCacheInBytes: 40*1000**2,
+				maximumFileSizeToCacheInBytes: 40 * 1000 ** 2,
 				inlineWorkboxRuntime: true,
 				sourcemap: !production,
 				mode: production ? "production" : "dev",
 				manifestTransforms: [integrityManifestTransform]
 			},
 			function render({ swDest, count, size }) {
-				console.log(`Service worker ${swDest} set to precache ${count} files totalling ${size/(1000**2)} MB.`)
+				console.log(`Service worker ${swDest} set to precache ${count} files totalling ${size / (1000 ** 2)} MB.`)
 			}
-		),
+			),
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(),
+			// Em dev mode, chama `npm run start` após gerar o bundle
+			!production && serve(),
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
-	],
-	watch: {
-		clearScreen: false
+			// Watch no diretório `public` para atualizar o navegador durante o desenvolvimento
+			!production && livereload('public'),
+		],
+		watch: {
+			clearScreen: false
+		}
 	}
-}];
+];
 
 async function integrityManifestTransform(originalManifest, compilation) {
   const warnings = [];
 	const manifest = await Promise.all(originalManifest.map(async entry => {
 		if (entry.url === "index.html") {
-			// index.html may get transformed by the server so it will not match the integrity check
+			// index.html pode ser transformado pelo servidor, então não corresponde à verificação de integridade
 			return entry;
 		}
 		const fd = await open(join('public', entry.url));
