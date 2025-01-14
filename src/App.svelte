@@ -40,7 +40,7 @@
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
   import jsPDF from "jspdf";
-  import { Document, Packer, Paragraph} from "docx";
+  import { Document as DocxDocument, Packer, Paragraph} from "docx";
   import MarkdownIt from "markdown-it";
 
   import QuickLRU from "quick-lru";
@@ -2228,7 +2228,7 @@
         // Convert Markdown to DOCX
         const md = new MarkdownIt();
         const plainText = md.render(markDown).replace(/<[^>]+>/g, ""); // Strip HTML tags
-        const doc = new Document({
+        const doc = new DocxDocument({
           sections: [
             {
               children: plainText
