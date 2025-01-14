@@ -39,9 +39,15 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
-  import jsPDF from "jspdf";
+  //import jsPDF from "jspdf";
   import { Document as DocxDocument, Packer, Paragraph} from "docx";
+  //import MarkdownIt from "markdown-it";
+  import { saveAs } from "file-saver";
   import MarkdownIt from "markdown-it";
+  import markdownItKatex from "markdown-it-katex";
+  import markdownPdf from "markdown-pdf";
+  import * as fs from "fs";
+  import { JSDOM } from "jsdom";
 
   import QuickLRU from "quick-lru";
 
@@ -2200,7 +2206,7 @@
     }
   }*/
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], { type: "text/markdown" });
 
@@ -2266,6 +2272,82 @@
 
   // Helper function to save Blob as a file
   function saveFileBlobExp(blob, filename) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }*/
+
+  // Configurar Markdown-It com suporte para KaTeX
+  const md = new MarkdownIt().use(markdownItKatex);
+
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+
+    if (docType === "md") {
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return;
+    }
+
+    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+    try {
+      if (docType === "pdf") {
+        // Gerar PDF diretamente do Markdown
+        markdownPdf().from.string(markDown).to("output.pdf", function () {
+          const pdfBlob = fs.readFileSync("output.pdf");
+          saveFileBlob(new Blob([pdfBlob]), `${$title}.pdf`);
+        });
+      } else if (docType === "docx") {
+        // Renderizar Markdown para HTML e converter para DOCX
+        const htmlContent = md.render(markDown);
+        const dom = new JSDOM(htmlContent);
+        const plainText = dom.window.document.body.textContent || "";
+
+        // Usar docx.js para criar o arquivo DOCX
+        const doc = new DocxDocument({
+          sections: [
+            {
+              children: plainText
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line) => new Paragraph(line)),
+            },
+          ],
+        });
+        const buffer = await Packer.toBlob(doc);
+        saveFileBlob(buffer, `${$title}.docx`);
+      } else if (docType === "tex") {
+        // Gerar arquivo LaTeX
+        const latexContent = `\\documentclass{article}
+  \\usepackage[utf8]{inputenc}
+  \\usepackage{amsmath}
+  \\usepackage{amsfonts}
+  \\usepackage{amssymb}
+
+  \\begin{document}
+  ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
+  \\end{document}`;
+        const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
+        saveFileBlob(latexBlob, `${$title}.tex`);
+      }
+
+      modalInfo.modalOpen = false;
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading,
+      };
+    }
+  }
+
+  // Helper function to save Blob as a file
+  function saveFileBlob(blob, filename) {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = filename;
