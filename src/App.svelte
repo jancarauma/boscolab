@@ -42,8 +42,6 @@
 
   import QuickLRU from "quick-lru";
 
-  import { pandoc } from "../public/ipandoc.js";
-
   import { get, set, update, delMany } from 'idb-keyval';
 
   import {
@@ -95,6 +93,8 @@
   import DownloadDocumentModal from "./DownloadDocumentModal.svelte";
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
+
+  import { pandoc } from "./pandoc.js";
 
   createCustomUnits();
 
@@ -2196,28 +2196,23 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-    const upload_blob = new Blob([markDown], { type: "text/markdown" });
 
+    // Caso seja o tipo markdown, salva o arquivo diretamente
     if (docType === "md") {
+      const upload_blob = new Blob([markDown], { type: "text/markdown" });
       saveFileBlob(upload_blob, `${$title}.${docType}`);
       return;
     }
 
-    const formData = new FormData();
-    formData.append("request_file", upload_blob);
-
-    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
-
+    // Use o Pandoc WASM para converter o markdown para outro formato
     try {
-      // Aqui vamos chamar a função pandoc, que será responsável pela conversão
-      const pandocArgs = `-o output.${docType}`; // Passando o nome do arquivo de saída com base no tipo
-      const output = await pandoc(pandocArgs, markDown);
+      modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
 
-      // O resultado de pandoc será o conteúdo do arquivo convertido
-      const fileBlob = new Blob([output], { type: "application/octet-stream" });
+      const output = await pandoc(`-f markdown -t ${docType}`, markDown);
+      const outputBlob = new Blob([output], { type: `application/${docType}` });
 
-      // Salvar o arquivo gerado
-      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      saveFileBlob(outputBlob, `${$title}.${docType}`);
+
       modalInfo.modalOpen = false;
     } catch (error) {
       console.log(`Error creating ${docType} document: ${error}`);
