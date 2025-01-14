@@ -2194,18 +2194,29 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-    const upload_blob = new Blob([markDown], {type: "text/markdown"});
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
 
     if (docType === "md") {
       saveFileBlob(upload_blob, `${$title}.${docType}`);
       return;
     }
 
-    const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+    const upload_file = new File([upload_blob], "input.md", { type: "text/markdown" });
 
     // Instanciando e inicializando o Pandoc
     const pandoc = new Pandoc();
-    await pandoc.init(); // Inicializa o Pandoc (WebAssembly)
+    try {
+      await pandoc.init(); // Inicializa o Pandoc (WebAssembly)
+    } catch (error) {
+      console.error("Erro ao inicializar o Pandoc:", error);
+      modalInfo = {
+        state: "error",
+        error: "Falha ao inicializar o Pandoc.",
+        modalOpen: true,
+        heading: "Erro"
+      };
+      return;
+    }
 
     modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
 
@@ -2216,6 +2227,11 @@ Please include a link to this sheet in the email to assist in debugging the prob
         options: { from: "markdown", to: getPandocFormat(docType) },  // Formatando para o tipo desejado
       });
 
+      // Verificando se a conversão gerou um erro
+      if (!result) {
+        throw new Error("Falha na conversão do documento.");
+      }
+
       // Convertendo o resultado para Blob
       const fileBlob = new Blob([result], { type: getMimeType(docType) });
 
@@ -2224,10 +2240,10 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
       modalInfo.modalOpen = false;
     } catch (error) {
-      console.log(`Error creating ${docType} document: ${error}`);
+      console.error(`Erro ao criar o documento ${docType}:`, error);
       modalInfo = {
         state: "error",
-        error: error,
+        error: error.message || error,
         modalOpen: true,
         heading: modalInfo.heading
       };
