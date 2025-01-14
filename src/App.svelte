@@ -2194,27 +2194,27 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
   async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+    const uploadBlob = new Blob([markDown], { type: "text/markdown" });
 
     if (docType === "md") {
-      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      saveFileBlob(uploadBlob, `${$title}.${docType}`);
       return;
     }
 
-    const upload_file = new File([upload_blob], "input.md", { type: "text/markdown" });
-
-    // Instanciando e inicializando o Pandoc
-    const pandoc = new Pandoc();
+    // Configurando o caminho para o arquivo wasm
     const wasmPath = "/docgen/pandoc.wasm";
+    const pandoc = new Pandoc({ wasmURL: wasmPath });
+
     try {
-      await pandoc.init(); // Inicializa o Pandoc (WebAssembly)
+      // Inicializando o Pandoc (WebAssembly)
+      await pandoc.init();
     } catch (error) {
       console.error("Erro ao inicializar o Pandoc:", error);
       modalInfo = {
         state: "error",
-        error: "Falha ao inicializar o Pandoc.",
+        error: "Falha ao inicializar o Pandoc. Verifique o caminho do arquivo wasm e tente novamente.",
         modalOpen: true,
-        heading: "Erro"
+        heading: "Erro ao Inicializar"
       };
       return;
     }
@@ -2224,13 +2224,12 @@ Please include a link to this sheet in the email to assist in debugging the prob
     try {
       // Configurando as opções de conversão com base no tipo de documento
       const result = await pandoc.run({
-        text: markDown,  // Texto do Markdown
-        options: { from: "markdown", to: getPandocFormat(docType) },  // Formatando para o tipo desejado
+        text: markDown,
+        options: { from: "markdown", to: getPandocFormat(docType) }
       });
 
-      // Verificando se a conversão gerou um erro
       if (!result) {
-        throw new Error("Falha na conversão do documento.");
+        throw new Error("O Pandoc não retornou um resultado válido.");
       }
 
       // Convertendo o resultado para Blob
@@ -2244,9 +2243,9 @@ Please include a link to this sheet in the email to assist in debugging the prob
       console.error(`Erro ao criar o documento ${docType}:`, error);
       modalInfo = {
         state: "error",
-        error: error.message || error,
+        error: error.message || "Erro inesperado durante a conversão.",
         modalOpen: true,
-        heading: modalInfo.heading
+        heading: "Erro ao Gerar Documento"
       };
     }
   }
@@ -2261,7 +2260,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       case "tex":
         return "latex";
       default:
-        return "html";  // Para o formato md, por exemplo, ou quando não especificado
+        throw new Error(`Formato de documento desconhecido: ${docType}`);
     }
   }
 
@@ -2275,7 +2274,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       case "tex":
         return "application/x-tex";
       default:
-        return "application/octet-stream";
+        throw new Error(`Tipo MIME desconhecido para: ${docType}`);
     }
   }
 
