@@ -2298,7 +2298,7 @@
         // Gerar PDF diretamente do Markdown
         markdownPdf().from.string(markDown).to("output.pdf", function () {
           const pdfBlob = fs.readFileSync("output.pdf");
-          saveFileBlob(new Blob([pdfBlob]), `${$title}.pdf`);
+          saveFileBlobExp(new Blob([pdfBlob]), `${$title}.pdf`);
         });
       } else if (docType === "docx") {
         // Renderizar Markdown para HTML e converter para DOCX
@@ -2318,7 +2318,7 @@
           ],
         });
         const buffer = await Packer.toBlob(doc);
-        saveFileBlob(buffer, `${$title}.docx`);
+        saveFileBlobExp(buffer, `${$title}.docx`);
       } else if (docType === "tex") {
         // Gerar arquivo LaTeX
         const latexContent = `\\documentclass{article}
@@ -2331,7 +2331,7 @@
   ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
   \\end{document}`;
         const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
-        saveFileBlob(latexBlob, `${$title}.tex`);
+        saveFileBlobExp(latexBlob, `${$title}.tex`);
       }
 
       modalInfo.modalOpen = false;
@@ -2347,7 +2347,7 @@
   }
 
   // Helper function to save Blob as a file
-  function saveFileBlob(blob, filename) {
+  function saveFileBlobExp(blob, filename) {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = filename;
