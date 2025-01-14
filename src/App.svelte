@@ -756,7 +756,7 @@
         currentState = `/${hash}`;
         if (firstTime && ( window.location.pathname === "/open_file" || 
                            searchParams.get('activation') === "file") ) {
-          modalInfo = {state: "opening", modalOpen: true, heading: "Opening File"};
+          modalInfo = {state: "opening", modalOpen: true, heading: "Abrindo Planilha"};
           await initializeBlankSheet();  // ensure minimal sheet is loaded in case file load fails or launch queue is empty
           window.history.replaceState(null, "", "/");
           if ('launchQueue' in window) {
@@ -844,7 +844,7 @@
           firstTime &&
           (window.location.pathname === "/open_file" || searchParams.get('activation') === "file")
         ) {
-          modalInfo = { state: "opening", modalOpen: true, heading: "Opening File" };
+          modalInfo = { state: "opening", modalOpen: true, heading: "Abrindo Planilha" };
           await initializeBlankSheet();
           window.history.replaceState(null, "", "/");
           if ('launchQueue' in window) {
@@ -1605,7 +1605,7 @@
 
   function openSheetFromFile(file: File, fileHandle: null | FileSystemFileHandle, pushState = true) {
     if (file.size > 0) {
-      modalInfo = {state: "opening", modalOpen: true, heading: "Opening File"};
+      modalInfo = {state: "opening", modalOpen: true, heading: "Abrindo Planilha"};
       const reader = new FileReader();
       reader.onload = (event) => loadSheetFromFile(event, fileHandle, pushState);
       reader.readAsText(file);
