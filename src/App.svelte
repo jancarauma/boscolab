@@ -802,7 +802,7 @@
   }*/
 
   async function refreshSheet(firstTime = false) {
-    console.log("Valor de refreshingSheet antes de chamar refreshSheet:", refreshingSheet);
+    //console.log("Valor de refreshingSheet antes de chamar refreshSheet:", refreshingSheet);
     if (!refreshingSheet) {
       refreshingSheet = true;
 
@@ -824,11 +824,11 @@
         hash = pathnameSegments[1];
       } else {
         // Caso não haja segmento após o domínio
-        console.log("Nenhum segmento encontrado no pathname.");
+        console.log("Default pathname");
         // Aqui você pode definir um valor padrão ou lançar um erro
       }
 
-      console.log("Hash gerado:", hash);
+      //console.log("Hash gerado:", hash);
 
       if (
         !firstTime &&
