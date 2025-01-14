@@ -15,7 +15,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import { optimizeImports } from 'carbon-preprocess-svelte';
 import { generateSW } from 'rollup-plugin-workbox';
 import ssri from 'ssri';
-import wasm from '@rollup/plugin-wasm';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -96,7 +95,6 @@ export default [
 		}),
 		commonjs(),
 		typescript( { sourceMap: !production} ),
-		wasm(),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
