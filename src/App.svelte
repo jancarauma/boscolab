@@ -94,7 +94,7 @@
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
 
-  import { pandoc } from "./pandoc.js";
+  import { pandoc } from "../public/pandoc.js";
 
   createCustomUnits();
 
