@@ -54,7 +54,7 @@
 <br />
 <p>
   Este software deriva do projeto de código aberto 
-  <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank"></a>EngineeringPaper</a>, 
+  <a href="https://github.com/mgreminger/EngineeringPaper.xyz" target="_blank">EngineeringPaper.xyz</a>, 
   desenvolvido por Michael Greminger e licenciado sob os termos da MIT License. Essas permissões e restrições continuam aplicáveis ao Boscolab.
 </p>
 <br />
