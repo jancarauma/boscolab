@@ -99,7 +99,7 @@
   const apiUrl = window.location.origin;
 
   const currentVersion = 20241123;
-  const tutorialHash = "moJCuTwjPi7dZeZn5QiuaP";
+  const tutorialHash = "97bc5d8cddab08298b4ef6";
 
   const termsVersion = 20250111;
   let termsAccepted = 0;
@@ -115,8 +115,8 @@
   const exampleSheets = [
     {
       path: `/${tutorialHash}`,
-      title: "Introduction to Boscolab"
-    },
+      title: "Apresentação ao Boscolab"
+    },/*
     {
       path: "/g4MZrw8GUPdHBSUTzGbQjb",
       title: "Plotting and Functions" 
@@ -148,7 +148,7 @@
     {
       path: "/mWf3zkzQEmYsUPckCPX5P8",
       title: "Thermodynamic Properties of Fluids" 
-    },
+    },*/
   ];
 
   const prebuiltTables = [
@@ -2770,13 +2770,13 @@ Please include a link to this sheet in the email to assist in debugging the prob
           on:click={handleGetShareableLink} 
           icon={CloudUpload}
         />
-        <!--<HeaderActionLink
+        <HeaderActionLink
           href={`/${tutorialHash}`}
           title="Tutorial"
           rel="nofollow"
           icon={Help}
           on:click={(e) => handleLinkPushState(e, `/${tutorialHash}`) }
-        />-->
+        />
         <div class="dot-container">
           <HeaderGlobalAction 
             title={"Opções da Planilha" + (usingDefaultConfig ? "" : " (Modificado)")}
@@ -2816,7 +2816,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       on:close={() => window.dispatchEvent(new Event('resize'))}
     >
       <SideNavItems>
-        <!--<SideNavMenu text="Example Sheets">
+        <SideNavMenu text="Exemplos">
           {#each exampleSheets as {path, title} (path)}
             <SideNavMenuItem 
               href={path}
@@ -2826,7 +2826,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
               <div title={title} class="side-nav-title">{title}</div>
             </SideNavMenuItem>
           {/each}
-        </SideNavMenu>-->
+        </SideNavMenu>
         <!--<SideNavMenu text="Prebuilt Tables">
           {#each prebuiltTables as {url, title} (url)}
             <SideNavMenuItem 
