@@ -48,6 +48,7 @@
     "mathjax": "^3.2.2",
     "mathjs": "^11.8.2",
     "mathlive": "github:mgreminger/mathlive#05347383c43787feafba5bb48f51b3e3389ed641",
+    "pandoc-wasm": "^0.0.2",
     "plotly.js-basic-dist": "github:mgreminger/plotly.js#dist-basic-for-ep",
     "quick-lru": "^6.1.1",
     "quill": "^2.0.0",

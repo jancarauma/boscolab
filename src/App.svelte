@@ -39,7 +39,7 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
-
+  import { Pandoc } from 'pandoc-wasm';
   import QuickLRU from "quick-lru";
 
   import { get, set, update, delMany } from 'idb-keyval';
@@ -2145,7 +2145,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     return markdown;
   }
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
@@ -2189,6 +2189,76 @@ Please include a link to this sheet in the email to assist in debugging the prob
         error: error,
         modalOpen: true,
         heading: modalInfo.heading};
+    }
+  }*/  
+
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], {type: "text/markdown"});
+
+    if (docType === "md") {
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return;
+    }
+
+    const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+
+    // Instanciando e inicializando o Pandoc
+    const pandoc = new Pandoc();
+    await pandoc.init(); // Inicializa o Pandoc (WebAssembly)
+
+    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+    try {
+      // Configurando as opções de conversão com base no tipo de documento
+      const result = await pandoc.run({
+        text: markDown,  // Texto do Markdown
+        options: { from: "markdown", to: getPandocFormat(docType) },  // Formatando para o tipo desejado
+      });
+
+      // Convertendo o resultado para Blob
+      const fileBlob = new Blob([result], { type: getMimeType(docType) });
+
+      // Salvando o arquivo gerado
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+
+      modalInfo.modalOpen = false;
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading
+      };
+    }
+  }
+
+  // Função para obter o formato de saída do Pandoc
+  function getPandocFormat(docType: "docx" | "pdf" | "md" | "tex"): string {
+    switch (docType) {
+      case "docx":
+        return "docx";
+      case "pdf":
+        return "pdf";
+      case "tex":
+        return "latex";
+      default:
+        return "html";  // Para o formato md, por exemplo, ou quando não especificado
+    }
+  }
+
+  // Função para obter o tipo MIME do arquivo de saída
+  function getMimeType(docType: "docx" | "pdf" | "md" | "tex"): string {
+    switch (docType) {
+      case "docx":
+        return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+      case "pdf":
+        return "application/pdf";
+      case "tex":
+        return "application/x-tex";
+      default:
+        return "application/octet-stream";
     }
   }
 
