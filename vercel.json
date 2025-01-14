@@ -11,6 +11,23 @@
   ],
   "headers": [
     {
+      "source": "/docgen/pandoc.wasm",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/wasm"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Content-Encoding",
+          "value": "identity"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
