@@ -39,6 +39,9 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
+  import jsPDF from "jspdf";
+  import { DocumentExp, Packer, Paragraph} from "docx";
+  import MarkdownIt from "markdown-it";
 
   import QuickLRU from "quick-lru";
 
@@ -2150,7 +2153,7 @@
     return markdown;
   }
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
@@ -2195,6 +2198,79 @@
         modalOpen: true,
         heading: modalInfo.heading};
     }
+  }*/
+
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+
+    // Save Markdown directly
+    if (docType === "md") {
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return;
+    }
+
+    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+    try {
+      if (docType === "pdf") {
+        // Convert Markdown to PDF
+        const md = new MarkdownIt();
+        const htmlContent = md.render(markDown);
+        const pdf = new jsPDF();
+        pdf.html(htmlContent, {
+          callback: function (doc) {
+            const pdfBlob = doc.output("blob");
+            saveFileBlob(pdfBlob, `${$title}.pdf`);
+          },
+        });
+      } else if (docType === "docx") {
+        // Convert Markdown to DOCX
+        const md = new MarkdownIt();
+        const plainText = md.render(markDown).replace(/<[^>]+>/g, ""); // Strip HTML tags
+        const doc = new DocumentExp({
+          sections: [
+            {
+              children: plainText
+                .split("\n")
+                .filter((line) => line.trim() !== "")
+                .map((line) => new Paragraph(line)),
+            },
+          ],
+        });
+        const buffer = await Packer.toBlob(doc);
+        saveFileBlob(buffer, `${$title}.docx`);
+      } else if (docType === "tex") {
+          // Convert Markdown to LaTeX
+          const latexContent = `\\documentclass{article}
+          \\usepackage[utf8]{inputenc}
+
+          \\begin{document}
+          ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
+          \\end{document}`;
+          const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
+          saveFileBlob(latexBlob, `${$title}.tex`);
+        }
+
+      modalInfo.modalOpen = false;
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading,
+      };
+    }
+  }
+
+  // Helper function to save Blob as a file
+  function saveFileBlob(blob, filename) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
   }
 
   async function retrieveRecentSheets() {
