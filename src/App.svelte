@@ -99,7 +99,7 @@
   const apiUrl = window.location.origin;
 
   const currentVersion = 20241123;
-  const tutorialHash = "97bc5d8cddab08298b4ef6";
+  const tutorialHash = "e2ab9b8b94b44fb16daba6";
 
   const termsVersion = 20250111;
   let termsAccepted = 0;
