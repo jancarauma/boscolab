@@ -9,6 +9,6 @@
     ]
   },
   "extends": "./node_modules/@tsconfig/svelte/tsconfig.json",
-  "include": ["src/**/*", "public/pandoc.js"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules/*", "src/database/_worker.ts"]
 }

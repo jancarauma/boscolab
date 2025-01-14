@@ -94,8 +94,6 @@
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
 
-  import { pandoc } from "../public/pandoc.js";
-
   createCustomUnits();
 
   const apiUrl = window.location.origin;
@@ -2147,7 +2145,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     return markdown;
   }
 
-  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
@@ -2191,37 +2189,6 @@ Please include a link to this sheet in the email to assist in debugging the prob
         error: error,
         modalOpen: true,
         heading: modalInfo.heading};
-    }
-  }*/
-
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
-    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-
-    // Caso seja o tipo markdown, salva o arquivo diretamente
-    if (docType === "md") {
-      const upload_blob = new Blob([markDown], { type: "text/markdown" });
-      saveFileBlob(upload_blob, `${$title}.${docType}`);
-      return;
-    }
-
-    // Use o Pandoc WASM para converter o markdown para outro formato
-    try {
-      modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
-
-      const output = await pandoc(`-f markdown -t ${docType}`, markDown);
-      const outputBlob = new Blob([output], { type: `application/${docType}` });
-
-      saveFileBlob(outputBlob, `${$title}.${docType}`);
-
-      modalInfo.modalOpen = false;
-    } catch (error) {
-      console.log(`Error creating ${docType} document: ${error}`);
-      modalInfo = {
-        state: "error",
-        error: error,
-        modalOpen: true,
-        heading: modalInfo.heading
-      };
     }
   }
 
