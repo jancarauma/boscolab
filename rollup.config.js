@@ -85,6 +85,7 @@ export default [
 				preferBuiltins: false, // Garantindo que os módulos locais são preferidos
 			}),
 			commonjs(),
+			json(),
 			typescript({ sourceMap: !production }),
 
 			// Minificação em produção
