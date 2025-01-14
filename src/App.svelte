@@ -2206,7 +2206,7 @@
 
     // Save Markdown directly
     if (docType === "md") {
-      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      saveFileBlobExp(upload_blob, `${$title}.${docType}`);
       return;
     }
 
@@ -2221,7 +2221,7 @@
         pdf.html(htmlContent, {
           callback: function (doc) {
             const pdfBlob = doc.output("blob");
-            saveFileBlob(pdfBlob, `${$title}.pdf`);
+            saveFileBlobExp(pdfBlob, `${$title}.pdf`);
           },
         });
       } else if (docType === "docx") {
@@ -2239,7 +2239,7 @@
           ],
         });
         const buffer = await Packer.toBlob(doc);
-        saveFileBlob(buffer, `${$title}.docx`);
+        saveFileBlobExp(buffer, `${$title}.docx`);
       } else if (docType === "tex") {
           // Convert Markdown to LaTeX
           const latexContent = `\\documentclass{article}
@@ -2249,7 +2249,7 @@
           ${markDown.replace(/#/g, "\\section").replace(/\n/g, "\n\n")}
           \\end{document}`;
           const latexBlob = new Blob([latexContent], { type: "text/x-tex" });
-          saveFileBlob(latexBlob, `${$title}.tex`);
+          saveFileBlobExp(latexBlob, `${$title}.tex`);
         }
 
       modalInfo.modalOpen = false;
@@ -2265,7 +2265,7 @@
   }
 
   // Helper function to save Blob as a file
-  function saveFileBlob(blob, filename) {
+  function saveFileBlobExp(blob, filename) {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = filename;
