@@ -2219,7 +2219,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableL
         "Accept": "application/json",
         "Content-Type": "application/json",  // Cabeçalho correto para JSON
       },
-      mode: "cors",
+      //mode: "cors",
     });
 
     if (response.ok) {
