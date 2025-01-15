@@ -2211,7 +2211,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableL
     // Atualize a URL da função Lambda com o endpoint do API Gateway
     const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
     
-    const response = await fetch(`${apiUrl}/convert?docType=${docType}`, {
+    const response = await fetch(`${apiUrl}/docgen?docType=${docType}`, {
       method: "POST",
       body: formData,
       headers: {
