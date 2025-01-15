@@ -2145,7 +2145,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     return markdown;
   }
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  /*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
     const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
     const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
@@ -2190,7 +2190,59 @@ Please include a link to this sheet in the email to assist in debugging the prob
         modalOpen: true,
         heading: modalInfo.heading};
     }
+  }*/
+
+async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+  const upload_blob = new Blob([markDown], {type: "text/markdown"});
+
+  if (docType === "md") {
+    saveFileBlob(upload_blob, `${$title}.${docType}`);
+    return;
   }
+
+  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+  const formData = new FormData();
+  formData.append("request_file", upload_file);
+
+  modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
+
+  try {
+    // URL da função Lambda (certifique-se de substituir pelo endpoint correto)
+    const response = await fetch(`https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/docgen/${docType}`, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json",  // Espera-se uma resposta JSON
+        "Content-Type": "multipart/form-data",  // Indica que estamos enviando um arquivo
+      },
+      mode: "cors"  // Garantir que a requisição use CORS
+    });
+
+    if (response.ok) {
+      const fileBlob = await response.blob();
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      modalInfo.modalOpen = false;
+    } else {
+      let errorMessage = await response.text();
+      try {
+        const errorObject = JSON.parse(errorMessage);
+        errorMessage = errorObject.detail;
+      } catch {}
+
+      throw new Error(`${response.status} ${errorMessage}`);
+    }
+  } catch (error) {
+    console.log(`Error creating ${docType} document: ${error}`);
+    modalInfo = {
+      state: "error",
+      error: error,
+      modalOpen: true,
+      heading: modalInfo.heading
+    };
+  }
+}
+
 
   async function retrieveRecentSheets() {
     try {
