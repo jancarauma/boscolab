@@ -2210,7 +2210,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableL
 
   try {
       // URL da função Lambda configurada
-      const response = await fetch("https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/docgen", {
+      const response = await fetch("https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/", {
           method: "POST",
           body: formData,
           headers: {
