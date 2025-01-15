@@ -2193,13 +2193,14 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }*/
 
   async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  // Obtém o conteúdo Markdown com um prefixo
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
   
-  // Convertendo o conteúdo markdown para Base64
+  // Codificando o conteúdo Markdown em Base64
   const base64Content = btoa(unescape(encodeURIComponent(markDown)));
-
-  // URL da função Lambda
-  const lambdaUrl = "https://45kl6ziaffd7jqhd32kkhi22gy0cjkcd.lambda-url.us-east-2.on.aws/docgen/" + docType;
+  
+  // URL da sua função Lambda
+  const lambdaUrl = "https://45kl6ziaffd7jqhd32kkhi22gy0cjkcd.lambda-url.us-east-2.on.aws/";
 
   modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
 
@@ -2227,7 +2228,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       // Convertendo o arquivo retornado de volta de Base64 para um Blob
       const fileBlob = await (await fetch(`data:application/${docType};base64,${fileContentBase64}`)).blob();
 
-      // Salvando o arquivo
+      // Salvando o arquivo convertido
       saveFileBlob(fileBlob, `${$title}.${docType}`);
 
       modalInfo.modalOpen = false;
@@ -2251,7 +2252,6 @@ Please include a link to this sheet in the email to assist in debugging the prob
     };
   }
 }
-
 
   async function retrieveRecentSheets() {
     try {
