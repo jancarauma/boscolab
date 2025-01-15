@@ -2192,7 +2192,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
     }
   }*/
 
-async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+/*async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
 
   // Codifica o conteúdo do arquivo em base64
@@ -2244,7 +2244,59 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableL
       heading: modalInfo.heading
     };
   }
+}*/
+
+async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+  const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+  
+  if (docType === "md") {
+    const upload_blob = new Blob([markDown], { type: "text/markdown" });
+    saveFileBlob(upload_blob, `${$title}.${docType}`);
+    return;
+  }
+
+  const upload_blob = new Blob([markDown], { type: "text/markdown" });
+  const upload_file = new File([upload_blob], "input.md", { type: "text/markdown" });
+
+  // Criação do FormData
+  const formData = new FormData();
+  formData.append("request_file", upload_file);
+
+  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+  try {
+    const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio"; // URL da API
+
+    // Envia o FormData no corpo da requisição
+    const response = await fetch(`${apiUrl}/docgen/${docType}`, {
+      method: "POST",
+      body: formData
+    });
+
+    if (response.ok) {
+      const fileBlob = await response.blob();
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      modalInfo.modalOpen = false;
+    } else {
+      let errorMessage = await response.text();
+      try {
+        const errorObject = JSON.parse(errorMessage);
+        errorMessage = errorObject.detail;
+      } catch { }
+
+      throw new Error(`${response.status} ${errorMessage}`);
+    }
+  } catch (error) {
+    console.log(`Error creating ${docType} document: ${error}`);
+    modalInfo = {
+      state: "error",
+      error: error,
+      modalOpen: true,
+      heading: modalInfo.heading
+    };
+  }
 }
+
 
 
   async function retrieveRecentSheets() {
