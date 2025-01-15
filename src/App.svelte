@@ -2194,33 +2194,33 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
 async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-  const upload_blob = new Blob([markDown], {type: "text/markdown"});
+  
+  // Codificar o conteúdo markdown em Base64
+  const base64Content = btoa(unescape(encodeURIComponent(markDown)));  // Codifica o conteúdo markdown para Base64
 
   if (docType === "md") {
-    saveFileBlob(upload_blob, `${$title}.${docType}`);
+    saveFileBlob(new Blob([markDown], { type: "text/markdown" }), `${$title}.${docType}`);
     return;
   }
 
-  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
-  const formData = new FormData();
-  formData.append("request_file", upload_file);
-
-  modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
+  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
 
   try {
-    // URL da função Lambda (certifique-se de substituir pelo endpoint correto)
     const response = await fetch(`https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/docgen/${docType}`, {
       method: "POST",
-      body: formData,
       headers: {
-        "Accept": "application/json",  // Espera-se uma resposta JSON
-        "Content-Type": "multipart/form-data",  // Indica que estamos enviando um arquivo
+        "Accept": "application/json", // Espera-se uma resposta JSON
+        "Content-Type": "application/json", // Enviando JSON ao invés de FormData
       },
-      mode: "cors"  // Garantir que a requisição use CORS
+      body: JSON.stringify({
+        fileContent: base64Content,
+        docType: docType
+      }),
     });
 
     if (response.ok) {
-      const fileBlob = await response.blob();
+      const responseBody = await response.json();
+      const fileBlob = new Blob([new Uint8Array(atob(responseBody.body).split("").map(c => c.charCodeAt(0)))], { type: `application/${docType}` });
       saveFileBlob(fileBlob, `${$title}.${docType}`);
       modalInfo.modalOpen = false;
     } else {
@@ -2238,10 +2238,11 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableL
       state: "error",
       error: error,
       modalOpen: true,
-      heading: modalInfo.heading
+      heading: modalInfo.heading,
     };
   }
 }
+
 
 
   async function retrieveRecentSheets() {
