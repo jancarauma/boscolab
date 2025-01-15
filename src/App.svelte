@@ -2194,54 +2194,55 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
 async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-  
-  // Codificar o conteúdo markdown em Base64
-  const base64Content = btoa(unescape(encodeURIComponent(markDown)));  // Codifica o conteúdo markdown para Base64
+  const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
+  // Se o tipo de documento for "md", não faz sentido fazer requisição ao backend
   if (docType === "md") {
-    saveFileBlob(new Blob([markDown], { type: "text/markdown" }), `${$title}.${docType}`);
-    return;
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return;
   }
 
-  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+  const formData = new FormData();
+  formData.append("request_file", upload_file);
+
+  modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
 
   try {
-    const response = await fetch(`https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/docgen/${docType}`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json", // Espera-se uma resposta JSON
-        "Content-Type": "application/json", // Enviando JSON ao invés de FormData
-      },
-      body: JSON.stringify({
-        fileContent: base64Content,
-        docType: docType
-      }),
-    });
+      // URL da função Lambda configurada
+      const response = await fetch("https://hrxn5mbu2l6ozblakfg2r37x3u0krfoh.lambda-url.us-east-2.on.aws/docgen", {
+          method: "POST",
+          body: formData,
+          headers: {
+              "Accept": "application/json",  // A função Lambda vai retornar um JSON com a URL do arquivo
+              "Content-Type": "multipart/form-data",  // Estamos enviando um arquivo
+          },
+          mode: "cors",  // Garantir que a requisição use CORS
+      });
 
-    if (response.ok) {
-      const responseBody = await response.json();
-      const fileBlob = new Blob([new Uint8Array(atob(responseBody.body).split("").map(c => c.charCodeAt(0)))], { type: `application/${docType}` });
-      saveFileBlob(fileBlob, `${$title}.${docType}`);
-      modalInfo.modalOpen = false;
-    } else {
-      let errorMessage = await response.text();
-      try {
-        const errorObject = JSON.parse(errorMessage);
-        errorMessage = errorObject.detail;
-      } catch {}
-
-      throw new Error(`${response.status} ${errorMessage}`);
-    }
+      if (response.ok) {
+          const fileBlob = await response.blob();
+          saveFileBlob(fileBlob, `${$title}.${docType}`);
+          modalInfo.modalOpen = false;
+      } else {
+          let errorMessage = await response.text();
+          try {
+              const errorObject = JSON.parse(errorMessage);
+              errorMessage = errorObject.detail;
+          } catch {}
+          throw new Error(`${response.status} ${errorMessage}`);
+      }
   } catch (error) {
-    console.log(`Error creating ${docType} document: ${error}`);
-    modalInfo = {
-      state: "error",
-      error: error,
-      modalOpen: true,
-      heading: modalInfo.heading,
-    };
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+          state: "error",
+          error: error,
+          modalOpen: true,
+          heading: modalInfo.heading
+      };
   }
 }
+
 
 
 
