@@ -2194,31 +2194,32 @@ Please include a link to this sheet in the email to assist in debugging the prob
 
 async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-  const upload_blob = new Blob([markDown], {type: "text/markdown"});
+
+  // Codifica o conteúdo do arquivo em base64
+  const base64Content = btoa(markDown);
+
+  const requestBody = JSON.stringify({
+    fileContent: base64Content,  // Envia o conteúdo do arquivo em base64
+  });
 
   if (docType === "md") {
-    saveFileBlob(upload_blob, `${$title}.${docType}`);
+    saveFileBlob(new Blob([markDown], {type: "text/markdown"}), `${$title}.${docType}`);
     return;
   }
-
-  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
-  const formData = new FormData();
-  formData.append("request_file", upload_file);
 
   modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
 
   try {
-    // Atualize a URL da função Lambda com o endpoint do API Gateway
     const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
     
     const response = await fetch(`${apiUrl}/docgen?docType=${docType}`, {
       method: "POST",
-      body: formData,
+      body: requestBody,  // Envia o corpo como JSON
       headers: {
-        "Accept": "application/json",  // Espera-se uma resposta JSON
-        "Content-Type": "multipart/form-data",  // Indica que estamos enviando um arquivo
+        "Accept": "application/json",
+        "Content-Type": "application/json",  // Cabeçalho correto para JSON
       },
-      mode: "cors"  // Garantir que a requisição use CORS
+      mode: "cors",
     });
 
     if (response.ok) {
