@@ -2245,50 +2245,47 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 }*/
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
-    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-    const formData = new FormData();
+async function getDocument(docType = "docx", getShareableLink = false) {
+  const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
 
-    // Adicionar o conteúdo do arquivo como um blob
-    const markdownBlob = new Blob([markDown], { type: "text/markdown" });
-    formData.append("request_file", markdownBlob, "input.md");
+  // Cria um FormData para enviar os dados como multipart/form-data
+  const formData = new FormData();
+  const blob = new Blob([markDown], { type: "text/markdown" });
+  formData.append("request_file", blob, "input.md");
+  formData.append("docType", docType);
 
-    // Adicionar o tipo de documento solicitado
-    formData.append("docType", docType);
-
-    modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
-
-    try {
-      const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
-
-      const response = await fetch(`${apiUrl}/docgen`, {
-        method: "POST",
-        body: formData, // Envia o formulário como corpo da requisição
-      });
-
-      if (response.ok) {
-        const fileBlob = await response.blob();
-        saveFileBlob(fileBlob, `${$title}.${docType}`);
-        modalInfo.modalOpen = false;
-      } else {
-        let errorMessage = await response.text();
-        try {
-          const errorObject = JSON.parse(errorMessage);
-          errorMessage = errorObject.detail;
-        } catch {}
-
-        throw new Error(`${response.status} ${errorMessage}`);
-      }
-    } catch (error) {
-      console.log(`Error creating ${docType} document: ${error}`);
-      modalInfo = {
-        state: "error",
-        error: error,
-        modalOpen: true,
-        heading: modalInfo.heading,
-      };
-    }
+  if (docType === "md") {
+    saveFileBlob(blob, `${$title}.${docType}`);
+    return;
   }
+
+  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+  try {
+    const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
+    const response = await fetch(`${apiUrl}/docgen`, {
+      method: "POST",
+      body: formData, // O corpo da requisição é o FormData
+    });
+
+    if (response.ok) {
+      const fileBlob = await response.blob();
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      modalInfo.modalOpen = false;
+    } else {
+      const errorMessage = await response.text();
+      throw new Error(`${response.status} ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error(`Error creating ${docType} document: ${error}`);
+    modalInfo = {
+      state: "error",
+      error,
+      modalOpen: true,
+      heading: modalInfo.heading,
+    };
+  }
+}
 
   async function retrieveRecentSheets() {
     try {
