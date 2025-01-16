@@ -2215,10 +2215,9 @@ Please include a link to this sheet in the email to assist in debugging the prob
     const response = await fetch(`${apiUrl}/docgen?docType=${docType}`, {
       method: "POST",
       body: requestBody,  // Envia o corpo como JSON
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",  // Cabeçalho correto para JSON
-      },
+      //headers: {
+      //  "Accept": "application/json",
+      //},
       //mode: "cors",
     });
 
