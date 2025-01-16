@@ -2250,9 +2250,20 @@ async function getDocument(docType = "docx", getShareableLink = false) {
 
   // Cria um FormData para enviar os dados como multipart/form-data
   const formData = new FormData();
+  
+  // Cria o blob com o tipo correto
   const blob = new Blob([markDown], { type: "text/markdown" });
+  
+  // Adiciona o arquivo com nome e tipo específicos
   formData.append("request_file", blob, "input.md");
+  
+  // Adiciona o tipo de documento
   formData.append("docType", docType);
+
+  // Log para debug
+  for (let pair of formData.entries()) {
+    console.log('FormData contém:', pair[0], pair[1]);
+  }
 
   if (docType === "md") {
     saveFileBlob(blob, `${$title}.${docType}`);
@@ -2265,8 +2276,7 @@ async function getDocument(docType = "docx", getShareableLink = false) {
     const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
     const response = await fetch(`${apiUrl}/docgen`, {
       method: "POST",
-      body: formData,
-      // Não definimos o Content-Type aqui, deixamos o navegador configurar automaticamente com o boundary correto
+      body: formData
     });
 
     if (!response.ok) {
@@ -2275,6 +2285,10 @@ async function getDocument(docType = "docx", getShareableLink = false) {
     }
 
     const fileBlob = await response.blob();
+    if (fileBlob.size === 0) {
+      throw new Error("Arquivo retornado está vazio");
+    }
+
     saveFileBlob(fileBlob, `${$title}.${docType}`);
     modalInfo.modalOpen = false;
   } catch (error) {
