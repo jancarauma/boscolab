@@ -2265,22 +2265,23 @@ async function getDocument(docType = "docx", getShareableLink = false) {
     const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
     const response = await fetch(`${apiUrl}/docgen`, {
       method: "POST",
-      body: formData, // O corpo da requisição é o FormData
+      body: formData,
+      // Não definimos o Content-Type aqui, deixamos o navegador configurar automaticamente com o boundary correto
     });
 
-    if (response.ok) {
-      const fileBlob = await response.blob();
-      saveFileBlob(fileBlob, `${$title}.${docType}`);
-      modalInfo.modalOpen = false;
-    } else {
-      const errorMessage = await response.text();
-      throw new Error(`${response.status} ${errorMessage}`);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ message: "Erro desconhecido" }));
+      throw new Error(errorData.message || `Erro ${response.status}: ${response.statusText}`);
     }
+
+    const fileBlob = await response.blob();
+    saveFileBlob(fileBlob, `${$title}.${docType}`);
+    modalInfo.modalOpen = false;
   } catch (error) {
-    console.error(`Error creating ${docType} document: ${error}`);
+    console.error(`Error creating ${docType} document:`, error);
     modalInfo = {
       state: "error",
-      error,
+      error: error.message,
       modalOpen: true,
       heading: modalInfo.heading,
     };
