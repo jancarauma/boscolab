@@ -2245,53 +2245,51 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 }*/
 
-  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
-    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-    const upload_blob = new Blob([markDown], {type: "text/markdown"});
+async function getDocument(docType, getShareableLink = false) {
+  const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+  const uploadBlob = new Blob([markDown], { type: "text/markdown" });
 
-    if (docType === "md") {
-      saveFileBlob(upload_blob, `${$title}.${docType}`);
-      return
-    }
-
-    const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
-    const formData = new FormData();
-    formData.append("request_file", upload_file);
-
-    modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
-
-    try {
-      const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
-      const response = await fetch(`${apiUrl}/docgen`, {
-        method: "POST",
-        body: formData
-      });
-
-      if (response.ok) {
-        const fileBlob = await response.blob();
-
-        saveFileBlob(fileBlob, `${$title}.${docType}`);
-
-        modalInfo.modalOpen = false;
-      } else {
-        let errorMessage = await response.text();
-        try {
-          const errorObject = JSON.parse(errorMessage);
-          errorMessage = errorObject.detail;
-        } catch {
-        }
-
-        throw new Error(`${response.status} ${errorMessage}`);
-      }
-    } catch (error) {
-      console.log(`Error creating ${docType} document: ${error}`);
-      modalInfo = {
-        state: "error",
-        error: error,
-        modalOpen: true,
-        heading: modalInfo.heading};
-    }
+  if (docType === "md") {
+    saveFileBlob(uploadBlob, `${$title}.${docType}`);
+    return;
   }
+
+  const uploadFile = new File([uploadBlob], "input.md", { type: "text/markdown" });
+  const formData = new FormData();
+  formData.append("request_file", uploadFile);
+  formData.append("docType", docType);
+
+  console.log("Iniciando upload para API...");
+  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+
+  try {
+    const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio/docgen";
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      const fileBlob = await response.blob();
+      console.log("Documento gerado com sucesso, iniciando download...");
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      modalInfo.modalOpen = false;
+    } else {
+      const errorMessage = await response.text();
+      console.error(`Erro ao gerar documento: ${errorMessage}`);
+      throw new Error(`Erro ${response.status}: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error("Erro ao criar documento:", error);
+    modalInfo = {
+      state: "error",
+      error,
+      modalOpen: true,
+      heading: modalInfo.heading,
+    };
+  }
+}
+
 
   async function retrieveRecentSheets() {
     try {
