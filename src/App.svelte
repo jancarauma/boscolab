@@ -2245,67 +2245,53 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 }*/
 
-async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
-  const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
-  console.log('Conteúdo do Markdown gerado:', markDown);  // Log do conteúdo gerado
+  async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
+    const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+    const upload_blob = new Blob([markDown], {type: "text/markdown"});
 
-  const upload_blob = new Blob([markDown], {type: "text/markdown"});
-  console.log('Blob criado com tipo:', upload_blob.type);  // Log do tipo de Blob
-
-  if (docType === "md") {
-    saveFileBlob(upload_blob, `${$title}.${docType}`);
-    console.log(`Arquivo Markdown salvo como ${$title}.${docType}`);
-    return;
-  }
-
-  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
-  console.log('Arquivo para envio preparado:', upload_file);  // Log do arquivo preparado
-
-  const formData = new FormData();
-  formData.append("request_file", upload_file);
-  console.log('FormData preparado:', formData);  // Log do FormData
-
-  modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
-
-  try {
-    const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
-    console.log(`Enviando requisição para API: ${apiUrl}/docgen`);
-    
-    const response = await fetch(`${apiUrl}/docgen`, {
-      method: "POST",
-      body: formData
-    });
-
-    if (response.ok) {
-      console.log('Resposta da API recebida:', response.status);
-      const fileBlob = await response.blob();
-      console.log('Arquivo recebido, tamanho:', fileBlob.size);
-
-      saveFileBlob(fileBlob, `${$title}.${docType}`);
-      console.log(`Arquivo salvo como ${$title}.${docType}`);
-
-      modalInfo.modalOpen = false;
-    } else {
-      let errorMessage = await response.text();
-      try {
-        const errorObject = JSON.parse(errorMessage);
-        errorMessage = errorObject.detail;
-      } catch (e) {
-        console.error('Erro ao parsear a resposta de erro:', e);
-      }
-
-      throw new Error(`${response.status} ${errorMessage}`);
+    if (docType === "md") {
+      saveFileBlob(upload_blob, `${$title}.${docType}`);
+      return
     }
-  } catch (error) {
-    console.log(`Error creating ${docType} document: ${error}`);
-    modalInfo = {
-      state: "error",
-      error: error,
-      modalOpen: true,
-      heading: modalInfo.heading
-    };
-  }
 
+    const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+    const formData = new FormData();
+    formData.append("request_file", upload_file);
+
+    modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
+
+    try {
+      const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
+      const response = await fetch(`${apiUrl}/docgen`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        const fileBlob = await response.blob();
+
+        saveFileBlob(fileBlob, `${$title}.${docType}`);
+
+        modalInfo.modalOpen = false;
+      } else {
+        let errorMessage = await response.text();
+        try {
+          const errorObject = JSON.parse(errorMessage);
+          errorMessage = errorObject.detail;
+        } catch {
+        }
+
+        throw new Error(`${response.status} ${errorMessage}`);
+      }
+    } catch (error) {
+      console.log(`Error creating ${docType} document: ${error}`);
+      modalInfo = {
+        state: "error",
+        error: error,
+        modalOpen: true,
+        heading: modalInfo.heading};
+    }
+  }
 
   async function retrieveRecentSheets() {
     try {
