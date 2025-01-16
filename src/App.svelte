@@ -2245,62 +2245,67 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 }*/
 
-async function getDocument(docType = "docx", getShareableLink = false) {
+async function getDocument(docType: "docx" | "pdf" | "md" | "tex", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
+  console.log('Conteúdo do Markdown gerado:', markDown);  // Log do conteúdo gerado
 
-  // Cria um FormData para enviar os dados como multipart/form-data
-  const formData = new FormData();
-  
-  // Cria o blob com o tipo correto
-  const blob = new Blob([markDown], { type: "text/markdown" });
-  
-  // Adiciona o arquivo com nome e tipo específicos
-  formData.append("request_file", blob, "input.md");
-  
-  // Adiciona o tipo de documento
-  formData.append("docType", docType);
-
-  // Log para debug
-  for (let pair of formData.entries()) {
-    console.log('FormData contém:', pair[0], pair[1]);
-  }
+  const upload_blob = new Blob([markDown], {type: "text/markdown"});
+  console.log('Blob criado com tipo:', upload_blob.type);  // Log do tipo de Blob
 
   if (docType === "md") {
-    saveFileBlob(blob, `${$title}.${docType}`);
+    saveFileBlob(upload_blob, `${$title}.${docType}`);
+    console.log(`Arquivo Markdown salvo como ${$title}.${docType}`);
     return;
   }
 
-  modalInfo = { state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo" };
+  const upload_file = new File([upload_blob], "input.md", {type: "text/markdown"});
+  console.log('Arquivo para envio preparado:', upload_file);  // Log do arquivo preparado
+
+  const formData = new FormData();
+  formData.append("request_file", upload_file);
+  console.log('FormData preparado:', formData);  // Log do FormData
+
+  modalInfo = {state: "generatingDocument", modalOpen: true, heading: "Gerando Arquivo"};
 
   try {
     const apiUrl = "https://zfikzh4oaf.execute-api.us-east-2.amazonaws.com/novoestagio";
+    console.log(`Enviando requisição para API: ${apiUrl}/docgen`);
+    
     const response = await fetch(`${apiUrl}/docgen`, {
       method: "POST",
       body: formData
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({ message: "Erro desconhecido" }));
-      throw new Error(errorData.message || `Erro ${response.status}: ${response.statusText}`);
-    }
+    if (response.ok) {
+      console.log('Resposta da API recebida:', response.status);
+      const fileBlob = await response.blob();
+      console.log('Arquivo recebido, tamanho:', fileBlob.size);
 
-    const fileBlob = await response.blob();
-    if (fileBlob.size === 0) {
-      throw new Error("Arquivo retornado está vazio");
-    }
+      saveFileBlob(fileBlob, `${$title}.${docType}`);
+      console.log(`Arquivo salvo como ${$title}.${docType}`);
 
-    saveFileBlob(fileBlob, `${$title}.${docType}`);
-    modalInfo.modalOpen = false;
+      modalInfo.modalOpen = false;
+    } else {
+      let errorMessage = await response.text();
+      try {
+        const errorObject = JSON.parse(errorMessage);
+        errorMessage = errorObject.detail;
+      } catch (e) {
+        console.error('Erro ao parsear a resposta de erro:', e);
+      }
+
+      throw new Error(`${response.status} ${errorMessage}`);
+    }
   } catch (error) {
-    console.error(`Error creating ${docType} document:`, error);
+    console.log(`Error creating ${docType} document: ${error}`);
     modalInfo = {
       state: "error",
-      error: error.message,
+      error: error,
       modalOpen: true,
-      heading: modalInfo.heading,
+      heading: modalInfo.heading
     };
   }
-}
+
 
   async function retrieveRecentSheets() {
     try {
