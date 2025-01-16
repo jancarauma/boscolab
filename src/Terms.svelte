@@ -11,7 +11,7 @@
 <h4>Nossos Termos</h4>
 <br />
 <p>
-  O Boscolab é um software livre e de código aberto, projetado para simplicidade e respeito à privacidade. Todas as operações ocorrem exclusivamente em seu dispositivo local, sem a necessidade de criação de contas ou envio de dados para servidores externos. Links compartilháveis ou exportações em formatos como .docx, .tex e .pdf envolvem transmissão mínima de dados necessária ao funcionamento desses recursos.
+  O Boscolab é um software livre e de código aberto, projetado para simplicidade e respeito à privacidade. Todas as operações ocorrem exclusivamente em seu dispositivo local, sem a necessidade de criação de contas ou envio de dados para servidores externos. Links compartilháveis ou exportações em formatos como .docx, .tex, etc envolvem transmissão mínima de dados necessária ao funcionamento desses recursos.
 </p>
 <br />
 <p>

@@ -5,11 +5,11 @@
   export let open = true;
 
   const dispatch = createEventDispatcher<{
-    downloadDocument: {docType: "docx" | "pdf" | "md" | "tex", getShareableLink: boolean};
+    downloadDocument: {docType: "docx" | "pdf" | "md" | "tex" | "odt" | "html", getShareableLink: boolean};
     downloadSheet: {saveAs: boolean};
   }>();
 
-  let docType: "blab" | "docx" | "pdf" | "md" | "tex" = "blab";
+  let docType: "blab" | "docx" | "pdf" | "md" | "tex" | "odt" | "html" = "blab";
   let getShareableLink = false;
   let saveAs = false;
 
@@ -55,9 +55,11 @@
     >
       <RadioButton labelText="Arquivo de Planilha Nativa do Boscolab (.blab)" value="blab" />
       <RadioButton labelText="Arquivo Markdown" value="md" />
-      <RadioButton labelText="Arquivo Microsoft Word (Em Breve)" value="docx" />
-      <RadioButton labelText="Arquivo PDF (Em Breve)" value="pdf" />
-      <RadioButton labelText="Arquivo LaTeX (Em Breve)" value="tex" />    
+      <RadioButton labelText="Arquivo OpenDocument" value="odt" />
+      <RadioButton labelText="Arquivo Microsoft Word" value="docx" />      
+      <RadioButton labelText="Arquivo LaTeX" value="tex" />
+      <RadioButton labelText="Arquivo Html" value="html" />
+      <!--<RadioButton labelText="Arquivo PDF (Em Breve)" value="pdf" />-->
     </RadioButtonGroup>
     {#if window.showSaveFilePicker}
       <div>
@@ -72,7 +74,7 @@
     <div>
       <div class="bx--label">Link Compartilhável</div>
       <Checkbox 
-        labelText="Criar um link compartilhável e adicioná-lo ao documento gerado (aplica-se apenas aos arquivos md, docx, pdf e tex; qualquer pessoa com este link privado poderá visualizar sua planilha original)"
+        labelText="Criar um link compartilhável e adicioná-lo ao documento gerado (aplica-se apenas aos arquivos md, odt, docx e tex; qualquer pessoa com este link privado poderá visualizar sua planilha original)"
         bind:checked={getShareableLink}
         disabled={docType === "blab"}
       />

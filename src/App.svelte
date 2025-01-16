@@ -2245,7 +2245,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
   }
 }*/
 
-async function getDocument(docType, getShareableLink = false) {
+async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "html", getShareableLink = false) {
   const markDown = "<!-- Created with Boscolab -->\n" + await getMarkdown(getShareableLink);
   const uploadBlob = new Blob([markDown], { type: "text/markdown" });
 
