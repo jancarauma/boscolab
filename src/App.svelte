@@ -3339,7 +3339,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
         {:else if modalInfo.state === "generateCode"}
           <GenerateCodeDialog index={modalInfo.codeGenerationIndex} {pyodidePromise}/>
         {:else}
-          <InlineLoading status="error" description="An error occurred" />
+          <InlineLoading status="error" description="Houve um erro" />
           {@html modalInfo.error}
         {/if}
       </Modal>
