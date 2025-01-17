@@ -93,6 +93,7 @@
   import DownloadDocumentModal from "./DownloadDocumentModal.svelte";
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
+  import { LightFilled } from "carbon-icons-svelte";
 
   createCustomUnits();
 
@@ -2918,10 +2919,13 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
         id="new-sheet"
         on:click={(e) => handleLinkPushState(e, '/')}
       >
-        <DocumentBlank /> Nova Planilha
+        <DocumentBlank/> Nova Planilha
       </SideNavLink>  
       <SideNavItems>
-        <SideNavMenu text="Exemplos">
+        <SideNavMenu>
+          <div slot="text" class="menu-header">
+            <LightFilled/> Exemplos
+          </div>
           {#each exampleSheets as {path, title} (path)}
             <SideNavMenuItem 
               href={path}
