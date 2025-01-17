@@ -47,13 +47,13 @@
   on:click
 >
   <div class="message main">
-    Drop File or
+    Arraste o Arquivo ou
   </div>
   <div class="message main">
-    Link to Open
+    Abra o Link
   </div>
   <div class="message">
-    Hit Escape Key or Click to Dismiss
+    Pressione a tecla Esc ou clique para fechar
   </div>
 </div>
 

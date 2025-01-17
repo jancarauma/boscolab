@@ -154,39 +154,39 @@
   const prebuiltTables = [
     {
       url: "https://boscolab.vercel.app/PaFvsBhgoJdZEEwyBLPnD6",
-      title: "Mechanical Properties of Metals" 
+      title: "Propriedades Mecânicas de Metais" 
     },
     {
       url: "https://boscolab.vercel.app/QF5ThTJMUhn2sLBxM4Vyr9",
-      title: "Coefficients of Friction" 
+      title: "Coeficientes de Atrito" 
     },
     {
       url: "https://boscolab.vercel.app/FwahHU9W8ht28t9p4LNqFd",
-      title: "Coefficients of Thermal Expansion" 
+      title: "Coeficientes de Diltação Térmica" 
     },
     {
       url: "https://boscolab.vercel.app/iBxxaDryEV8NkdrNdsZzvF",
-      title: "Electrical Properties of Conductors" 
+      title: "Propriedades Elétricas de Condutores" 
     },
     {
       url: "https://boscolab.vercel.app/EyXiBtFajaDHpxqRpvGQFX",
-      title: "Dielectric Properties" 
+      title: "Propriedades Dielétricas" 
     },
     {
       url: "https://boscolab.vercel.app/EnZhHT9wvsESXvRChZ7TLV",
-      title: "Properties of Liquids" 
+      title: "Propriedades de Líquidos" 
     },
     {
       url: "https://boscolab.vercel.app/bPX72mmrNjVsgZbos25Gkw",
-      title: "Beam Section Properties" 
+      title: "Propriedades de Seções de Viga" 
     },
     {
       url: "https://boscolab.vercel.app/XvB4X3qGDZoupFyRCLbWmL",
-      title: "W-Beam Properties" 
+      title: "Propriedades de W-Beam" 
     },
     {
       url: "https://boscolab.vercel.app/ndyjJRwvqoJBfVLw7BGFfu",
-      title: "Musical Note Frequencies" 
+      title: "Frequências de Notas Musicais" 
     }
   ];
 
@@ -2644,6 +2644,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
   #sheet {
     width: min(1000px, 100%);
     height: fit-content;
+    padding-top: 28px;
     z-index: 2;
   }
 
