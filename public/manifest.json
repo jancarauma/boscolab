@@ -64,7 +64,7 @@
     {
       "name": "Nova Planilha",
       "url": "/",
-      "description": "Open a new window with a blank sheet",
+      "description": "Abre uma Nova Janela com uma Nova Planilha",
       "icons": [
         { "src": "images/new-sheet-icon-192.png", "sizes": "192x192" },
         { "src": "images/new-sheet-icon-96.png", "sizes": "96x96" }

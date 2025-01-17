@@ -2914,6 +2914,15 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       on:open={retrieveRecentSheets}
       on:close={() => window.dispatchEvent(new Event('resize'))}
     >
+      <SideNavLink
+        id="new-sheet"
+        on:click={(e) => handleLinkPushState(e, '/')}
+        text={
+          <>
+            <DocumentBlank /> Nova Planilha
+          </>
+        }
+      />
       <SideNavItems>
         <SideNavMenu text="Exemplos">
           {#each exampleSheets as {path, title} (path)}
