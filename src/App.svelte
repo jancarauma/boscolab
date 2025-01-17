@@ -2917,8 +2917,9 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       <SideNavLink
         id="new-sheet"
         on:click={(e) => handleLinkPushState(e, '/')}
-        text="<DocumentBlank /> Nova Planilha"
-      />  
+      >
+        <DocumentBlank /> Nova Planilha
+      </SideNavLink>  
       <SideNavItems>
         <SideNavMenu text="Exemplos">
           {#each exampleSheets as {path, title} (path)}
