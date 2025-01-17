@@ -2913,31 +2913,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       bind:isOpen={sideNavOpen}
       on:open={retrieveRecentSheets}
       on:close={() => window.dispatchEvent(new Event('resize'))}
-    >
-      <SideNavLink
-        id="new-sheet"
-        on:click={(e) => handleLinkPushState(e, '/')}
-        text="Nova Planilha"
-      >
-      </SideNavLink>  
-      <SideNavLink
-        id="open-sheet"
-        on:click={handleFileOpen}
-        text="Abrir"
-      >
-      </SideNavLink> 
-      <SideNavLink
-        id="save-sheet"
-        on:click={loadSaveSheetModal}
-        text="Salvar"
-      >
-      </SideNavLink> 
-      <SideNavLink
-        id="save-sheet"
-        on:click={handleGetShareableLink}
-        text="Compartilhar"
-      >
-      </SideNavLink> 
+    >      
       <SideNavItems>
         <SideNavMenu text="Exemplos">
           {#each exampleSheets as {path, title} (path)}
