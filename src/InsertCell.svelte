@@ -263,7 +263,7 @@
             <div>6</div>
             <div>Condicional</div>
           {:else}
-            <div>Condicional (Função)</div>
+            <div>Condicional</div>
           {/if}
           <div><ChartLine size={20}/></div>
         </div>
