@@ -201,7 +201,7 @@
             <div>2</div>
             <div>Texto</div>
           {:else}
-            <div>Comentário</div>
+            <div>Texto</div>
           {/if}
           <div><AddComment size={20}/></div>
         </div>

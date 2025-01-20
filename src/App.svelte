@@ -2656,6 +2656,50 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     background: gray;
   }
 
+  div.sheet-margin-left {
+    width: 1px;
+    flex-grow: 0;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background: gray;
+    box-shadow: -8px 3px 8px black;
+  }
+
+  @media print {
+    div.sheet-margin-left {
+      width: 1px;
+      flex-grow: 0;
+      position: sticky;
+      top: 0px;
+      z-index: 2;
+      background: gray;
+      box-shadow: -8px 3px 8px black;
+    }
+  }
+
+  div.sheet-margin-right {
+    width: 1px;
+    flex-grow: 0;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background: gray;
+    box-shadow: 8px 3px 8px black;
+  }
+
+  @media print {
+    div.sheet-margin-right {
+      width: 1px;
+      flex-grow: 0;
+      position: sticky;
+      top: 0px;
+      z-index: 2;
+      background: gray;
+      box-shadow: 8px 3px 8px black;
+    }
+  }
+
   #keyboard-tray {
     display: flex;
     justify-content: center;
@@ -2674,6 +2718,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       display: none;
     }
   }
+  
 
   div.status-footer {
     grid-row: 2;
@@ -3028,7 +3073,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
           on:click={() => showTerms()}
           text="Termos e Condições"
         />
-        <SideNavLink
+        <!--<SideNavLink
           on:click={() => modalInfo = {
               modalOpen: true,
               state: "bugReport",
@@ -3036,7 +3081,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
           }}
           text="Notificar Bug"
         />
-        <!--<SideNavLink 
+        <SideNavLink 
           on:click={() => modalInfo = {
             modalOpen: true,
             state: "newVersion",
@@ -3087,7 +3132,9 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       on:click={() => $activeCell = -1}
     >
     </div>
-      
+
+    <div class="sheet-margin-left"></div>  
+
     <div id="sheet">
       <DocumentTitle bind:title={$title}/>
 
@@ -3108,6 +3155,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       <div class="bottom-spacer" class:inIframe></div>
     </div>
 
+    <div class="sheet-margin-right"></div>  
+    
     <div
       class="sheet-margin"
       on:click={() => $activeCell = -1}
