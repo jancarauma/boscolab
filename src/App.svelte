@@ -2493,6 +2493,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     overflow-x: auto;
     justify-content: flex-end;
     background: linear-gradient(45deg, black, #383838, #383838, #ff9800);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.4);
+    border-bottom: 1px solid #f29203;
   }
 
   @media print {
@@ -3065,7 +3067,14 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
               {/if}
             {/each}
           </SideNavMenu>
-        {/if}        
+        {/if}   
+        
+        <div class="nav-separator"/>
+
+        <SideNavLink 
+          on:click={() => window.print()}
+          text="Imprimir"
+        />
 
         <div class="nav-separator"/>
 
