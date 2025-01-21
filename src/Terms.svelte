@@ -57,8 +57,9 @@
 </p>
 <br />
 <p>
-  Modificações realizadas por J. G. da Silva estão protegidas por copyright © 2025 J. G. da Silva e também são licenciadas sob a MIT License, com os seguintes termos:
+  Modificações realizadas estão protegidas por copyright e também são licenciadas sob a MIT License, com os seguintes termos:
 </p>
+<br />
 <ul>
   <li>O software pode ser usado, modificado e distribuído, desde que não seja vendido ou explorado diretamente para fins comerciais.</li>
   <li>Este aviso de copyright e os termos da licença original devem acompanhar todas as cópias ou partes substanciais do software.</li>
