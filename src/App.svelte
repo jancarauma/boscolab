@@ -93,6 +93,7 @@
   import DownloadDocumentModal from "./DownloadDocumentModal.svelte";
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
+  import { Folder } from "carbon-icons-svelte";
 
   createCustomUnits();
 
@@ -2465,7 +2466,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
   .nav-separator {
     width: 100%;
     height: 1px;
-    background-color: #ccc;
+    background-color: #525252;
     margin: 4px 0;
   }
 
@@ -2908,7 +2909,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
           id="open-sheet"
           title="Abrir Planilha"
           on:click={handleFileOpen}
-          icon={Document}
+          icon={Folder}
         />
         <HeaderGlobalAction
           id="save-sheet"
@@ -2939,7 +2940,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
             <div class="dot"></div>
           {/if}
         </div>
-        <HeaderGlobalAction
+        <!--<HeaderGlobalAction
           title="Unidades"
           on:click={handleUnitsModal}
           icon={Ruler}
@@ -2949,7 +2950,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
           title="Atalhos" 
           on:click={handleKeyboardShortcutsModal}
           icon={Keyboard}
-        />
+        />-->
       {:else}
         <HeaderGlobalAction
           title="Abrir Esta Planilha em Nova Aba"
@@ -3065,7 +3066,9 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
             {/each}
           </SideNavMenu>
         {/if}        
+
         <div class="nav-separator"/>
+
         <SideNavLink 
           on:click={(e) => handleLinkPushState(e, `/${tutorialHash}`) }
           href={`/${tutorialHash}`}
@@ -3083,7 +3086,20 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
             </SideNavMenuItem>
           {/each}
         </SideNavMenu> 
+
         <div class="nav-separator"/>
+        
+        <SideNavLink 
+          on:click={handleKeyboardShortcutsModal}
+          text="Atalhos"
+        />
+        <SideNavLink 
+          on:click={handleUnitsModal}
+          text="Unidades"
+        />        
+
+        <div class="nav-separator"/>
+
         <SideNavLink 
           on:click={() => showTerms()}
           text="Termos e Condições"
