@@ -2462,6 +2462,13 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     grid-template-rows: auto 1fr auto;
   }
 
+  .nav-separator {
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin: 4px 0;
+  }
+
   @media screen {
     div.page {
       height: 100%;
@@ -2915,13 +2922,13 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
           on:click={handleGetShareableLink} 
           icon={CloudUpload}
         />
-        <HeaderActionLink
+        <!--<HeaderActionLink
           href={`/${tutorialHash}`}
           title="Tutorial"
           rel="nofollow"
           icon={Help}
           on:click={(e) => handleLinkPushState(e, `/${tutorialHash}`) }
-        />
+        />-->
         <div class="dot-container">
           <HeaderGlobalAction 
             title={"Opções da Planilha" + (usingDefaultConfig ? "" : " (Modificado)")}
@@ -2960,18 +2967,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       on:open={retrieveRecentSheets}
       on:close={() => window.dispatchEvent(new Event('resize'))}
     >      
-      <SideNavItems>
-        <SideNavMenu text="Exemplos">
-          {#each exampleSheets as {path, title} (path)}
-            <SideNavMenuItem 
-              href={path}
-              rel="nofollow"
-              on:click={(e) => handleLinkPushState(e, path)}
-            >
-              <div title={title} class="side-nav-title">{title}</div>
-            </SideNavMenuItem>
-          {/each}
-        </SideNavMenu>
+      <SideNavItems>        
         <!--<SideNavMenu text="Prebuilt Tables">
           {#each prebuiltTables as {url, title} (url)}
             <SideNavMenuItem 
@@ -2983,6 +2979,39 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
             </SideNavMenuItem>
           {/each}
         </SideNavMenu>-->
+        {#if recentSheets.size > 0}
+          <SideNavMenu text="Arquivos Recentes">
+            {#each [...recentSheets] as [key, value] (key)}
+              {#if "url" in value}
+                <SideNavMenuItem
+                  isSelected={getSheetHash(new URL(value.url)) === currentState.slice(1)}
+                  href={`/${getSheetHash(new URL(value.url))}`}
+                  rel="nofollow"
+                  on:click={(e) => ("url" in value) ? handleLinkPushState(e, `/${getSheetHash(new URL(value.url))}`) : null}
+                >
+                  <div title={value.title}>
+                    <div class="side-nav-title">
+                      {value.title}
+                    </div>
+                    <em class="side-nav-date">{(new Date(value.accessTime)).toLocaleString()}</em>
+                  </div>
+                </SideNavMenuItem>
+              {:else}
+                <SideNavMenuItem
+                  isSelected={key === window.history.state?.fileKey}  
+                  on:click={async (e) => ("fileHandle" in value) ? openSheetFromFileHandle(value.fileHandle) : null}
+                >
+                  <div title={value.fileName}>
+                    <div class="side-nav-title">
+                      {`File: ${value.fileName}`}
+                    </div>
+                    <em class="side-nav-date">{(new Date(value.accessTime)).toLocaleString()}</em>
+                  </div>
+                </SideNavMenuItem>
+              {/if}
+            {/each}
+          </SideNavMenu>
+        {/if}
         {#if $history.length > 0}
           <SideNavMenu text="Revisões da Planilha">
             {#each $history as {url, hash, creation} (hash+creation)}
@@ -3035,40 +3064,26 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
               {/if}
             {/each}
           </SideNavMenu>
-        {/if}
-        {#if recentSheets.size > 0}
-          <SideNavMenu text="Arquivos Recentes">
-            {#each [...recentSheets] as [key, value] (key)}
-              {#if "url" in value}
-                <SideNavMenuItem
-                  isSelected={getSheetHash(new URL(value.url)) === currentState.slice(1)}
-                  href={`/${getSheetHash(new URL(value.url))}`}
-                  rel="nofollow"
-                  on:click={(e) => ("url" in value) ? handleLinkPushState(e, `/${getSheetHash(new URL(value.url))}`) : null}
-                >
-                  <div title={value.title}>
-                    <div class="side-nav-title">
-                      {value.title}
-                    </div>
-                    <em class="side-nav-date">{(new Date(value.accessTime)).toLocaleString()}</em>
-                  </div>
-                </SideNavMenuItem>
-              {:else}
-                <SideNavMenuItem
-                  isSelected={key === window.history.state?.fileKey}  
-                  on:click={async (e) => ("fileHandle" in value) ? openSheetFromFileHandle(value.fileHandle) : null}
-                >
-                  <div title={value.fileName}>
-                    <div class="side-nav-title">
-                      {`File: ${value.fileName}`}
-                    </div>
-                    <em class="side-nav-date">{(new Date(value.accessTime)).toLocaleString()}</em>
-                  </div>
-                </SideNavMenuItem>
-              {/if}
-            {/each}
-          </SideNavMenu>
-        {/if}
+        {/if}        
+        <div class="nav-separator"/>
+        <SideNavLink 
+          on:click={(e) => handleLinkPushState(e, `/${tutorialHash}`) }
+          href={`/${tutorialHash}`}
+          rel="nofollow"
+          text="Ajuda"
+        />
+        <SideNavMenu text="Exemplos">
+          {#each exampleSheets as {path, title} (path)}
+            <SideNavMenuItem 
+              href={path}
+              rel="nofollow"
+              on:click={(e) => handleLinkPushState(e, path)}
+            >
+              <div title={title} class="side-nav-title">{title}</div>
+            </SideNavMenuItem>
+          {/each}
+        </SideNavMenu> 
+        <div class="nav-separator"/>
         <SideNavLink 
           on:click={() => showTerms()}
           text="Termos e Condições"
