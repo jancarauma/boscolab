@@ -602,7 +602,7 @@
           modalInfo = {
             state: "uploadSheet",
             modalOpen: true,
-            heading: "Save as Sharable Link"
+            heading: "Salvar com Link Compartilhável"
           };
         }
         break;
@@ -2503,6 +2503,12 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     }
   }
 
+  @media (max-width: 450px) {
+    :global(.bx-header) {
+      display: none;
+    }
+  }
+
   :global(.bx--header__name) {
     padding: 0px !important;
     flex-grow: 1;
@@ -3192,7 +3198,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       />
 
       <div class="print-logo">
-        Criado com <img src="logo_with_background.png" alt="Boscolab" height="12 px">
+        Orgulhosamente desenvolvido com <img src="logo_with_background.png" alt="Boscolab" height="14 px">
       </div>
 
       <div class="bottom-spacer" class:inIframe></div>
