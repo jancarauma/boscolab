@@ -15,6 +15,7 @@
   import InsertPage from "carbon-icons-svelte/lib/InsertPage.svelte";
   import RainDrop from "carbon-icons-svelte/lib/RainDrop.svelte";
   import DataTable from "carbon-icons-svelte/lib/DataTable.svelte";
+  import { Choices, DataBase, FunctionMath, TextCreation } from 'carbon-icons-svelte';
 
   export let index: number;
   export let insertCell: InsertCell;
@@ -186,7 +187,7 @@
             <div>1</div>
           {/if}
           <div>Equação</div>
-          <div><AddAlt size={20}/></div>
+          <div><FunctionMath size={20}/></div>
         </div>
       </button>
 
@@ -203,7 +204,7 @@
           {:else}
             <div>Texto</div>
           {/if}
-          <div><AddComment size={20}/></div>
+          <div><TextCreation size={20}/></div>
         </div>
       </button>
 
@@ -233,7 +234,7 @@
             <div>4</div>
           {/if}
           <div>Lista</div>
-          <div><Grid size={20}/></div>
+          <div><DataBase size={20}/></div>
         </div>
       </button>
 
@@ -265,7 +266,7 @@
           {:else}
             <div>Condicional</div>
           {/if}
-          <div><ChartLine size={20}/></div>
+          <div><Choices size={20}/></div>
         </div>
       </button>
 

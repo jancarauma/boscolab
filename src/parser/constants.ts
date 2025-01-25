@@ -41,21 +41,19 @@ export const COMPARISON_MAP = new Map([
 export const UNITS_WITH_OFFSET = new Set(['degC', 'degF', 'celsius', 'fahrenheit']);
 
 export const TYPE_PARSING_ERRORS = {
-  math: "Este campo deve conter uma atribuição (exemplo: x=3+4) ou uma consulta (exemplo: x=). Para excluir uma célula matemática indesejada, clique na lixeira à direita.",
-  plot: "Este campo deve conter uma consulta de função com um intervalo de parâmetro de entrada no formato y(-10 ≤ x ≤ 10)=, uma consulta com um par de escalares ou vetores separados por vírgula no formato (a,b)=, ou uma consulta com uma expressão paramétrica no formato (sin(s), cos(s)) for (0 ≤ s ≤ 2*pi)=.",
-  parameter: "É necessário um nome de variável neste campo.",
-  units: "Este campo pode conter apenas unidades entre colchetes ou pode ser deixado em branco para indicar que não há unidades.",
-  expression: "Este campo pode conter apenas uma expressão válida ou número, sem sinal de igual, ou pode estar em branco.",
-  expression_no_blank: "Este campo pode conter apenas uma expressão válida ou número, sem sinal de igual.",
-  number: "Este campo pode conter apenas um número, pois unidades são especificadas para esta coluna.",
-  condition: "Este campo pode conter apenas uma declaração de condição, como x>1. A expressão correspondente à primeira condição satisfeita será usada.",
-  piecewise: "Erro de sintaxe.",
-  equality: "Uma equação é necessária neste campo.",
-  id_list: "É necessário um nome de variável ou uma lista de nomes de variáveis separadas por vírgulas (exemplo: x,y). Se for necessária uma resolução numérica, as variáveis devem ser fornecidas com valores iniciais utilizando til (~), como x~1, y~2, por exemplo.",
-  data_table_expression: "É necessário um nome de variável ou uma atribuição neste campo."
+  math: "Este campo aceita atribuições (ex.: x=3+4) ou consultas (ex.: x=) para cálculos matemáticos dinâmicos. Para remover uma célula matemática, clique no ícone de lixeira à direita.",
+  plot: "Este campo deve conter: uma função com intervalo no formato y(-10 ≤ x ≤ 10)=, uma consulta com dois escalares ou vetores separados por vírgula no formato (a,b)=, ou uma expressão paramétrica no formato (sin(s), cos(s)) for (0 ≤ s ≤ 2*pi)=.",
+  parameter: "É necessário fornecer um nome de variável válido neste campo.",
+  units: "Este campo aceita apenas unidades entre colchetes ou pode ser deixado em branco para indicar a ausência de unidades.",
+  expression: "Este campo aceita apenas uma expressão válida ou número (sem sinal de igual) ou pode permanecer em branco.",
+  expression_no_blank: "Este campo aceita apenas uma expressão válida ou número, sem sinal de igual.",
+  number: "Este campo aceita apenas um número. As unidades são especificadas para esta coluna.",
+  condition: "Este campo deve conter uma condição lógica, como x>1. A primeira condição satisfeita será usada para avaliação.",
+  piecewise: "Erro de sintaxe. Verifique a estrutura da entrada.",
+  equality: "Este campo exige uma equação válida.",
+  id_list: "É necessário um nome de variável ou uma lista de variáveis separadas por vírgulas (ex.: x, y). Para resolução numérica, inclua valores iniciais usando til (~), como em x~1, y~2.",
+  data_table_expression: "Este campo exige um nome de variável ou uma atribuição válida."
 };
-
-
 
 // SymPy and Python have many reserved names
 // These will get remapped so the user can still use these as variable names

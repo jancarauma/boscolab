@@ -38,6 +38,7 @@
 
   button.mobile {
     border-radius: 5px;
+    border: 1px solid #fe9801;
   } 
 
   div.mobile-container {
