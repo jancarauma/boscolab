@@ -12,6 +12,7 @@
   import RainDrop from "carbon-icons-svelte/lib/RainDrop.svelte";
   import IconButton from './IconButton.svelte';
   import DataTable from "carbon-icons-svelte/lib/DataTable.svelte";
+  import { Choices, DataBase, FunctionMath, TextCreation } from 'carbon-icons-svelte';
 
   export let index;
   export let last = false;
@@ -105,7 +106,7 @@
       id={last ? "add-math-cell" : `add-math-cell-${index}`}
       noTouch={!last}
     >
-      <AddAlt />
+      <FunctionMath />
     </IconButton>
 
     <IconButton 
@@ -114,7 +115,7 @@
       id={last ? "add-documentation-cell" : `add-documentation-cell-${index}`} 
       noTouch={!last}
     >
-      <AddComment />
+      <TextCreation />
     </IconButton>
 
     <IconButton 
@@ -132,7 +133,7 @@
       id={last ? "add-table-cell" : `add-table-cell-${index}`}
       noTouch={!last}
     >
-      <Grid />
+      <DataBase />
     </IconButton>
 
     <IconButton 
@@ -150,7 +151,7 @@
       id={last ? "add-piecewise-cell" : `add-piecewise-cell-${index}`}
       noTouch={!last}
     >
-      <ChartLine />
+      <Choices />
     </IconButton>
 
     <IconButton

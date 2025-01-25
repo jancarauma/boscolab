@@ -19,6 +19,7 @@
   import Add from "carbon-icons-svelte/lib/Add.svelte";
   import RowDelete from "carbon-icons-svelte/lib/RowDelete.svelte";
   import IconButton from "./IconButton.svelte";
+  import { FunctionMath } from "carbon-icons-svelte";
 
   export let index: number;
   export let systemCell: SystemCell;
@@ -308,7 +309,7 @@
           id={`add-row-${index}`}
           title="Adicionar Equação"
         >
-          <Add />
+          <FunctionMath />
         </IconButton>
       </div>
 

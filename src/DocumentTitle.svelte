@@ -19,14 +19,25 @@
 
     @media (max-width: 500px) {
       h1 {
-        padding-left: 34px;
+        padding-left: 6px;
       }
     }
+  }
+
+  h1.document-title {
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: white;
+    padding: 8px;
+    margin-right: 6px;
+    background: linear-gradient(45deg, #080808, transparent);
+    border-radius: 36px;
   }
 
 </style>
 
 <h1
+  class="document-title"
   on:focus={() => {$activeCell = -1; spellcheck = true}}
   on:blur={() => spellcheck = false}
   contenteditable="true"

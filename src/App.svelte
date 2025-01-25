@@ -2867,6 +2867,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     >
       <img class="logo" src="logo_dark.png" alt="Boscolab">
     </span>
+
+    <DocumentTitle bind:title={$title}/>
     
     {#if serviceWorkerUpdateWaiting}
       <HeaderGlobalAction 
@@ -3177,7 +3179,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     <div class="sheet-margin-left"></div>  
 
     <div id="sheet">
-      <DocumentTitle bind:title={$title}/>
+      <!--<DocumentTitle bind:title={$title}/>-->
 
       <CellList
         on:insertSheet={loadInsertSheetModal}
