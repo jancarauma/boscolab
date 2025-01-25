@@ -2652,7 +2652,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
   }
 
   #sheet {
-    width: min(1000px, 100%);
+    width: min-content;
+    min-width: min(1000px, 100%);
     height: fit-content;
     padding-top: 28px;
     z-index: 2;
