@@ -2503,12 +2503,6 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     }
   }
 
-  @media (max-width: 450px) {
-    :global(.bx-header) {
-      display: none;
-    }
-  }
-
   :global(.bx--header__name) {
     padding: 0px !important;
     flex-grow: 1;
