@@ -1926,7 +1926,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
       // use current file handle if user has already saved this sheet
       const currentFileHandle = getFileHandleFromKey(window.history.state?.fileKey);
       if (!saveAs && currentFileHandle && window.history.state?.fileKey ===  currentFileHandle.name + $title + $sheetId) {
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Arquivo"};
         try {
           const writable = await currentFileHandle.createWritable();
           await writable.write(fileData);
@@ -1958,7 +1958,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
           return;
         }
 
-        modalInfo = {state: "saving", modalOpen: true, heading: "Saving File"};
+        modalInfo = {state: "saving", modalOpen: true, heading: "Salvando Arquivo"};
         try {
           const writable = await saveFileHandle.createWritable();
           await writable.write(fileData);
@@ -1967,10 +1967,10 @@ Please include a link to this sheet in the email to assist in debugging the prob
           //save failed
           modalInfo = {
             state: "error",
-            error: `<p>Error saving sheet: ${saveFileHandle.name} </p><br>
+            error: `<p>Erro ao salvar planilha: ${saveFileHandle.name} </p><br>
                     <p>${e}</p`,
             modalOpen: true,
-            heading: "Saving Sheet"
+            heading: "Salvando Planilha"
           };
           return;
         }
@@ -2017,7 +2017,7 @@ Please include a link to this sheet in the email to assist in debugging the prob
         window.history.pushState(currentStateObject, "", currentState);
         $autosaveNeeded = false;
       } catch(e) {
-        console.log(`Error saving local checkpoint: ${e}`);
+        console.log(`Erro ao salvar ponto de auto-salvamento local: ${e}`);
         saveFailed = true;
       }
 
