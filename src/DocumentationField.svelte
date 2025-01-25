@@ -129,7 +129,6 @@
   :global(div.wrap div.ql-toolbar) {
     transition: 0.3s;
     transition-delay: .1s;
-    max-height: 66px;
     overflow: visible;
     opacity: 1;
   }
