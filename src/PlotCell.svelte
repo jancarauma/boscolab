@@ -17,7 +17,7 @@
   import Error from "carbon-icons-svelte/lib/Error.svelte";
   import Add from "carbon-icons-svelte/lib/Add.svelte";
   import RowDelete from "carbon-icons-svelte/lib/RowDelete.svelte";
-  import { FunctionMath } from "carbon-icons-svelte";
+  import { FunctionMath } from "carbon-icons-svelte";  
 
   export let index: number;
   export let plotCell: PlotCell;
@@ -554,7 +554,7 @@
     <TextCheckbox 
       bind:checked={plotCell.logX}
       on:change={handleLogScaleChange}
-      title="Use log scale for x axis"
+      title="Aplicar escala logarítmica para o eixo x"
     >
       log x
     </TextCheckbox>
@@ -562,7 +562,7 @@
     <TextCheckbox
       bind:checked={plotCell.logY}
       on:change={handleLogScaleChange}
-      title="Use log scale for y asix"
+      title="Aplicar escala logarítmica para o eixo y"
     >
       log y
     </TextCheckbox>
@@ -570,7 +570,7 @@
     <TextCheckbox
       bind:checked={plotCell.squareAspectRatio}
       on:change={handleAspectRatioChange}
-      title="Use square aspect ratio"
+      title="Aplicar proporção de aspecto quadrado"
     >
       Razão 1:1
     </TextCheckbox>

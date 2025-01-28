@@ -94,6 +94,7 @@
   import { getBlankStatement } from "./parser/LatexToSympy";
   import SetDefaultConfigDialog from "./SetDefaultConfigDialog.svelte";
   import { Folder } from "carbon-icons-svelte";
+  import { fly } from "svelte/transition";
 
   createCustomUnits();
 
@@ -301,6 +302,15 @@
   let baseUnitsConfigDialog: BaseUnitsConfigDialog | null = null;
   let cellList: CellList;
 
+  let previousScrollY = 0;
+  let isHeaderVisible = true;
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    isHeaderVisible = currentScrollY < previousScrollY;
+    previousScrollY = currentScrollY;
+  }
+
   function startWebWorker() {
     if (pyodideLoadingTimeoutRef) {
       clearTimeout(pyodideLoadingTimeoutRef);
@@ -344,6 +354,7 @@
     window.removeEventListener("beforeunload", handleBeforeUnload);
     window.removeEventListener("keydown", handleKeyboardShortcuts);
     window.removeEventListener("beforeprint", handleBeforePrint);
+    window.removeEventListener("scroll", handleScroll);
     terminateWorker();
     if (autosaveIntervalId) {
       window.clearInterval(autosaveIntervalId);
@@ -377,6 +388,7 @@
     window.addEventListener("beforeunload", handleBeforeUnload);
     window.addEventListener("keydown", handleKeyboardShortcuts);
     window.addEventListener("beforeprint", handleBeforePrint);
+    window.addEventListener("scroll", handleScroll);
 
     autosaveIntervalId = window.setInterval(saveLocalCheckpoint, autosaveInterval);
 
@@ -2470,6 +2482,16 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     margin: 4px 0;
   }
 
+  .header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: #383838;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
   @media screen {
     div.page {
       height: 100%;
@@ -2856,6 +2878,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
 	on:dragover|preventDefault
 	on:dragenter={e => fileDropActive = !modalInfo.modalOpen}
 >
+  {#if isHeaderVisible}
+  <div class="header-wrapper" transition:fly="{{ y: -100, duration: 300 }}">
   <Header
     bind:isSideNavOpen={sideNavOpen}
     persistentHamburgerMenu={!inIframe}
@@ -2965,6 +2989,8 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
       {/if}
     </HeaderUtilities>
   </Header>
+  </div>
+  {/if}
 
 
   {#if !inIframe}
