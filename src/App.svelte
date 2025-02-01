@@ -2714,10 +2714,11 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
   #keyboard-tray {
     display: flex;
     justify-content: center;
-    background-color: #383838;
     transition: 0.3s;
     transition-delay: 0.1s;
     overflow: hidden;
+    background-color: #383838;
+    border-top: 1px solid #ff9800;    
   }
 
   #keyboard-tray.inIframe {
@@ -2750,7 +2751,7 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 5px;  
   }
 
   @media print {
