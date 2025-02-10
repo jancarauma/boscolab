@@ -1,3 +1,5 @@
+
+<!-- oṁ tat sat -->
 <script lang="ts">
   import { onDestroy, onMount, tick, type ComponentEvents } from "svelte";
   import { type Cell, cellFactory } from "./cells/Cells";
