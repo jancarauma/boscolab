@@ -1,7 +1,7 @@
 
 <!-- oṁ tat sat -->
 <script lang="ts">
-  import { injectAnalytics } from '@vercel/analytics/sveltekit';
+  import { inject } from '@vercel/analytics';
   import { onDestroy, onMount, tick, type ComponentEvents } from "svelte";
   import { type Cell, cellFactory } from "./cells/Cells";
   import { BaseCell } from "./cells/BaseCell";
@@ -358,7 +358,7 @@
 
   onMount( async () => {
     //injectAnalytics({ mode: dev ? 'development' : 'production' });
-    injectAnalytics({ mode: 'production' });
+    inject({ mode: 'production' });
 
     // let katex globally available
     if (typeof window !== 'undefined') {
