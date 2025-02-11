@@ -1,7 +1,7 @@
 
 <!-- oṁ tat sat -->
 <script lang="ts">
-  import { Analytics } from "@vercel/analytics/react";
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
   import { onDestroy, onMount, tick, type ComponentEvents } from "svelte";
   import { type Cell, cellFactory } from "./cells/Cells";
   import { BaseCell } from "./cells/BaseCell";
