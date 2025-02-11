@@ -78,16 +78,6 @@ export function createCustomUnits() {
       definition: '.001 kilogramforce',
       aliases: ['gf']
     },
-    // Eletrical engineering
-    VAR: {
-      definition: '1 V*A',
-    },
-    kVAR: {
-      definition: '1000 V*A',
-    },
-    MVAR: {
-      definition: '1000000 V*A',
-    },
    });
 }
 
