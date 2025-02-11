@@ -357,6 +357,9 @@
   });
 
   onMount( async () => {
+    //injectAnalytics({ mode: dev ? 'development' : 'production' });
+    injectAnalytics({ mode: 'production' });
+
     // let katex globally available
     if (typeof window !== 'undefined') {
       window.katex = katex;
