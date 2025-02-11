@@ -52,6 +52,12 @@ export function createCustomUnits() {
     Btu: {
       definition: '1 BTU'
     },
+    cal: {
+      definition: '4.1868 J',
+    },
+    kcal: {
+      definition: '41868 J',
+    },
     // power
     tonrefrigeration: {
       definition: '12000 BTU/hr',
@@ -66,11 +72,21 @@ export function createCustomUnits() {
     },
     MMBH: {
       definition: '1000000 BTU/hr'
-    },
+    },    
     // force
     gramforce: {
       definition: '.001 kilogramforce',
       aliases: ['gf']
+    },
+    // Eletrical engineering
+    VAR: {
+      definition: '1 V*A',
+    },
+    kVAR: {
+      definition: '1000 V*A',
+    },
+    MVAR: {
+      definition: '1000000 V*A',
     },
    });
 }
