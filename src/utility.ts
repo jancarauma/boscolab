@@ -73,11 +73,15 @@ export function createCustomUnits() {
     MMBH: {
       definition: '1000000 BTU/hr'
     },    
+    Wp: {
+      definition: '1 W',
+      aliases: ['watt-peak', 'watt-pico']
+    },
     // force
     gramforce: {
       definition: '.001 kilogramforce',
       aliases: ['gf']
-    },
+    },    
    });
 }
 
