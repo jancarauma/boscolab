@@ -645,7 +645,7 @@
                 class="padding-bottom"
                 for={`interpolation-name-${index}-${i}`}
               >
-                {def.type === "polyfit" ? "Polyfit Function Name:" : "Interpolation Function Name:"}
+                {def.type === "polyfit" ? "Nome da Função Polyfit:" : "Nome da Função Interpolação:"}
               </label>
               <div
                 id={`interpolation-name-${index}-${i}`} 
@@ -669,7 +669,7 @@
                 {:else}
                   <IconButton
                     on:click={() => def.nameField.element?.getMathField()?.executeCommand('copyToClipboard')}
-                    title="Copy function name to clipboard"
+                    title="Copiar nome da função para área de transferência"
                     id={`copy-interpolation-function-name-${index}-${i}`}
                   >
                     <Copy />
@@ -677,7 +677,7 @@
                 {/if}
                 {#if def.type === "polyfit"}
                   <label class="margin-left">
-                    Order:
+                    Ordem:
                     <input
                       type="number"
                       bind:value={def.order}
@@ -694,7 +694,7 @@
             <div class="vertical">
               <div class="horizontal spread">
                 <label for={`input-radio-${index}-${i}-${j}`}>
-                  Input:
+                  Entrada:
                 </label>
                 <input 
                   type="radio"
@@ -707,7 +707,7 @@
               </div>
               <div class="horizontal">
                 <label for={`output-radio-${index}-${i}-${j}`}>
-                  Output:
+                  Saída:
                 </label>
                 <input 
                   type="radio"
@@ -765,7 +765,7 @@
             </DataTableInput>
             {#if nonNumeric}
               <TooltipIcon direction="right" align="end">
-                <span slot="tooltipText">Data table must contain numeric values</span>
+                <span slot="tooltipText">A tabela de dados deve conter valores numéricos</span>
                 <Error class="error"/>
               </TooltipIcon>
             {:else}
