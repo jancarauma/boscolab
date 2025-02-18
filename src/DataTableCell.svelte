@@ -728,7 +728,7 @@
       >
         <IconButton
           on:click={() => handleDeleteInterpoloationDef(i)}
-          title={`Delete ${def.type === "polyfit" ? "Polyfit" : "Interpolation"} Function`}
+          title={`Excluir Função ${def.type === "polyfit" ? "Polyfit" : "Interpolação"}`}
           id={`delete-interpolation-row-${index}-${i}`}
         >
           <RowDelete />
