@@ -30,6 +30,7 @@ import {
   type GuessContext, type Guess_listContext, IdContext, type Id_listContext,
   type StatementContext, type QueryContext, AssignContext, type EqualityContext, type PiExprContext,
   type ExponentContext, type ArgumentContext, type Builtin_functionContext, type User_functionContext,
+  type SummationContext, type Summation_cmdContext,
   type IndefiniteIntegralContext, type Indefinite_integral_cmdContext,
   type Integral_cmdContext, type IntegralContext, type DerivativeContext,
   type Derivative_cmdContext, type NDerivativeContext, type N_derivative_cmdContext,
@@ -1641,6 +1642,22 @@ export class LatexToSympy extends LatexParserVisitor<string | Statement | UnitBl
         rangeQueryStatements: [yQueryResult.statement, xQueryResult.statement] /* order is significant */
       };
     }
+  }
+
+  visitSummation = (ctx: SummationContext) => {
+    // Obtém a variável de índice a partir do subscrito (ex.: "x" de "x=1")
+    const indexVar = this.visit(ctx.id()); // supondo que a regra retorne apenas uma id para o índice
+    // Obtem os limites: 
+    // - O limite inferior vem da parte "expr" após o "=" (ex.: 1)
+    // - O limite superior vem do sobrescrito (ex.: 100)
+    // Dependendo da estrutura do seu ctx, pode ser:
+    const lowerBound = this.visit(ctx.expr(0));  // limite inferior
+    const upperBound = this.visit(ctx.expr(1));  // limite superior
+    // O somando é a expressão entre parênteses (ex.: (x^2))
+    const summand = this.visit(ctx.expr(2));
+    // Retorne a string de conversão para sympy.
+    // Em sympy, um somatório pode ser definido como Sum(summand, (indexVar, lowerBound, upperBound))
+    return `_Sum(${summand}, ${indexVar}, ${lowerBound}, ${upperBound})`;
   }
 
   visitIndefiniteIntegral = (ctx: IndefiniteIntegralContext) => {

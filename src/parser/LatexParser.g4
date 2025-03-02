@@ -54,6 +54,11 @@ n_derivative_cmd: CMD_FRAC
     L_BRACE (MATHRM_0=CMD_MATHRM L_BRACE id R_BRACE | id)  ((CARET L_BRACE number R_BRACE) | single_char_exp1=CARET_SINGLE_CHAR_NUMBER) R_BRACE
     L_BRACE (MATHRM_1=CMD_MATHRM L_BRACE id R_BRACE | id) L_PAREN id R_PAREN ((CARET L_BRACE number R_BRACE) | single_char_exp2=CARET_SINGLE_CHAR_NUMBER) R_BRACE L_PAREN expr R_PAREN;
 
+summation_cmd: 
+    (CMD_SUM_UNDERSCORE L_BRACE lower_lim_expr=expr R_BRACE | CMD_SUM_UNDERSCORE_SINGLE_CHAR)  
+    ((CARET L_BRACE upper_lim_expr=expr R_BRACE) | CARET_SINGLE_CHAR) 
+    L_PAREN summand_expr=expr R_PAREN;
+
 argument: (id EQ expr) | (expr lower=(LT | LTE)  id upper=(LT | LTE) expr);
 
 condition: condition_single | condition_chain;
@@ -90,6 +95,7 @@ expr: <assoc=right> id CARET_SINGLE_CHAR_ID_UNDERSCORE_SUBSCRIPT            #exp
     | integral_cmd                                                          #integral
     | derivative_cmd                                                        #derivative
     | n_derivative_cmd                                                      #nDerivative
+    | summation_cmd                                                         #summation
     | BACKSLASH? CMD_LN L_PAREN expr R_PAREN                                #ln
     | BACKSLASH? CMD_LOG L_PAREN expr R_PAREN                               #log
     | CMD_SLASH_LOG_UNDERSCORE L_BRACE expr R_BRACE L_PAREN expr R_PAREN    #baseLog
@@ -126,6 +132,7 @@ expr: <assoc=right> id CARET_SINGLE_CHAR_ID_UNDERSCORE_SUBSCRIPT            #exp
     | expr integral_cmd                                                     #missingMultiplication
     | expr derivative_cmd                                                   #missingMultiplication
     | expr n_derivative_cmd                                                 #missingMultiplication
+    | expr summation_cmd                                                    #missingMultiplication
     | CMD_PLACEHOLDER (L_BRACE R_BRACE)?                                    #emptyPlaceholder
     | (CMD_MATHRM L_BRACE expr R_BRACE)? (DECIMAL_POINT | number | EQ)? CMD_MATHRM L_BRACE expr R_BRACE (DECIMAL_POINT | number | EQ)? #removeOperatorFont
     ;

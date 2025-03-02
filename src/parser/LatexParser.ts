@@ -1172,7 +1172,7 @@ export default class LatexParser extends Parser {
 			this.exitRule();
 		}
 		return localctx;
-	}
+	}	
 	// @RuleVersion(0)
 	public indefinite_integral_cmd(): Indefinite_integral_cmdContext {
 		let localctx: Indefinite_integral_cmdContext = new Indefinite_integral_cmdContext(this, this._ctx, this.state);
@@ -4336,7 +4336,6 @@ export class Trig_functionContext extends ParserRuleContext {
 		}
 	}
 }
-
 
 export class Indefinite_integral_cmdContext extends ParserRuleContext {
 	constructor(parser?: LatexParser, parent?: ParserRuleContext, invokingState?: number) {

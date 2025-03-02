@@ -19,6 +19,7 @@ import { EqualityContext } from "./LatexParser";
 import { Piecewise_assignContext } from "./LatexParser";
 import { Piecewise_argContext } from "./LatexParser";
 import { Trig_functionContext } from "./LatexParser";
+import { SummationContext } from "./LatexParser";
 import { Indefinite_integral_cmdContext } from "./LatexParser";
 import { Integral_cmdContext } from "./LatexParser";
 import { Derivative_cmdContext } from "./LatexParser";
@@ -390,6 +391,13 @@ export default class LatexParserVisitor<Result> extends ParseTreeVisitor<Result>
 	 * @return the visitor result
 	 */
 	visitIndefiniteIntegral?: (ctx: IndefiniteIntegralContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `Summation`
+	 * labeled alternative in `LatexParser.expr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSummation?: (ctx: SummationContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `numberWithUnitsExpr`
 	 * labeled alternative in `LatexParser.expr`.

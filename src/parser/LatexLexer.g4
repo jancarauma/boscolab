@@ -25,6 +25,10 @@ CMD_INT_UNDERSCORE: '\\int' [ ]* '_' ;
 CMD_INT_UNDERSCORE_SINGLE_CHAR_NUMBER: '\\int' [ ]* '_' [0-9];
 CMD_INT_UNDERSCORE_SINGLE_CHAR_ID: '\\int' [ ]* '_' [a-zA-Z] ;
 
+CMD_SUM: '\\sum';
+CMD_SUM_UNDERSCORE: '\\sum_';
+CMD_SUM_UNDERSCORE_SINGLE_CHAR: '\\sum_'.;
+
 CMD_MATHRM: '\\mathrm' ;
 
 CMD_FRAC: '\\frac' ;
