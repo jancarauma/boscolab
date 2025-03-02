@@ -85,7 +85,7 @@ export function createCustomUnits() {
     // Monetary
     realBRL: {
       definition: '1',
-      aliases: ['R$', 'BRL', 'Real', 'Reais']
+      aliases: ['BRL', 'Real', 'Reais']
     },
    });
 }
