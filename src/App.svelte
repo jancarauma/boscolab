@@ -42,7 +42,7 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
-  import { serviceWorkerUpdateWaiting } from './stores';
+  import { serviceWorkerUpdateWaiting } from './stores.js';
 
   import QuickLRU from "quick-lru";
 

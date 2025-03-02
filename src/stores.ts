@@ -22,6 +22,8 @@ import { type Config, type InsertedSheet, type Sheet, getDefaultConfig, normaliz
 
 const defaultTitle = 'Nova Planilha';
 
+export const serviceWorkerUpdateWaiting = writable(false);
+
 export const unsavedChange = writable(false);
 export const autosaveNeeded = writable(false);
 
