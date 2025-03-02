@@ -2372,15 +2372,20 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
 
   async function updateServiceWorker() {
     const registration = await navigator.serviceWorker.getRegistration();
+    
     if (registration?.waiting) {
       registration.waiting.postMessage({ type: "SKIP_WAITING" });
 
       // Aguarda a atualização e recarrega a página
       registration.waiting.addEventListener("statechange", (event) => {
         if ((event.target as ServiceWorker).state === "activated") {
+          console.log("Service Worker atualizado! Recarregando a página...");
           window.location.reload();
         }
       });
+    } else {
+      console.warn("Nenhum Service Worker aguardando. Recarregando manualmente.");
+      window.location.reload(); // Recarrega a aba se não houver SW esperando
     }
   }
 
