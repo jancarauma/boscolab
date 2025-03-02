@@ -307,7 +307,7 @@
         <IconButton
           on:click={addRow}
           id={`add-row-${index}`}
-          title="Adicionar Equação"
+          title="Adicionar Matemática"
         >
           <FunctionMath />
         </IconButton>

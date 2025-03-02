@@ -102,7 +102,7 @@
     <hr>
     
     <IconButton
-      title="Adicionar Equação"
+      title="Adicionar Matemática"
       on:click={() => addCell('math', index)}
       id={last ? "add-math-cell" : `add-math-cell-${index}`}
       noTouch={!last}
