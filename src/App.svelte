@@ -42,6 +42,7 @@
   import { keyboards } from "./keyboard/Keyboard";
   import { Workbox } from "workbox-window";
   import { MathfieldElement } from "mathlive";
+  import { serviceWorkerUpdateWaiting } from './stores';
 
   import QuickLRU from "quick-lru";
 
@@ -291,7 +292,7 @@
 
   let sideNavOpen = false;
 
-  let serviceWorkerUpdateWaiting = false;
+  //let serviceWorkerUpdateWaiting = false;
   let checkServiceWorkerIntervalId: null | number = null;
   
   let modalInfo:ModalInfo = {
@@ -472,7 +473,7 @@
     }
 
     // register service worker
-    if (window.location.hostname !== "localhost") {
+    /*if (window.location.hostname !== "localhost") {
       const wb = new Workbox('/serviceworker.js');
       wb.addEventListener('waiting', () => serviceWorkerUpdateWaiting = true);
       try {
@@ -488,6 +489,30 @@
           }, 60*60*1000);
       } catch(e) {
         console.warn(`Error registering service worker ${e}`);
+      }
+    }*/
+    if (window.location.hostname !== "localhost") {
+      const wb = new Workbox('/serviceworker.js');
+
+      // Atualiza o store quando há uma nova versão esperando
+      wb.addEventListener('waiting', () => {
+        serviceWorkerUpdateWaiting.set(true);
+      });
+
+      try {
+        await wb.register();
+        console.log("Service worker registrado com sucesso.");
+
+        // Verifica periodicamente por atualizações
+        checkServiceWorkerIntervalId = window.setInterval(async () => {
+          try {
+            await wb.update();
+          } catch (e) {
+            console.warn(`Erro ao verificar atualização do Service Worker: ${e}`);
+          }
+        }, 60 * 60 * 1000);
+      } catch (e) {
+        console.warn(`Erro ao registrar Service Worker: ${e}`);
       }
     }
 
@@ -2345,6 +2370,20 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
     }
   }
 
+  async function updateServiceWorker() {
+    const registration = await navigator.serviceWorker.getRegistration();
+    if (registration?.waiting) {
+      registration.waiting.postMessage({ type: "SKIP_WAITING" });
+
+      // Aguarda a atualização e recarrega a página
+      registration.waiting.addEventListener("statechange", (event) => {
+        if ((event.target as ServiceWorker).state === "activated") {
+          window.location.reload();
+        }
+      });
+    }
+  }
+
   function handleUpdateAvailable() {
     modalInfo = {
       modalOpen: true,
@@ -2877,10 +2916,18 @@ async function getDocument(docType: "docx" | "pdf" | "md" | "tex" | "odt" | "htm
 
     <DocumentTitle bind:title={$title}/>
     
-    {#if serviceWorkerUpdateWaiting}
+    <!--{#if serviceWorkerUpdateWaiting}
       <HeaderGlobalAction 
         title="Nova Atualização Disponível" 
         on:click={handleUpdateAvailable}
+      >
+        <Renew size={20} id="update-icon"/>
+      </HeaderGlobalAction>
+    {/if}-->
+    {#if $serviceWorkerUpdateWaiting}
+      <HeaderGlobalAction 
+        title="Nova Atualização Disponível" 
+        on:click={updateServiceWorker}
       >
         <Renew size={20} id="update-icon"/>
       </HeaderGlobalAction>
