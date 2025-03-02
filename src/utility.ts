@@ -82,6 +82,11 @@ export function createCustomUnits() {
       definition: '.001 kilogramforce',
       aliases: ['gf']
     },    
+    // Monetary
+    realBRL: {
+      definition: '1',
+      aliases: ['R$', 'BRL']
+    },
    });
 }
 
